@@ -5,7 +5,7 @@
     <div class="above">
       <!--主要的-->
       <div class="above_main">
-        <div class="item_article mute-item" v-for=" n in 20">
+        <div class="item_article mute-item" >
           <p class="meta-list">
             <span class="mute-state">系列</span>-
             <span class="mute-noactive">前端攻城狮-阿江</span>-

@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <div class="navbar">
-      <span class="title"><span class="xing">Wu</span>的个人博客</span>
+      <span class="title" @click="gohome()"><span class="xing">Wu</span>的个人博客</span>
       <div class="navlink">
         <ul>
           <li>
@@ -21,9 +21,9 @@
               </template>
             </el-autocomplete>
           </li>
-          <li>文章 </li>
-          <li>
-            <el-dropdown trigger="hover" >
+          <li class="mouseIcon">文章 </li>
+          <li class="mouseIcon">
+            <el-dropdown trigger="hover"  >
                <span class="el-dropdown-link" style="color: #000;">
                 分类 <i class="el-icon-caret-bottom icon-color"></i>
                </span>
@@ -35,7 +35,7 @@
               </el-dropdown-menu>
             </el-dropdown>
           </li>
-          <li>关于我 <i class="el-icon-s-promotion icon-color"></i></li>
+          <li class="mouseIcon" @click="goaboutMy()">关于我 <i class="el-icon-s-promotion icon-color"></i></li>
         </ul>
       </div>
     </div>
@@ -44,7 +44,15 @@
 
 <script>
   export default {
-    name: "Head"
+    name: "Head",
+    methods:{
+      goaboutMy(){
+        this.$router.push('/aboutMy');
+      },
+      gohome(){
+        this.$router.push("/");
+      }
+    }
   }
 </script>
 
@@ -106,5 +114,7 @@
   .icon-color{
     color: #909399;
   }
-
+  .mouseIcon{
+    cursor: pointer;
+  }
 </style>
