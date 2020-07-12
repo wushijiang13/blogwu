@@ -5,13 +5,13 @@
     <div class="above">
       <!--主要的-->
       <div class="above_main">
-        <div class="item_article mute-item" v-for=" n in 20">
-          <p class="meta-list">
+        <div class="item_article mute-item" >
+          <p class="meta-list" >
             <span class="mute-state">系列</span>-
             <span class="mute-noactive">前端攻城狮-阿江</span>-
             <span class="mute-noactive">6小时前</span>-
             <span class="mute-noactive">javaScript</span>
-          <p class="meta-title">v-if和v-show的区别你真的知道吗？</p>
+          <p class="meta-title" @click="goArticleDetails()">v-if和v-show的区别你真的知道吗？</p>
           <div class="">
             <p class="mute-giveup">
               <span class="iconfont icon-style icon-dianzan" ref="dianzan" @click="clickgiveup">123</span>
@@ -61,6 +61,9 @@
     methods: {
       clickgiveup() {
         this.$refs.dianzan.style.color = "#67C23A";
+      },
+        goArticleDetails(){
+        this.$router.push("/details");
       }
     },
     computed: {},
@@ -90,7 +93,6 @@
 
   .above_secondary {
     width: 16rem;
-    height: 200px;
     display: inline-block;
     vertical-align: top;
     float: right;
