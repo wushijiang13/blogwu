@@ -5,37 +5,13 @@
       <div class="navlink">
         <ul>
           <li>
-            <el-autocomplete
-              popper-class="my-autocomplete"
-              placeholder="请输入搜索内容"
-              size="small"
-              >
-              <i
-                class="el-icon-search el-input__icon"
-                slot="suffix"
-               >
-              </i>
-              <template slot-scope="{ item }">
-                <div class="name">{{ item.value }}</div>
-                <span class="addr">{{ item.address }}</span>
-              </template>
-            </el-autocomplete>
+            <a-input-search placeholder="搜索一下吧~" style="width: 200px" @search="onSearch" />
           </li>
-          <li class="mouseIcon">文章 </li>
-          <li class="mouseIcon">
-            <el-dropdown trigger="hover"  >
-               <span class="el-dropdown-link" style="color: #000;">
-                分类 <i class="el-icon-caret-bottom icon-color"></i>
-               </span>
-              <el-dropdown-menu slot="dropdown" >
-                <el-dropdown-item >JavaScript</el-dropdown-item>
-                <el-dropdown-item >Css</el-dropdown-item>
-                <el-dropdown-item >Html</el-dropdown-item>
-                <el-dropdown-item >Vue</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </li>
-          <li class="mouseIcon" @click="goaboutMy()">关于我 <i class="el-icon-s-promotion icon-color"></i></li>
+          <li class="mouseIcon">写文章</li>
+          <li class="mouseIcon">文章</li>
+          <li class="mouseIcon">分类</li>
+          <li class="mouseIcon" @click="goaboutMy()">关于我<a-icon type="qrcode"/></li>
+          <li class="mouseIcon" @click="gogitHub()"><a-icon type="github" class="iconBig"/></li>
         </ul>
       </div>
     </div>
@@ -51,7 +27,13 @@
       },
       gohome(){
         this.$router.push("/");
-      }
+      },
+      onSearch(){
+
+      },
+      gogitHub(){
+        window.open("https://github.com/wushijiang13")
+      },
     }
   }
 </script>
@@ -102,7 +84,10 @@
   }
   .navlink ul{
     font-size: 0;
-    vertical-align: top;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
   }
   .navlink li {
     display: inline-block;
@@ -113,6 +98,9 @@
   }
   .icon-color{
     color: #909399;
+  }
+  .iconBig{
+    font-size: 1.4rem;
   }
   .mouseIcon{
     cursor: pointer;

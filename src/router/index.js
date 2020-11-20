@@ -10,8 +10,6 @@ Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
 
-
-
 export default new Router({
   routes: [
     {

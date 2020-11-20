@@ -1,27 +1,10 @@
 <template>
   <div class="index">
-    <el-backtop :bottom="100">
-    </el-backtop>
+    <a-back-top />
     <div class="above">
       <!--主要的-->
       <div class="above_main">
-        <div class="item_article mute-item" >
-          <p class="meta-list">
-            <span class="mute-state">系列</span>-
-            <span class="mute-noactive">前端攻城狮-阿江</span>-
-            <span class="mute-noactive">6小时前</span>-
-            <span class="mute-noactive">javaScript</span>
-          <p class="meta-title">v-if和v-show的区别你真的知道吗？</p>
-          <div class="">
-            <p class="mute-giveup">
-              <span class="iconfont icon-style icon-dianzan" ref="dianzan" @click="clickgiveup">123</span>
-              <span class="iconfont icon-style icon-pinglun1"><span class="icons-text">123</span></span>
-            </p>
-          </div>
-          <img
-            src="https://user-gold-cdn.xitu.io/2020/6/2/172739afbfc76121?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1"
-            class="mute-img" alt="缩略图">
-        </div>
+        <cellItem v-for="(item,index) in articleList" :key="index" :info="item"></cellItem>
       </div>
       <!--次要的-->
       <div class="above_secondary">
@@ -45,6 +28,8 @@
 </template>
 
 <script>
+  import cellItem from './public/cell-item'
+
   export default {
     name: "index",
     data() {
@@ -55,15 +40,30 @@
           },
           autoplay: true,
           // Some Swiper option/callback...
-        }
+        },
+
+
+        articleList:[
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+        ]
       }
     },
     methods: {
-      clickgiveup() {
-        this.$refs.dianzan.style.color = "#67C23A";
-      }
+
     },
-    computed: {},
+    components: {
+      cellItem,
+    },
 
   }
 </script>
@@ -71,7 +71,6 @@
 <style scoped>
   .index {
     width: 980px;
-    height: 1000px;
     margin: 1rem auto;
   }
 
@@ -79,8 +78,6 @@
     margin-bottom: 0;
   }
 
-  .above {
-  }
 
   .above_main {
     width: 44rem;
@@ -98,78 +95,7 @@
     top: 4rem;
   }
 
-  .item_article {
-    height: 5.5rem;
-    padding: 0.5rem 0.5rem;
-  }
 
-  .mute-item {
-    color: #909399;
-    cursor: pointer;
-    position: relative;
-    border-bottom: 1px solid #EBEEF5;
-  }
-
-  .meta-list {
-    font-size: 0.5rem;
-  }
-
-  .mute-state {
-    color: #6aff55;
-  }
-
-  .mute-noactive:hover {
-    color: #409EFF;
-  }
-
-  .meta-title {
-    width: 80%;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #000;
-    margin-top: 0.5rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  .meta-title:hover {
-    text-decoration: underline;
-  }
-
-  .mute-giveup {
-    height: 1.3rem;
-    margin-top: 0.6rem;
-    font-size: 0;
-  }
-
-  .icon-style {
-    font-size: 0.8rem;
-    color: #DCDFE6;
-    font-weight: 600;
-    padding: 0.3rem 0.4rem;
-    border: 1px solid #EBEEF5;
-    display: inline-block;
-  }
-
-  .mute-img {
-    position: absolute;
-    width: 4rem;
-    height: 4rem;
-    top: 1.4rem;
-    right: 1rem;
-
-  }
-
-  .icons-text {
-    font-size: 0.8rem;
-    color: #DCDFE6;
-    font-weight: 600;
-  }
-
-  .icon-pinglun1 {
-    font-size: 0.9rem;
-  }
 
   .user-notice {
     background-color: #fff;
