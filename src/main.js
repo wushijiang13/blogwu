@@ -10,6 +10,10 @@ import './assets/font/iconfont.css'
 import './assets/font/iconfont.js'
 
 import router from './router'
+import {get,post} from './request/request'
+
+Vue.prototype.$get=get;
+Vue.prototype.$post=post;
 
 Vue.config.productionTip = false
 Vue.use(Antd);

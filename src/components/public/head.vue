@@ -5,7 +5,7 @@
       <div class="navlink">
         <ul>
           <li>
-            <a-input-search placeholder="搜索一下吧~" style="width: 200px" @search="onSearch" />
+            <a-input-search placeholder="搜索一下吧~" style="width: 200px"  @search="onSearch" />
           </li>
           <li class="mouseIcon">写文章</li>
           <li class="mouseIcon">文章</li>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+  import {getArticleList} from '../../request/requestUrl'
   export default {
     name: "Head",
     methods:{
@@ -29,7 +30,9 @@
         this.$router.push("/");
       },
       onSearch(){
-
+        // this.$get(getArticleList,{page:1,limit:10,search:}).then((res)=>{
+        //
+        // })
       },
       gogitHub(){
         window.open("https://github.com/wushijiang13")

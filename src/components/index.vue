@@ -29,6 +29,8 @@
 
 <script>
   import cellItem from './public/cell-item'
+  import {getArticleList} from '../request/requestUrl'
+  import {getConversionTime} from '../utils/utils'
 
   export default {
     name: "index",
@@ -39,27 +41,34 @@
             el: '.swiper-pagination'
           },
           autoplay: true,
-          // Some Swiper option/callback...
         },
-
-
         articleList:[
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-          {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
+          // {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
         ]
       }
     },
+    created() {
+      this.getArticleList();
+    },
     methods: {
-
+      /**
+       * 获取文章推荐list
+       */
+      getArticleList(){
+        this.$get(getArticleList,{page:1,limit:10}).then((res)=>{
+          console.log(res);
+          if(res.code == 0){
+            if(res.data.length >= 1){
+              this.articleList=res.data.map(item=>{
+                if(item.article_time != undefined){
+                  item.article_time=getConversionTime(item.article_time);
+                }
+                return item;
+              });
+            }
+          }
+        })
+      },
     },
     components: {
       cellItem,
@@ -70,8 +79,10 @@
 
 <style scoped>
   .index {
-    width: 980px;
     margin: 1rem auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
   }
 
   last-child {
@@ -93,6 +104,7 @@
     float: right;
     position: sticky;
     top: 4rem;
+    margin-left: 2rem;
   }
 
 
@@ -132,5 +144,11 @@
     padding: 1rem 0rem;
     width: 100%;
     color: #606266;
+  }
+
+  @media screen and (max-width: 980px) {
+      .above_secondary{
+        display: none;
+      }
   }
 </style>

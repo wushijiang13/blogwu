@@ -3,13 +3,12 @@
     <CmdOpen v-show="isMaster"></CmdOpen>
     <Head></Head>
     <router-view/>
-
   </div>
 
 </template>
 
 <script>
-import Head from "./components/public/Head";
+import Head from "./components/public/head";
 import CmdOpen from './components/master/cmdOpen';
 export default {
   name: 'App',
@@ -54,6 +53,7 @@ export default {
 <style>
 #app {
   background-color: #f8f9fb;
+  overflow: hidden;
 }
 p{
   margin: 0px;

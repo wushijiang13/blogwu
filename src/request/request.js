@@ -4,7 +4,7 @@ import axios from 'axios';
 Vue.prototype.$axios = axios
 axios.defaults.timeout = 5000;
 
-let BASE_URL=process.env.BASE_URL  ? process.env.BASE_URL : "http://192.168.43.241:3000" ;
+let BASE_URL=process.env.BASE_URL  ? process.env.BASE_URL : "http://localhost:3000" ;
 /**
  * 封装get方法
  * @param url

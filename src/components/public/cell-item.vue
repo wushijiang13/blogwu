@@ -3,15 +3,15 @@
     <div class="item_article mute-item">
       <div class="mute-item-div">
         <p class="meta-list">
-          <span class="mute-state">{{info.typeName}}</span>-
-          <span class="mute-noactive">{{info.position}}-{{info.nickName}}</span>-
-          <span class="mute-noactive">6小时前</span>-
-          <span class="mute-noactive">{{info.articleType}}</span>
-        <p class="meta-title">{{info.titles}}</p>
+          <span class="mute-state">{{info.article_type == 0 ? "单文" : "系列"}}</span>-
+          <span class="mute-noactive">{{info.user_position}}-{{info.user_name}}</span>-
+          <span class="mute-noactive">{{info.article_time}}</span>-
+          <span class="mute-noactive">{{info.article_types_name}}</span>
+        <p class="meta-title">{{info.article_title}}</p>
         <div class="">
           <p class="mute-giveup">
-            <span class="iconfont icon-style" ref="dianzan" @click="clickgiveup"><a-icon type="like" class="icons-text"/>{{info.likeNum}}</span>
-            <span class="iconfont icon-style "><a-icon type="message" class="icons-text"/>{{info.commentNum}}</span>
+            <span class="iconfont icon-style" ref="dianzan" @click="clickgiveup"><a-icon type="like" class="icons-text"/>{{info.article_like}}</span>
+            <span class="iconfont icon-style "><a-icon type="message" class="icons-text"/>{{info.article_comments}}</span>
           </p>
         </div>
       </div>
