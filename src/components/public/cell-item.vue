@@ -3,6 +3,7 @@
     <div class="item_article mute-item">
       <div class="mute-item-div">
         <p class="meta-list">
+          <a-skeleton active v-if="info == ''"/>
           <span class="mute-state">{{info.article_type == 0 ? "单文" : "系列"}}</span>-
           <span class="mute-noactive">{{info.user_position}}-{{info.user_name}}</span>-
           <span class="mute-noactive">{{info.article_time}}</span>-
@@ -21,7 +22,7 @@
           class="mute-img" alt="缩略图"/>
       </div>
     </div>
-    <a-divider />
+    <slot name="dividers"></slot>
   </div>
 </template>
 

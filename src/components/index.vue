@@ -3,11 +3,19 @@
     <a-back-top />
     <div class="above">
       <!--主要的-->
-      <div class="above_main">
-        <cellItem v-for="(item,index) in articleList" :key="index" :info="item"></cellItem>
+      <div class="above-main">
+        <cellItem v-for="(item,index) in articleList" :key="index" :info="item">
+          <a-divider slot="dividers" v-if="(articleList.length-1) != index "/>
+        </cellItem>
+        <div class="not-list"  v-show="articleList.length == 0">
+           <p class="not-title">
+             数据库都查炸了╮(╯▽╰)╭<br/>
+             都没有找到您想要的信息。。
+           </p>
+        </div>
       </div>
       <!--次要的-->
-      <div class="above_secondary">
+      <div class="above-secondary">
         <div class="user-notice">
           <p class="notice-title">公告
             <svg class="icon-star" aria-hidden="true">
@@ -31,6 +39,7 @@
   import cellItem from './public/cell-item'
   import {getArticleList} from '../request/requestUrl'
   import {getConversionTime} from '../utils/utils'
+  import { mapState } from 'vuex';
 
   export default {
     name: "index",
@@ -42,38 +51,43 @@
           },
           autoplay: true,
         },
-        articleList:[
-          // {typeName:"系列",position:"前端攻城狮",nickName:"阿江",articleType:"javaScript",titles:"v-if和v-show的区别你真的知道吗？",likeNum:"123",commentNum:"123"},
-        ]
       }
     },
+    components: {
+      cellItem,
+    },
+    computed: {
+      ...mapState({
+        articleList: state => state.articleList  /*从vuex中获取到数据*/
+      })
+    },
     created() {
-      this.getArticleList();
+      this.$asyncFunQueue.call(this,this.getArticleList);
     },
     methods: {
       /**
        * 获取文章推荐list
        */
       getArticleList(){
-        this.$get(getArticleList,{page:1,limit:10}).then((res)=>{
-          console.log(res);
-          if(res.code == 0){
-            if(res.data.length >= 1){
-              this.articleList=res.data.map(item=>{
-                if(item.article_time != undefined){
-                  item.article_time=getConversionTime(item.article_time);
-                }
-                return item;
-              });
+       return  new Promise((resolve)=>{
+          this.$post(getArticleList,{page:1,limit:10}).then((res)=>{
+            if(res.code == 0){
+              if(res.data.length >= 1){
+                let data =res.data.map(item=>{
+                  if(item.article_time != undefined){
+                    item.article_time=getConversionTime(item.article_time);
+                  }
+                  return item;
+                });
+                this.$store.dispatch("setAddArticleList",data).then(()=>{
+                  resolve();
+                });
+              }
             }
-          }
+          })
         })
       },
     },
-    components: {
-      cellItem,
-    },
-
   }
 </script>
 
@@ -89,14 +103,13 @@
     margin-bottom: 0;
   }
 
-
-  .above_main {
+  .above-main {
     width: 44rem;
     background-color: #fff;
     display: inline-block;
   }
 
-  .above_secondary {
+  .above-secondary {
     width: 16rem;
     height: 200px;
     display: inline-block;
@@ -106,9 +119,6 @@
     top: 4rem;
     margin-left: 2rem;
   }
-
-
-
   .user-notice {
     background-color: #fff;
     padding-bottom: 1rem;
@@ -145,9 +155,17 @@
     width: 100%;
     color: #606266;
   }
-
+  .not-list{
+  }
+  .not-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 200px;
+  }
   @media screen and (max-width: 980px) {
-      .above_secondary{
+      .above-secondary{
         display: none;
       }
   }

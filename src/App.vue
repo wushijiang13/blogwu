@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-    <CmdOpen v-show="isMaster"></CmdOpen>
-    <Head></Head>
+    <cmdOpen @closeCmd="closeCmd" v-show="isMaster"></cmdOpen>
+    <heads></heads>
     <router-view/>
   </div>
-
 </template>
 
 <script>
-import Head from "./components/public/head";
-import CmdOpen from './components/master/cmdOpen';
+import heads from "./components/public/head";
+import cmdOpen from './components/master/cmdOpen';
 export default {
   name: 'App',
   data(){
@@ -17,7 +16,7 @@ export default {
       isMaster:false,
     }
   },
-  components: {Head,CmdOpen},
+  components: {heads,cmdOpen},
   methods:{
     keyCodeForEvent(){
       let self = this;
@@ -37,12 +36,14 @@ export default {
           dCode = true;
         }
         if(cCode && mCode && dCode){
-          console.log("锦");
           this.isMaster=true;
           cCode,mCode,dCode = false;
         }
       })
     },
+    closeCmd(){
+      this.isMaster=false;
+    }
   },
   created() {
     this.keyCodeForEvent();
@@ -51,8 +52,10 @@ export default {
 </script>
 
 <style>
-#app {
+body{
   background-color: #f8f9fb;
+}
+#app {
   overflow: hidden;
 }
 p{

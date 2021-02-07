@@ -1,6 +1,6 @@
 <template>
       <div class="masterOpen">
-        <input placeholder="请输入" class="bindInput" ref="wbind" v-model="wbind"/>
+        <input placeholder="请输入" class="bindInput" ref="wbind" @keydown.enter="cmdInput" v-model="wbind"/>
       </div>
 </template>
 
@@ -10,6 +10,29 @@ export default {
   data(){
     return {
       wbind:'',
+      cmdList:[
+        {name:"close",fun:this.closeCmd},
+      ],//指令集
+    }
+  },
+  methods:{
+    /**
+     * 指令
+     */
+    cmdInput(){
+      this.cmdList.forEach((item)=>{
+        console.log(this.wbind);
+        console.log(item.name);
+        if (item.name == this.wbind) {
+          console.log(item.fun);
+        }
+      })
+    },
+    /**
+     * 关闭方法
+     */
+    closeCmd(){
+      this.$emit("closeCmd",false);
     }
   },
   created() {

@@ -2,21 +2,21 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
+import './utils/ant-import'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import store from './vuex/store'
 import 'swiper/css/swiper.css'
 import './assets/font/iconfont.css'
 import './assets/font/iconfont.js'
 
 import router from './router'
-import {get,post} from './request/request'
+import {get,post,asyncFunQueue} from './request/request'
 
 Vue.prototype.$get=get;
 Vue.prototype.$post=post;
+Vue.prototype.$asyncFunQueue=asyncFunQueue;
 
 Vue.config.productionTip = false
-Vue.use(Antd);
 Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
 router.beforeEach(function(to,form,next){
@@ -29,6 +29,7 @@ router.beforeEach(function(to,form,next){
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

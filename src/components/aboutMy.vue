@@ -22,7 +22,7 @@
 
 <style scoped>
   .aboutmy{
-    width: 980px;
+    width: 90%;
     height: 200px;
     background: #fff;
     margin: 0px auto;
