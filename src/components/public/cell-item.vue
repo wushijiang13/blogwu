@@ -35,7 +35,7 @@ export default {
   methods:{
     clickgiveup() {
       this.$refs.dianzan.style.color = "#67C23A";
-    }
+    },
   }
 }
 </script>

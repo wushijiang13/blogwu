@@ -23,3 +23,10 @@ html {
 .ui-page{
   width: 60rem;
 }
+.head-title-p{
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  color: #000;
+  padding: 16px 0px;
+}

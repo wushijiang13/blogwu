@@ -19,13 +19,47 @@ function getConversionTime(date){
   }else if(diffDay >= 6){
     return parseFloat(diffDay/6)+"周前";
   }else if(diffDay < 6 && diffDay >=0){
-    return (diffDate+1)+"天前";
+    return (diffDay+1)+"天前";
   }else if(diffDay < 0  && newDate.getMonth() > oldDate.getHours()  ){
     return ((newDate.getMonth()-oldDate.getMonth())+1)+"小时前";
   }else if(newDate.getMonth() == oldDate.getHours()  && newDate.getMinutes() > oldDate.getMinutes()  ){
     return ((newDate.getMinutes()-oldDate.getMinutes())+1)+"分前";
   }
 }
-module.exports={
+/**
+ * 是否为null字符的判断
+ */
+function isNullCheck(value){
+  if(value!= null && value != undefined && value != ''){
+      return true;
+  }
+  return false;
+}
+
+
+/**
+ * 依赖浏览器的base64加密
+ * @param value 需要加密的对象
+ * @returns {string} 返回加密结果
+ */
+function base64En(value){
+  if(isNullCheck(value)){
+    return  btoa(encodeURIComponent(JSON.stringify(value)));
+  }
+}
+
+/***
+ * 依赖浏览器的base64解密
+ * @param value 传入需要解密的字符
+ */
+function  base64De(value){
+  if(isNullCheck(value)){
+    return  JSON.parse(decodeURIComponent(atob(value)));
+  }
+}
+export {
   getConversionTime,
+  isNullCheck,
+  base64En,
+  base64De,
 }
