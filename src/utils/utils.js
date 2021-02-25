@@ -1,7 +1,7 @@
 /***
  *工具类
  */
-
+let timeout=null;
 /**
  * 传入一个时间，根据当前时间转换成时分秒
  */
@@ -17,17 +17,18 @@ function getConversionTime(date){
   }else if(oldDate.getMonth() < newDate.getMonth()){
     return ((newDate.getMonth()-oldDate.getMonth())+1)+"月前";
   }else if(diffDay >= 6){
-    return parseFloat(diffDay/6)+"周前";
+    return parseInt(diffDay/6)+"周前";
   }else if(diffDay < 6 && diffDay >=0){
     return (diffDay+1)+"天前";
   }else if(diffDay < 0  && newDate.getMonth() > oldDate.getHours()  ){
-    return ((newDate.getMonth()-oldDate.getMonth())+1)+"小时前";
+    return parseInt((newDate.getMonth()-oldDate.getMonth())+1)+"小时前";
   }else if(newDate.getMonth() == oldDate.getHours()  && newDate.getMinutes() > oldDate.getMinutes()  ){
-    return ((newDate.getMinutes()-oldDate.getMinutes())+1)+"分前";
+    return parseInt((newDate.getMinutes()-oldDate.getMinutes())+1)+"分前";
   }
 }
 /**
  * 是否为null字符的判断
+ * return true 正确不等于空 false 空
  */
 function isNullCheck(value){
   if(value!= null && value != undefined && value != ''){
@@ -54,12 +55,33 @@ function base64En(value){
  */
 function  base64De(value){
   if(isNullCheck(value)){
-    return  JSON.parse(decodeURIComponent(atob(value)));
+    return JSON.parse(decodeURIComponent(atob(value)));
   }
 }
+
+/***
+ * 防抖
+ * @param fn 需要执行的函数
+ * @param error error执行的函数
+ * @returns {function(...[*]=)}
+ */
+function debounce(fn,message){
+    if(timeout != null){
+      this.$message.error(message);
+    }
+    clearTimeout(timeout);
+    timeout=setTimeout(()=>{
+      fn();
+      timeout=null;
+      clearTimeout(timeout);
+    },300)
+}
+
+
 export {
   getConversionTime,
   isNullCheck,
   base64En,
   base64De,
+  debounce,
 }

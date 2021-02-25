@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div class="item_article mute-item">
-      <div class="mute-item-div">
+    <div class="item_article mute-item" >
+      <a-skeleton active v-show="info == ''" :paragraph="{ rows: 2 ,width :[500,200]}"/>
+      <div class="mute-item-div" v-show="info != ''">
         <p class="meta-list">
-          <a-skeleton active v-if="info == ''"/>
-          <span class="mute-state">{{info.article_type == 0 ? "单文" : "系列"}}</span>-
+          <span :class="info.article_type == 0 ? 'mute-single' : 'mute-state' ">{{info.article_type == 0 ? "单文" : "系列"}}</span>-
           <span class="mute-noactive">{{info.user_position}}-{{info.user_name}}</span>-
           <span class="mute-noactive">{{info.article_time}}</span>-
           <span class="mute-noactive">{{info.article_types_name}}</span>
         <p class="meta-title">{{info.article_title}}</p>
-        <div class="">
+        <div>
           <p class="mute-giveup">
             <span class="iconfont icon-style" ref="dianzan" @click="clickgiveup"><a-icon type="like" class="icons-text"/>{{info.article_like}}</span>
             <span class="iconfont icon-style "><a-icon type="message" class="icons-text"/>{{info.article_comments}}</span>
           </p>
         </div>
       </div>
-      <div class="mute-item-img">
+      <div class="mute-item-img" v-show="info != ''">
         <img
           src="https://user-gold-cdn.xitu.io/2020/6/2/172739afbfc76121?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1"
           class="mute-img" alt="缩略图"/>
@@ -65,6 +65,9 @@ export default {
 
 .mute-state {
   color: #6aff55;
+}
+.mute-single{
+  color: #409EFF;
 }
 
 .mute-noactive:hover {

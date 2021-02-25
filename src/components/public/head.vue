@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <div class="navbar">
-      <span class="title" @click="gohome()"><span class="xing">Wu</span>的个人博客</span>
+      <span class="title" @click="clickHome()"><span class="xing">Wu</span>的个人博客</span>
       <div class="navlink">
         <ul>
           <li>
@@ -20,7 +20,7 @@
 
 <script>
   import {getArticleList} from '../../request/requestUrl'
-  import {getConversionTime} from "../../utils/utils";
+  import {getConversionTime,debounce} from "../../utils/utils";
   export default {
     name: "Head",
     data(){
@@ -33,7 +33,10 @@
       goaboutMy(){
         this.$router.push('/aboutMy');
       },
-      gohome(){
+      clickHome(){
+        debounce.call(this,this.goHome,'请勿重复点击');
+      },
+      goHome(){
         this.searchValue = this.searchValue == '' ? this.searchValue : '';
         this.onSearch();
         this.$router.push("/");
@@ -63,15 +66,6 @@
 </script>
 
 <style scoped>
-  .head {
-    width: 100%;
-    border-bottom: 1px solid #DCDFE6;
-    background-color: #fff;
-    position: sticky;
-    top: 0rem;
-    z-index: 10;
-  }
-
   .navbar {
     min-width: 980px;
     margin: 0px auto;

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios';
+import {isNullCheck} from "../utils/utils";
 //然后再修改原型链
 Vue.prototype.$axios = axios
 axios.defaults.timeout = 5000;
@@ -53,9 +54,12 @@ export function post(url, data = {}, config) {
  * 接受函数
  * 所有调用该方法传传递的参数方法均需要promise 返回
  */
-export async function asyncFunQueue(...fn){
+export async function asyncFunQueue(fn,success){
   for (let i = 0; i < fn.length; i++) {
    await fn[i]();
+  }
+  if(isNullCheck(success)){
+    await success();
   }
 }
 

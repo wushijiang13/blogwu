@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <cmdOpen @closeCmd="closeCmd" v-show="isMaster"></cmdOpen>
-    <heads></heads>
-    <router-view/>
+    <heads class="head"></heads>
+    <router-view style="margin-top: 70px"/>
   </div>
 </template>
 
@@ -52,6 +52,15 @@ export default {
 </script>
 
 <style>
+.head {
+  width: 100%;
+  border-bottom: 1px solid #DCDFE6;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+
 body{
   background-color: #f8f9fb;
 }
