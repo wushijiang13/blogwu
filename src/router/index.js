@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/index'//首页模板
-import aboutMy from "../components/page/aboutMy"; //关于我
-import article from "../components/modelPage/article"; //文章页面
-import addArticle from "../components/page/addArticle"; //新增文章
+import aboutMy from "@/components/page/aboutMy"; //关于我
+import article from "@/components/modelPage/article"; //文章页面
+import addArticle from "@/components/page/addArticle"; //新增文章
 
 //引入模块页面
 import home from '@/components/modelPage/home' //首页列表页面
