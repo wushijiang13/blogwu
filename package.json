@@ -14,7 +14,7 @@
     "animate.css": "^4.1.1",
     "ant-design-vue": "^1.7.2",
     "axios": "^0.21.1",
-    "swiper": "^5.4.1",
+    "swiper": "^6.5.1",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^4.1.1",
     "vue-infinite-scroll": "^2.0.2",
