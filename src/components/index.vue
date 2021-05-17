@@ -1,9 +1,9 @@
 <template>
   <div class="index">
-    <el-backtop :bottom="100">
-    </el-backtop>
+    <a-back-top/>
     <div class="above">
       <!--主要的-->
+<<<<<<< HEAD
       <div class="above_main">
         <div class="item_article mute-item" >
           <p class="meta-list" >
@@ -38,13 +38,21 @@
         <div class="statement">
           麻省理工学院许可| 版权所有©2018-至今 Mr.Wu
         </div>
+=======
+      <div class="above-main">
+        <router-view name="aboveMain"/>
+>>>>>>> 099c61508feea35083d4977af016199f05345bc2
       </div>
     </div>
-
+    <!--次要的-->
+    <div class="above-secondary">
+      <router-view name="aboveSecondary"/>
+    </div>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
   export default {
     name: "index",
     data() {
@@ -209,4 +217,59 @@
     width: 100%;
     color: #606266;
   }
+=======
+export default {
+  name: "index",
+  data() {
+    return {
+      swiperOptions: {
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        autoplay: true,
+      },
+    }
+  },
+
+  methods: {
+
+  },
+}
+</script>
+
+<style scoped>
+.index {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+last-child {
+  margin-bottom: 0;
+}
+
+.above-main {
+  width: 44rem;
+  background-color: #fff;
+  display: inline-block;
+}
+
+.above-secondary {
+  width: 16rem;
+  height: 200px;
+  display: inline-block;
+  vertical-align: top;
+  float: right;
+  position: sticky;
+  top: 4rem;
+  margin-left: 2rem;
+}
+
+@media screen and (max-width: 980px) {
+  .above-secondary {
+    display: none;
+  }
+}
+>>>>>>> 099c61508feea35083d4977af016199f05345bc2
 </style>

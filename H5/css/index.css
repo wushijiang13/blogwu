@@ -1,0 +1,41 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+body{
+  background-color: #f8f9fb;
+}
+.main{
+  max-width: 750px;
+  margin: 0px auto;
+}
+.item{
+  width: 90%;
+  margin: 1rem auto;
+  text-align: center;
+}
+p{
+  line-height: 1rem;
+  font-size: 0.5rem;
+}
+.cell-item{
+  font-size: 0.5rem;
+}
+.cell-left{
+  text-align: left;
+}
+.titles{
+  font-size: 0.4rem;
+  font-weight: 600;
+}
+.user_head{
+  margin-top: 1rem;
+  border-radius: 50%;
+  width: 4rem;
+}
+.website-list{
+   list-style: none;
+}
+.website-list li{
+  display: inline-block;
+}
