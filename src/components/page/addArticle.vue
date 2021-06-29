@@ -7,6 +7,9 @@
           <a-form-model-item  label="文章标题" ref="article_title" prop="article_title">
             <a-input placeholder="请输入文章标题"  v-model="addArticleInfo.article_title"/>
           </a-form-model-item>
+          <a-form-model-item label="文章封面" ref="article_title" prop="article_title">
+            <uploads></uploads>
+          </a-form-model-item>
           <a-form-model-item label="文章分类" ref="article_type" prop="article_type">
             <a-select
               placeholder="请选择文章分类"
@@ -58,7 +61,7 @@
       <div class="add-result" v-show="addStatus == 'success'">
         <a-result
           status="success"
-          :title="'添加'+addArticleInfo.article_title+'成功!'"
+          :title="'添加《'+addArticleInfo.article_title+'》成功!'"
         >
           <template #extra>
             <a-button key="console" @click="carryAdd" type="primary">
@@ -76,6 +79,7 @@
 
 <script>
 import Editor from "wangeditor"
+import uploads from "../utlis/uploads";
 import {getArticleTypeList,insertArticle} from '../../request/requestUrl'
 import {isNullCheck} from "../../utils/utils";
 
@@ -192,6 +196,9 @@ export default {
 
     },
 
+  },
+  components:{
+    uploads,
   }
 }
 </script>
@@ -220,4 +227,8 @@ input, .ant-select {
   width: 90%;
   margin: 0px auto;
 }
+/*.cover-upload{
+  width: 4rem;
+  height: 2rem;
+}*/
 </style>
