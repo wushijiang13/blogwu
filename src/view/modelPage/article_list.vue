@@ -1,25 +1,27 @@
 <template>
-  <div v-infinite-scroll="loadMore" :infinite-scroll-disabled="busy" :infinite-scroll-distance="10">
-      <cellItem  v-for="(item,index) in articleList" :key="index" :info="item" @click.native="goArticle(item)">
-        <a-divider slot="dividers" v-if="(articleList.length-1) != index "/>
-      </cellItem>
-      <div class="not-list" v-show="articleList.length == 0 && typeof  articleList != 'string'">
-        <p class="not-title">
-          数据库都查炸了╮(╯▽╰)╭<br/>
-          都没有找到您想要的信息。。
-        </p>
-      </div>
+  <div class="above_main">
+    <div v-infinite-scroll="loadMore" :infinite-scroll-disabled="busy" :infinite-scroll-distance="10">
+        <CellItem  v-for="(item,index) in articleList" :key="index" :info="item" @click.native="goArticle(item)">
+          <a-divider slot="dividers" v-if="(articleList.length-1) != index "/>
+        </CellItem>
+        <div class="not-list" v-show="articleList.length == 0 && typeof  articleList != 'string'">
+          <p class="not-title">
+            数据库都查炸了╮(╯▽╰)╭<br/>
+            都没有找到您想要的信息。。
+          </p>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
-import cellItem from '../public/cell-item'
+import CellItem from '../../components/layout/cell_item'
 import {getArticleList} from '../../request/requestUrl'
 import {mapState} from 'vuex';
 import {getConversionTime, base64En, isNullCheck} from "../../utils/utils";
 
 export default {
-  name: "home",
+  name: "article_list",
   data(){
     return {
       loading:false,
@@ -28,7 +30,7 @@ export default {
     }
   },
   components: {
-    cellItem,
+    CellItem,
   },
   computed: {
     ...mapState({
@@ -123,5 +125,10 @@ export default {
   align-items: center;
   text-align: center;
   height: 200px;
+}
+.above_main {
+  width: 44rem;
+  background-color: #fff;
+  display: inline-block;
 }
 </style>

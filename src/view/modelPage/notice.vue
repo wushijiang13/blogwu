@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="above_secondary">
     <div class="user-notice">
       <p class="notice-title">公告
         <svg class="icon-star" aria-hidden="true">
@@ -23,6 +23,14 @@ export default {
 </script>
 
 <style scoped>
+.above_secondary {
+    width: 16rem;
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+    position: sticky;
+    top: 4rem;
+}
 .user-notice {
   background-color: #fff;
   padding-bottom: 1rem;

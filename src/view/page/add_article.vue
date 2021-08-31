@@ -79,7 +79,7 @@
 
 <script>
 import Editor from "wangeditor"
-import uploads from "../utlis/uploads";
+import uploads from "../../components/utlis/uploads";
 import {getArticleTypeList,insertArticle} from '../../request/requestUrl'
 import {isNullCheck} from "../../utils/utils";
 
@@ -227,8 +227,4 @@ input, .ant-select {
   width: 90%;
   margin: 0px auto;
 }
-/*.cover-upload{
-  width: 4rem;
-  height: 2rem;
-}*/
 </style>

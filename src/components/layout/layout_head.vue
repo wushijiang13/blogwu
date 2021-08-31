@@ -34,7 +34,7 @@
         this.$router.push('/aboutMy');
       },
       clickHome(){
-        debounce.call(this,this.goHome,'请勿重复点击');
+        debounce.call(this,this.goHome,'再点人都被点傻了😡');
       },
       goHome(){
         this.searchValue = this.searchValue == '' ? this.searchValue : '';
@@ -66,6 +66,15 @@
 </script>
 
 <style scoped>
+  .head {
+    width: 100%;
+    border-bottom: 1px solid #DCDFE6;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
   .navbar {
     min-width: 980px;
     margin: 0px auto;

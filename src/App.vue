@@ -1,14 +1,12 @@
 <template>
   <div id="app">
-    <cmdOpen @closeCmd="closeCmd" v-show="isMaster"></cmdOpen>
-    <heads class="head"></heads>
-    <router-view style="margin-top: 70px"/>
+    <CmdOpen @closeCmd="closeCmd" v-show="isMaster"></CmdOpen>
+    <router-view />
   </div>
 </template>
 
 <script>
-import heads from "./components/public/head";
-import cmdOpen from './components/master/cmdOpen';
+import CmdOpen from './components/master/cmd_open.vue';
 export default {
   name: 'App',
   data(){
@@ -16,7 +14,7 @@ export default {
       isMaster:false,
     }
   },
-  components: {heads,cmdOpen},
+  components: {CmdOpen},
   methods:{
     keyCodeForEvent(){
       let self = this;
@@ -52,28 +50,15 @@ export default {
 </script>
 
 <style>
-<<<<<<< HEAD
 #app {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-=======
-.head {
-  width: 100%;
-  border-bottom: 1px solid #DCDFE6;
-  background-color: #fff;
-  position: fixed;
-  top: 0;
-  z-index: 10;
->>>>>>> 099c61508feea35083d4977af016199f05345bc2
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
-
 body{
   background-color: #f8f9fb;
-}
-#app {
-  overflow: hidden;
 }
 p{
   margin: 0px;

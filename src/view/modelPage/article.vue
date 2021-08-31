@@ -1,7 +1,7 @@
 <!--文章页面-->
 <template>
   <div class="article">
-    <div class="article-main">
+    <div class="article-details">
       <a-popover placement="bottomLeft">
         <template slot="content">
           <p>{{articleInfo.article_time}}</p>
@@ -14,7 +14,7 @@
       <div class="article-content" v-html="articleInfo.article_html">
       </div>
     </div>
-    <div class="not-data" v-if="articleInfo == ''">
+    <div class="not-data" v-if="!articleInfo">
       <a-result status="404" title="404" sub-title="抱歉，页面走丢了。。">
         <template #extra>
           <a-button @click="goBack" type="link">
@@ -50,9 +50,19 @@ export default {
 </script>
 
 <style scoped>
-.article{
-  user-select: none;
-}
+  .article{
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .article-details{
+    width: 95%;
+    padding: 20px;
+    background-color: #fff;
+    min-height: 300px;
+    display: inline-block;
+  }
   .article-title{
     font-size: 1.8rem;
     font-weight: 600;

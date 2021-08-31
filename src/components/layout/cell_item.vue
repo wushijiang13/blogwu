@@ -63,13 +63,6 @@ export default {
   font-size: 0.5rem;
 }
 
-.mute-state {
-  color: #6aff55;
-}
-.mute-single{
-  color: #409EFF;
-}
-
 .mute-noactive:hover {
   color: #409EFF;
 }

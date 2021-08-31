@@ -1,46 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-<<<<<<< HEAD
-import Index from '@/components/index'
-import article_Details from "../components/article_Details";
-=======
-import Index from '@/components/index'//首页模板
-import aboutMy from "@/components/page/aboutMy"; //关于我
-import article from "@/components/modelPage/article"; //文章页面
-import addArticle from "@/components/page/addArticle"; //新增文章
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
-//引入模块页面
-import home from '@/components/modelPage/home' //首页列表页面
-import notice from '@/components/modelPage/notice' //公告页面
-
->>>>>>> 099c61508feea35083d4977af016199f05345bc2
+import Layout from '@/components/layout/layout_main'//全局布局模板
+import article_list from '@/view/modelPage/article_list' //首页列表
+import notice from '@/view/modelPage/notice'//公告
+import article from '@/view/modelPage/article'// 文章详情
+import article_details from '@/components/article_details'// 文章详情 demo
+import about_my from '@/view/page/about_my'//关于我
+import add_article from '@/view/page/add_article'//新增文章
 
 Vue.use(Router)
-
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)
 }
 
-export default new Router({
+NProgress.configure({ showSpinner: false });
+
+const router =new Router({
   routes: [
     {
       path: '/',
       name: 'Index',
-<<<<<<< HEAD
-      component: Index
-    },
-    {
-      path:'/details',
-      name:'article_Details',
-      component: article_Details
-    }
-=======
-      component: Index,
+      component: Layout,
       children: [{
         path:'/',
         components:{
-          aboveMain:home,
+          aboveMain:article_list,
           aboveSecondary:notice,
         },
       }]
@@ -48,25 +36,54 @@ export default new Router({
     {
       path:'/article',
       name: "article",
-      component: Index,
+      component: Layout,
       children: [{
         path:'/',
         components:{
-          aboveMain:article,
-          aboveSecondary:notice,
+          aboveMain:article,//文章详情页面
+          aboveSecondary:null,
         },
       }]
     },
     {
+      path:'/details',
+      name:'details',
+      component: article_details //文章详情demo
+    },
+    {
       path: '/aboutMy',
       name: "aboutMy",
-      component: aboutMy
+      component: Layout,
+      children: [{
+        path:'/',
+        components:{
+          aboveMain:about_my,//关于我
+          aboveSecondary:null,
+        },
+      }]
     },
     {
       path: '/addArticle',
       name: "addArticle",
-      component: addArticle
+      component: Layout,
+      children: [{
+        path:'/',
+        components:{
+          aboveMain:add_article,//新增文章
+          aboveSecondary:null,
+        },
+      }]
     },
->>>>>>> 099c61508feea35083d4977af016199f05345bc2
   ]
 })
+
+router.beforeEach((to, from, next)=>{
+  NProgress.start();
+  next();
+})
+
+router.afterEach(()=>{
+  NProgress.done();
+})
+
+export default  router;
