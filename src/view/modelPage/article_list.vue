@@ -1,6 +1,10 @@
 <template>
   <div class="above_main">
-    <div v-infinite-scroll="loadMore" :infinite-scroll-disabled="busy" :infinite-scroll-distance="10">
+    <div v-infinite-scroll="loadMore"
+         :infinite-scroll-disabled="busy"
+         :infinite-scroll-immediate="false"
+         :infinite-scroll-distance="10">
+      {{busy}}
         <CellItem  v-for="(item,index) in articleList" :key="index" :info="item" @click.native="goArticle(item)">
           <a-divider slot="dividers" v-if="(articleList.length-1) != index "/>
         </CellItem>
@@ -16,9 +20,9 @@
 
 <script>
 import CellItem from '../../components/layout/cell_item'
-import {getArticleList} from '../../request/requestUrl'
+import {getArticleList} from '@config/request/requestUrl'
 import {mapState} from 'vuex';
-import {getConversionTime, base64En, isNullCheck} from "../../utils/utils";
+import { base64En, isNullCheck} from "../../utils/utils";
 
 export default {
   name: "article_list",
@@ -47,24 +51,13 @@ export default {
      */
     getArticleList(type = 'replace') {
         return new Promise((resolve,reject) => {
-          this.$post(getArticleList, {page: isNullCheck(this.page) ? this.page : 1 , limit: 7}).then((res) => {
-            if (res.code == 0) {
-              if (res.data.length >= 1) {
-                let data = res.data.map(item => {
-                  if (item.article_time != undefined) {
-                    item.article_time = getConversionTime(item.article_time);
-                  }
-                  return item;
+          this.$post(getArticleList, {page: isNullCheck(this.page) ? this.page : 1 , limit: 7}).then(({code,data}) => {
+            if (code == 0) {
+              if (data.length >= 1) {
+                const operateStatus= type == 'replace' ? "setAddArticleList" : "setPushArticleList";
+                this.$store.dispatch(operateStatus, data).then(() => {
+                  resolve();
                 });
-                if(type == 'replace'){
-                  this.$store.dispatch("setAddArticleList", data).then(() => {
-                    resolve();
-                  });
-                }else {
-                  this.$store.dispatch("setPushArticleList", data).then(() => {
-                    resolve();
-                  });
-                }
               }else{
                 reject();
               }

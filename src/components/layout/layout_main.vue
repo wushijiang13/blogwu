@@ -1,7 +1,7 @@
 <template>
   <div>
     <LayoutHeads/>
-    <div style="margin-top: 70px" class="layout-mian">
+    <div class="layout-mian">
       <a-back-top/>
       <div class="above">
         <div class="above-main">
@@ -44,9 +44,7 @@
 <style scoped>
   .layout-mian {
     width: 980px;
-    height: 1000px;
-    margin: 1rem auto;
-    overflow: auto;
+    margin-top: 70px;
   }
   last-child {
     margin-bottom: 0;

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {upLoad} from '../../request/currency/utils'
+import {upLoad} from '../../config/request/currency/utils'
 export default {
   name: "uploads",
   model:{

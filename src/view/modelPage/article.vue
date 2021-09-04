@@ -7,7 +7,7 @@
           <p>{{articleInfo.article_time}}</p>
         </template>
         <template slot="title">
-          <span>{{articleInfo.user_name}}-{{articleInfo.user_position}}-{{articleInfo.article_types_name}}</span>
+          <span>{{articleInfo.article_technology_type}}-{{articleInfo.nick_name}}-{{articleInfo.article_types_name}}</span>
         </template>
         <div class="article-title">{{articleInfo.article_title}}</div>
       </a-popover>
@@ -51,10 +51,10 @@ export default {
 
 <style scoped>
   .article{
-    user-select: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
   }
   .article-details{
     width: 95%;

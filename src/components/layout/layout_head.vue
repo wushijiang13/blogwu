@@ -7,7 +7,7 @@
           <li>
             <a-input-search placeholder="搜索一下吧~" :loading="searchLoading" style="width: 200px" v-model="searchValue"  @search="onSearch" />
           </li>
-          <li class="mouseIcon">写文章</li>
+          <li class="mouseIcon" @click="goAddArticle">写文章</li>
           <li class="mouseIcon">文章</li>
           <li class="mouseIcon">分类</li>
           <li class="mouseIcon" @click="goaboutMy()">关于我<a-icon type="qrcode"/></li>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import {getArticleList} from '../../request/requestUrl'
+  import {getArticleList} from '../../config/request/requestUrl'
   import {getConversionTime,debounce} from "../../utils/utils";
   export default {
     name: "Head",
@@ -32,6 +32,12 @@
     methods:{
       goaboutMy(){
         this.$router.push('/aboutMy');
+      },
+      /**
+       * 跳转到写文章
+       */
+      goAddArticle(){
+        debounce.call(this,()=>{this.$router.push('/addArticle');},'再点人都被点傻了😡');
       },
       clickHome(){
         debounce.call(this,this.goHome,'再点人都被点傻了😡');

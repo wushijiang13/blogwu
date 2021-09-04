@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios';
-import {isNullCheck} from "../utils/utils";
+import {isNullCheck} from "../../utils/utils";
 //然后再修改原型链
 Vue.prototype.$axios = axios
 axios.defaults.timeout = 5000;

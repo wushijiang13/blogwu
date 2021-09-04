@@ -4,13 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import './utils/ant-import'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import store from './vuex/store'
+import store from './config/vuex/store'
 import 'swiper/css/swiper.css'
 import './assets/font/iconfont.css'
 import './assets/font/iconfont.js'
 import infiniteScroll from 'vue-infinite-scroll'
-import router from './router'
-import {get,post,asyncFunQueue} from './request/request'
+import router from './config/router'
+import {get,post,asyncFunQueue} from './config/request/request'
 
 Vue.prototype.$get=get;
 Vue.prototype.$post=post;

@@ -4,9 +4,9 @@
       <a-skeleton active v-show="info == ''" :paragraph="{ rows: 2 ,width :[500,200]}"/>
       <div class="mute-item-div" v-show="info != ''">
         <p class="meta-list">
-          <span :class="info.article_type == 0 ? 'mute-single' : 'mute-state' ">{{info.article_type == 0 ? "单文" : "系列"}}</span>-
-          <span class="mute-noactive">{{info.user_position}}-{{info.user_name}}</span>-
-          <span class="mute-noactive">{{info.article_time}}</span>-
+          <span :class="info.article_type == 0 ? 'mute-single' : 'mute-state' ">{{info.article_technology_type}}</span>-
+          <span class="mute-noactive">{{info.nick_name}}</span>-
+          <span class="mute-noactive">{{getConversionTime(info.article_time)}}</span>-
           <span class="mute-noactive">{{info.article_types_name}}</span>
         <p class="meta-title">{{info.article_title}}</p>
         <div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+  import {getConversionTime} from "../../utils/utils";
 export default {
   name: "cell-item",
   props:[
@@ -36,6 +37,9 @@ export default {
     clickgiveup() {
       this.$refs.dianzan.style.color = "#67C23A";
     },
+    getConversionTime(article_time){
+      return  getConversionTime(article_time)
+    }
   }
 }
 </script>

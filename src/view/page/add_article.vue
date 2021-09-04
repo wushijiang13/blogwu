@@ -3,7 +3,7 @@
     <div class="add-article-mian">
       <div class="add-mian-div" v-show="addStatus == 'authentic'">
         <p class="head-title-p">添加文章</p>
-        <a-form-model  :rules="rules" :model="addArticleInfo" ref="ruleForm" :label-col="{ span: 3 }" :wrapper-col="{ span: 5 }">
+        <a-form-model  :rules="rules" :model="addArticleInfo" ref="ruleForm" :label-col="{ span: 4 }" :wrapper-col="{ span: 4 }">
           <a-form-model-item  label="文章标题" ref="article_title" prop="article_title">
             <a-input placeholder="请输入文章标题"  v-model="addArticleInfo.article_title"/>
           </a-form-model-item>
@@ -38,10 +38,10 @@
               @change="selectArticleTypeChange"
               :dropdownStyle="{zIndex:99999}"
             >
-              <a-select-option value="single">
+              <a-select-option value="单文">
                 单文
               </a-select-option>
-              <a-select-option value="series">
+              <a-select-option value="系列">
                 系列
               </a-select-option>
             </a-select>
@@ -67,7 +67,7 @@
             <a-button key="console" @click="carryAdd" type="primary">
               继续添加
             </a-button>
-            <a-button key="buy">
+            <a-button @click="()=>{$router.push('/')}" key="buy">
               去首页
             </a-button>
           </template>
@@ -80,7 +80,7 @@
 <script>
 import Editor from "wangeditor"
 import uploads from "../../components/utlis/uploads";
-import {getArticleTypeList,insertArticle} from '../../request/requestUrl'
+import {getArticleTypeList,insertArticle} from '../../config/request/requestUrl'
 import {isNullCheck} from "../../utils/utils";
 
 export default {
@@ -138,6 +138,7 @@ export default {
      */
     instrtArticleTypeList(){
       return new Promise(resolve => {
+        console.log(this.addArticleInfo);
         this.$post(insertArticle,this.addArticleInfo).then((res)=>{
           if(res.code == 0){
             this.addStatus='success';
