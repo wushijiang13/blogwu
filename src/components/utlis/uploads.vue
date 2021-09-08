@@ -1,68 +1,70 @@
 <template>
-    <div class="uploads">
-      <a-upload
-        name="avatar"
-        list-type="picture-card"
-        class="avatar-uploader"
-        :show-upload-list="false"
-        accept="image/png,image/jpg"
-        @change="uploadChange">
-        <slot name="showImg">
-
-        </slot>
-        <div v-if="imgList.length > 0">
-          <img  v-for="item in imgList" :key="item.src"  :src="item.src" alt="avatar" />
-        </div>
-        <div v-else>
-          <a-icon :type="loading ? 'loading' : 'plus'" />
-          <div class="ant-upload-text">
-            上传
-          </div>
-        </div>
-      </a-upload>
-    </div>
+  <div class="uploads">
+    <a-upload-dragger
+      v-if="imgList.length <= 0"
+      name="avatar"
+      list-type="picture-card"
+      class="avatar-uploader"
+      :show-upload-list="false"
+      accept="image/png,image/jpg"
+      :custom-request="upLoadImg"
+      :file-list="imgList"
+      limit="1"
+      drag>
+      <template>
+        <p class="ant-upload-icon">
+          <a-icon :type="loading ? 'loading' : 'plus'"/>
+        </p>
+        <p class="ant-upload-text">
+          文件拖到此处，或<em>点击上传</em>
+        </p>
+        <p class="ant-upload-hint">
+          只能上传jpg/png文件，且不超过2MB
+        </p>
+      </template>
+    </a-upload-dragger>
+    <template v-else>
+      <img  class="upload_img" v-for="item in imgList" :key="item" :src="item" alt="avatar"/>
+    </template>
+  </div>
 </template>
 
 <script>
-import {upLoad} from '../../config/request/currency/utils'
-export default {
-  name: "uploads",
-  model:{
-    prop:"imgList",
-    event:"update",
-  },
-  watch:{
-    imgList(){
-      this.$emit('update',this.imgList);
-    }
-  },
-  data(){
-    return {
-      loading:false,
-      imgList:[],//图片list
-    }
-  },
-  methods:{
-    uploadChange(info){
-      console.log(info);
-      if(info.file.status=="uploading"){
-        this.upLoadImg(info.file);
+  export default {
+    name: "uploads",
+    model: {
+      prop: "imgList",
+      event: "update",
+    },
+    watch: {
+      imgList() {
+        this.$emit('update', this.imgList);
       }
     },
-    upLoadImg(file){
-      return new Promise(resolve => {
-        this.$post(upLoad,{img_file:file}).then((res)=>{
-          if(res.code == 0){
-            this.imgList=file;
-            resolve(res);
-          }
+    data() {
+      return {
+        loading: false,
+        imgList: [],//图片list
+      }
+    },
+    methods: {
+      upLoadImg(option) {
+        return new Promise(resolve => {
+          this.$https.uploads(option.file).then(({code, data}) => {
+            if (code == 200) {
+              this.imgList=[];
+              this.imgList.push(data.file_url);
+              resolve(data);
+            }
+          })
         })
-      })
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-
+  .upload_img{
+    width: 200px;
+  }
 </style>

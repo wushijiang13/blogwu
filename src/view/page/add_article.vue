@@ -3,12 +3,12 @@
     <div class="add-article-mian">
       <div class="add-mian-div" v-show="addStatus == 'authentic'">
         <p class="head-title-p">添加文章</p>
-        <a-form-model  :rules="rules" :model="addArticleInfo" ref="ruleForm" :label-col="{ span: 4 }" :wrapper-col="{ span: 4 }">
+        <a-form-model  :rules="rules" :model="addArticleInfo" ref="ruleForm" :label-col="{ span: 4 }" :wrapper-col="{ span: 12 }">
           <a-form-model-item  label="文章标题" ref="article_title" prop="article_title">
             <a-input placeholder="请输入文章标题"  v-model="addArticleInfo.article_title"/>
           </a-form-model-item>
-          <a-form-model-item label="文章封面" ref="article_title" prop="article_title">
-            <uploads></uploads>
+          <a-form-model-item label="文章封面">
+            <uploads v-model="addArticleInfo.article_cover"/>
           </a-form-model-item>
           <a-form-model-item label="文章分类" ref="article_type" prop="article_type">
             <a-select
@@ -107,12 +107,13 @@ export default {
         article_technology_type:undefined,//文章系列分类
         article_text:'',
         article_html:'',
+        article_cover:"",//封面
       },//添加参数对象
-      addStatus:'authentic',//添加状态
+      addStatus:'authentic'//添加状态
     }
   },
   created() {
-    this.$asyncFunQueue.call(this,[this.getArticleTypeList])
+    this.$https.asyncFunQueue.call(this,[this.getArticleTypeList])
   },
   mounted() {
     this.editor = new Editor(".editor")
@@ -125,8 +126,8 @@ export default {
      */
     getArticleTypeList(){
       return new Promise(resolve => {
-        this.$post(getArticleTypeList,{}).then((res)=>{
-            if(res.code == 0){
+        this.$https.post(getArticleTypeList,{}).then((res)=>{
+            if(res.code == 200){
               this.articleTypeList=res.data;
               resolve(res);
             }
@@ -138,9 +139,8 @@ export default {
      */
     instrtArticleTypeList(){
       return new Promise(resolve => {
-        console.log(this.addArticleInfo);
-        this.$post(insertArticle,this.addArticleInfo).then((res)=>{
-          if(res.code == 0){
+        this.$https.post(insertArticle,this.addArticleInfo).then((res)=>{
+          if(res.code == 200){
             this.addStatus='success';
             resolve(res);
           }
@@ -170,8 +170,9 @@ export default {
     addArticleBtn(){
       this.$refs.ruleForm.validate(valid => {
         if (isNullCheck(this.editor.txt.text())) {
-          this.addArticleInfo.article_html=this.editor.txt.html();
-          this.addArticleInfo.article_text=this.editor.txt.text();
+          this.addArticleInfo.article_html=escape(`${this.editor.txt.html()}`);
+          this.addArticleInfo.article_text=escape(`${this.editor.txt.text()}`);
+          this.addArticleInfo.article_cover=this.addArticleInfo.article_cover.toString();
           this.instrtArticleTypeList()
         }
       })

@@ -16,9 +16,9 @@
           </p>
         </div>
       </div>
-      <div class="mute-item-img" v-show="info != ''">
+      <div class="mute-item-img" v-show="info.article_cover">
         <img
-          src="https://user-gold-cdn.xitu.io/2020/6/2/172739afbfc76121?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1"
+          :src="info.article_cover"
           class="mute-img" alt="缩略图"/>
       </div>
     </div>
@@ -107,7 +107,6 @@ export default {
   height: 4rem;
   top: 1.4rem;
   right: 1rem;
-
 }
 .icons-text {
   margin-right: .6rem;

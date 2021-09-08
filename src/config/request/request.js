@@ -1,12 +1,14 @@
-import Vue from 'vue'
 import axios from 'axios';
 import {isNullCheck} from "../../utils/utils";
 //然后再修改原型链
-Vue.prototype.$axios = axios
-axios.defaults.timeout = 5000;
 
-let BASE_URL = process.env.BASE_URL ? process.env.BASE_URL : "http://localhost:3000";
+const ask  = axios.create({
+  baseURL: process.env.BASE_URL ? process.env.BASE_URL : "http://localhost:3000",
+  timeout:5000,
+  headers: {'Content-Type': 'application/json;charset=UTF-8'},
+})
 
+console.log(ask.defaults);
 /**
  * 封装get方法
  * @param url
@@ -14,9 +16,11 @@ let BASE_URL = process.env.BASE_URL ? process.env.BASE_URL : "http://localhost:3
  * @returns {Promise}
  */
 export function get(url, params = {}) {
-  axios.uploadPost = false;
+  console.log("POST参数");
+  console.log(params);
   return new Promise((resolve, reject) => {
-    axios.get((BASE_URL + "" + url), {
+    ask.defaults.headers['Content-Type']='application/json;charset=UTF-8'
+    ask.get(url, {
       params: params
     })
       .then(response => {
@@ -37,11 +41,26 @@ export function get(url, params = {}) {
  */
 
 export function post(url, data = {}, config) {
+  console.log("POST参数");
+  console.log(data);
   return new Promise((resolve, reject) => {
+    ask.defaults.headers['Content-Type']='application/json;charset=UTF-8'
     let postData={params:btoa(encodeURIComponent(JSON.stringify(data)))};
-    console.log(postData);
-    axios.post((BASE_URL + "" + url), postData, config)
+    ask.post(url, postData, config)
       .then(response => {
+        resolve(response.data);
+      }, err => {
+        reject(err)
+      })
+  })
+}
+
+export function uploads(file) {
+  return new Promise((resolve, reject) => {
+    // ask.defaults.headers['Content-T ype']='multipart/form-data'
+    let form = new FormData();
+    form.append("upload_file",file)
+    ask.post('/files/upload', form).then(response => {
         resolve(response.data);
       }, err => {
         reject(err)
@@ -63,11 +82,10 @@ export async function asyncFunQueue(fn,success){
   }
 }
 
-
-
-
-
-
-
-
+export default {
+  get,
+  post,
+  uploads,
+  asyncFunQueue
+}
 

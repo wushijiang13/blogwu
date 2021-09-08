@@ -4,13 +4,16 @@
     <div class="article-details">
       <a-popover placement="bottomLeft">
         <template slot="content">
-          <p>{{articleInfo.article_time}}</p>
+          <p>{{getConversionTime(articleInfo.article_time)}}</p>
         </template>
         <template slot="title">
           <span>{{articleInfo.article_technology_type}}-{{articleInfo.nick_name}}-{{articleInfo.article_types_name}}</span>
         </template>
         <div class="article-title">{{articleInfo.article_title}}</div>
       </a-popover>
+      <div class="">
+
+      </div>
       <div class="article-content" v-html="articleInfo.article_html">
       </div>
     </div>
@@ -27,7 +30,8 @@
 </template>
 
 <script>
-import {isNullCheck,base64De} from '../../utils/utils'
+import {isNullCheck,getConversionTime} from '../../utils/utils'
+import {getArticleById} from '../../config/request/requestUrl'
 export default {
   name: "articles",
   data(){
@@ -36,14 +40,27 @@ export default {
       }
   },
   created() {
-    if(isNullCheck(this.$route.query.articleInfo)){
-      this.articleInfo=base64De(this.$route.query.articleInfo);
-    }
-    console.log(this.articleInfo);
+
+   this.init();
   },
   methods:{
     goBack(){
       this.$router.back();
+    },
+    getConversionTime(article_time){
+      return  getConversionTime(article_time)
+    },
+    init(){
+      if (this.$route.query.article_id) {
+        this.$https.post(getArticleById,{article_id:this.$route.query.article_id}).then(({code,data})=>{
+          if (code == 200) {
+            if(isNullCheck(data.article_info)){
+              this.articleInfo=data.article_info;
+              this.articleInfo.article_html=unescape(this.articleInfo.article_html);
+            }
+          }
+        })
+      }
     }
   }
 }
@@ -60,7 +77,6 @@ export default {
     width: 95%;
     padding: 20px;
     background-color: #fff;
-    min-height: 300px;
     display: inline-block;
   }
   .article-title{

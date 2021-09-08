@@ -10,18 +10,15 @@ import './assets/font/iconfont.css'
 import './assets/font/iconfont.js'
 import infiniteScroll from 'vue-infinite-scroll'
 import router from './config/router'
-import {get,post,asyncFunQueue} from './config/request/request'
+import https from './config/request/request'
 
-Vue.prototype.$get=get;
-Vue.prototype.$post=post;
-Vue.prototype.$asyncFunQueue=asyncFunQueue;
+Vue.prototype.$https=https;
 
 Vue.config.productionTip = false
 Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 Vue.use(infiniteScroll)
 
 router.beforeEach(function(to,form,next){
-  console.log(form);
   if(to.name === form.name){
   }
   next();

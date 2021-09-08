@@ -5,13 +5,18 @@
       <div class="navlink">
         <ul>
           <li>
-            <a-input-search placeholder="搜索一下吧~" :loading="searchLoading" style="width: 200px" v-model="searchValue"  @search="onSearch" />
+            <a-input-search placeholder="搜索一下吧~" :loading="searchLoading" style="width: 200px" v-model="searchValue"
+                            @search="onSearch" @change="searchChange"/>
           </li>
           <li class="mouseIcon" @click="goAddArticle">写文章</li>
           <li class="mouseIcon">文章</li>
           <li class="mouseIcon">分类</li>
-          <li class="mouseIcon" @click="goaboutMy()">关于我<a-icon type="qrcode"/></li>
-          <li class="mouseIcon" @click="gogitHub()"><a-icon type="github" class="iconBig"/></li>
+          <li class="mouseIcon" @click="goaboutMy()">关于我
+            <a-icon type="qrcode"/>
+          </li>
+          <li class="mouseIcon" @click="gogitHub()">
+            <a-icon type="github" class="iconBig"/>
+          </li>
         </ul>
       </div>
     </div>
@@ -20,51 +25,51 @@
 
 <script>
   import {getArticleList} from '../../config/request/requestUrl'
-  import {getConversionTime,debounce} from "../../utils/utils";
+  import {debounce} from "../../utils/utils";
+
   export default {
     name: "Head",
-    data(){
+    data() {
       return {
-        searchValue:'',
-        searchLoading:false,//搜索loading
+        searchValue: '',
+        searchLoading: false,//搜索loading
       }
     },
-    methods:{
-      goaboutMy(){
+    methods: {
+      goaboutMy() {
         this.$router.push('/aboutMy');
       },
       /**
        * 跳转到写文章
        */
-      goAddArticle(){
-        debounce.call(this,()=>{this.$router.push('/addArticle');},'再点人都被点傻了😡');
+      goAddArticle() {
+        debounce.call(this, () => {
+          this.$router.push('/addArticle');
+        }, '再点人都被点傻了😡');
       },
-      clickHome(){
-        debounce.call(this,this.goHome,'再点人都被点傻了😡');
+      clickHome() {
+        debounce.call(this, this.goHome, '再点人都被点傻了😡');
       },
-      goHome(){
-        this.searchValue = this.searchValue == '' ? this.searchValue : '';
+      goHome() {
         this.onSearch();
-        this.$router.push("/");
       },
-      onSearch(){
-        this.searchLoading=true;
-        this.$post(getArticleList,{page:1,limit:10,search:this.searchValue}).then((res)=>{
-          if(res.code == 0){
-              let data =res.data.map(item=>{
-                if(item.article_time != undefined){
-                  item.article_time=getConversionTime(item.article_time);
-                }
-                return item;
-              });
-              this.$store.dispatch("setAddArticleList",data).then(()=>{
-                this.searchLoading=false;
-              });
-          }
-        })
-        this.$router.push('/');
+      searchChange(){
+        this.$store.dispatch("setArticleSearch",this.searchValue);
       },
-      gogitHub(){
+      onSearch() {
+        debounce.call(this,()=>{
+          this.$router.push('/');
+          this.searchLoading = true;
+          this.$https.post(getArticleList, {page: 1, limit: 6, search: this.$store.state.articleSearch}).then(async ({code, data}) => {
+            if (code == 200) {
+              await this.$store.dispatch("clearArticlePage");
+              await this.$store.dispatch("setAddArticleList", data);
+              this.searchLoading = false;
+            }
+          })
+        },'请勿重复查询！')
+      },
+      gogitHub() {
         window.open("https://github.com/wushijiang13")
       },
     }
@@ -81,6 +86,7 @@
     left: 0;
     z-index: 999;
   }
+
   .navbar {
     min-width: 980px;
     margin: 0px auto;
@@ -115,13 +121,15 @@
     right: 2rem;
     text-align: center;
   }
-  .navlink ul{
+
+  .navlink ul {
     font-size: 0;
     display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
   }
+
   .navlink li {
     display: inline-block;
     font-size: 0.8rem;
@@ -129,13 +137,16 @@
     cursor: pointer;
     padding: 0rem 0.8rem;
   }
-  .icon-color{
+
+  .icon-color {
     color: #909399;
   }
-  .iconBig{
+
+  .iconBig {
     font-size: 1.4rem;
   }
-  .mouseIcon{
+
+  .mouseIcon {
     cursor: pointer;
   }
 </style>
