@@ -2,29 +2,33 @@
 <template>
   <div class="article">
     <div class="article-details">
-      <a-popover placement="bottomLeft">
-        <template slot="content">
-          <p>{{getConversionTime(articleInfo.article_time)}}</p>
-        </template>
-        <template slot="title">
-          <span>{{articleInfo.article_technology_type}}-{{articleInfo.nick_name}}-{{articleInfo.article_types_name}}</span>
-        </template>
-        <div class="article-title">{{articleInfo.article_title}}</div>
-      </a-popover>
-      <div class="">
-
+      <div class="data-show">
+        <a-popover placement="bottomLeft">
+          <template slot="content">
+            <p>{{getConversionTime(articleInfo.article_time)}}</p>
+          </template>
+          <template slot="title">
+            <span>{{articleInfo.article_technology_type}}-{{articleInfo.nick_name}}-{{articleInfo.article_types_name}}</span>
+          </template>
+          <div class="article-title">{{articleInfo.article_title}}</div>
+        </a-popover>
+        <div class="article-cover">
+          <img :src="articleInfo.article_cover"/>
+        </div>
+        <div class="article-content" v-html="articleInfo.article_html">
+        </div>
       </div>
-      <div class="article-content" v-html="articleInfo.article_html">
+      <div class="not-data">
+        <div  v-show="!articleInfo && isCloseInit">
+          <a-result status="404" title="404" sub-title="抱歉，页面走丢了。。">
+            <template #extra>
+              <a-button @click="goBack" type="link">
+                返回上一页
+              </a-button>
+            </template>
+          </a-result>
+        </div>
       </div>
-    </div>
-    <div class="not-data" v-if="!articleInfo">
-      <a-result status="404" title="404" sub-title="抱歉，页面走丢了。。">
-        <template #extra>
-          <a-button @click="goBack" type="link">
-           返回上一页
-          </a-button>
-        </template>
-      </a-result>
     </div>
   </div>
 </template>
@@ -37,10 +41,10 @@ export default {
   data(){
       return {
         articleInfo:'',//文章信息
+        isCloseInit:false,//是否结束初始化请求了
       }
   },
   created() {
-
    this.init();
   },
   methods:{
@@ -55,10 +59,13 @@ export default {
         this.$https.post(getArticleById,{article_id:this.$route.query.article_id}).then(({code,data})=>{
           if (code == 200) {
             if(isNullCheck(data.article_info)){
+              this.isCloseInit=true;
               this.articleInfo=data.article_info;
               this.articleInfo.article_html=unescape(this.articleInfo.article_html);
             }
           }
+        }).catch(e=>{
+          this.isCloseInit=true;
         })
       }
     }
@@ -75,8 +82,9 @@ export default {
   }
   .article-details{
     width: 95%;
-    padding: 20px;
+    padding: 0.8rem;
     background-color: #fff;
+    word-break: break-all;
     display: inline-block;
   }
   .article-title{
@@ -106,5 +114,29 @@ export default {
   }
   .article-content >>> hr{
     margin: 10px 0px;
+  }
+  .article-content >>> a{
+    color: #00B7FF;
+  }
+
+  .article-cover{
+    width: 100%;
+    margin-top: 0.8rem;
+  }
+
+  .article-cover img{
+    width: 100%;
+  }
+
+  @media screen and (max-width: 960px) {
+    .article-content >>> pre{
+      width: 85vw;
+    }
+    .article-details{
+      min-width: 95vw;
+    }
+    .not-data{
+      width: 95vw;
+    }
   }
 </style>

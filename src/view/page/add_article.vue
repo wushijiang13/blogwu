@@ -207,7 +207,7 @@ export default {
 
 <style scoped>
 .add-article {
-  width: 90%;
+  width: 960px;
   background: #fff;
   margin: 0px auto;
   margin-top: 1rem;
@@ -228,5 +228,11 @@ input, .ant-select {
 .add-article-mian{
   width: 90%;
   margin: 0px auto;
+}
+
+@media screen and (max-width: 960px) {
+  .add-article {
+    width: 95%;
+  }
 }
 </style>

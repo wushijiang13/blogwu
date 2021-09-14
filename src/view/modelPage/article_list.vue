@@ -3,8 +3,8 @@
     <div class="above_list">
       <div v-infinite-scroll="loadMore"
            :infinite-scroll-disabled="$store.state.articleListEnd"
-           :infinite-scroll-immediate="false"
-           :infinite-scroll-distance="10">
+           :infinite-scroll-immediate-check="false"
+           :infinite-scroll-distance="100">
         <CellItem v-for="(item,index) in articleList" :key="index" :info="item" @click.native="goArticle(item)">
           <a-divider slot="dividers" v-if="(articleList.length-1) != index "/>
         </CellItem>
@@ -89,17 +89,22 @@
        * 下拉刷新
        */
       async loadMore() {
-        if (this.$store.state.articleListEnd) {
-          return;
+        try {
+          if (this.$store.state.articleListEnd) {
+            return;
+          }
+          let type = 'replace';//遍历结果类型
+          if (this.$store.state.articlePage == 1) { //第一次
+            type = 'replace';
+          } else {
+            type = 'push';
+          }
+          await this.getArticleList(type);
+        }catch (e) {
+          this.$message.warning("到底了，没数据啦");
+        } finally {
+          this.loading = false;
         }
-        let type = 'replace';//遍历结果类型
-        if (this.$store.state.articlePage == 1) { //第一次
-          type = 'replace';
-        } else {
-          type = 'push';
-        }
-        await this.getArticleList(type);
-        this.loading = false;
       },
     }
   }
@@ -123,7 +128,7 @@
   }
 
   .above_list {
-    width: 44rem;
+    width: 100%;
     background-color: #fff;
     display: inline-block;
   }
@@ -131,7 +136,17 @@
   .list_end {
     text-align: center;
     background-color: #fff;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 0.6rem;
+    margin-top: 0.8rem;
+  }
+
+  @media screen and (max-width: 960px) {
+    .above_main{
+      width: 100vw;
+    }
+    .not-list{
+      width: 100%;
+      padding: 2rem;
+    }
   }
 </style>

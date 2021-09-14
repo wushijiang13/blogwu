@@ -1,14 +1,14 @@
 <template>
   <div>
     <LayoutHeads/>
-    <div class="layout-mian">
+    <div class="layout-main">
       <a-back-top/>
       <div class="above">
         <div class="above-main">
           <!--主要的-->
-          <router-view name="aboveMain"/>
+          <router-view  name="aboveMain"/>
           <!--次要的-->
-          <router-view name="aboveSecondary"/>
+          <router-view  name="aboveSecondary"/>
         </div>
       </div>
     </div>
@@ -42,11 +42,16 @@
 </script>
 
 <style scoped>
-  .layout-mian {
+  .layout-main {
     width: 980px;
-    margin-top: 70px;
   }
   last-child {
     margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 980px) {
+     .layout-main{
+       width: 100%;
+     }
   }
 </style>

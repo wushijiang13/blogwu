@@ -67,4 +67,10 @@ export default {
   width: 100%;
   color: #606266;
 }
+
+@media screen and (max-width: 980px) {
+  .above_secondary{
+    display: none;
+  }
+}
 </style>

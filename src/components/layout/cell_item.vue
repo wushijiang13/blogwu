@@ -16,7 +16,7 @@
           </p>
         </div>
       </div>
-      <div class="mute-item-img" v-show="info.article_cover">
+      <div class="mute-item-img"  v-if="info.article_cover">
         <img
           :src="info.article_cover"
           class="mute-img" alt="缩略图"/>
@@ -54,14 +54,19 @@ export default {
   cursor: pointer;
   position: relative;
   font-size: 0px;
+  display: flex;
 }
 .mute-item-div{
-  width: 80%;
+  flex: 5;
   display: inline-block;
+  overflow: hidden;
 }
 .mute-item-img{
-  width: 20%;
-  display: inline-block;
+  flex: 2;
+  display: inline-flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
 .meta-list {
   font-size: 0.5rem;
@@ -72,11 +77,11 @@ export default {
 }
 
 .meta-title {
-  width: 80%;
   font-size: 1rem;
   font-weight: 600;
   color: #000;
   margin-top: 0.5rem;
+  padding-right: 0.4rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -102,14 +107,16 @@ export default {
 }
 
 .mute-img {
-  position: absolute;
-  width: 4rem;
   height: 4rem;
-  top: 1.4rem;
-  right: 1rem;
 }
 .icons-text {
   margin-right: .6rem;
+}
+
+@media screen and (max-width: 960px) {
+  .mute-item{
+    width: 100vw;
+  }
 }
 
 </style>
