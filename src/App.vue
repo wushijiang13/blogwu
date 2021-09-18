@@ -5,17 +5,13 @@
 </template>
 
 <script>
+
 export default {
-  name: 'App',
-  data(){
-    return{
-      isMaster:false,
-    }
-  }
+  name: 'App'
 }
 </script>
 
-<style>
+<style lang="less">
   #app {
     display: flex;
     flex-direction: column;
@@ -24,7 +20,7 @@ export default {
     overflow: hidden;
   }
   body{
-    background-color: #f8f9fb;
+    background-color: @body-bg-color;
   }
   p{
     margin: 0px;

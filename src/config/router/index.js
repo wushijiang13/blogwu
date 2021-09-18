@@ -3,13 +3,13 @@ import Router from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-import Layout from '@/components/layout/layout_main'//全局布局模板
-import article_list from '@/view/modelPage/article_list' //首页列表
+import Layout from '@/components/layout/layout-main'//全局布局模板
+import article_list from '@/view/modelPage/article-list' //首页列表
 import notice from '@/view/modelPage/notice'//公告
 import article from '@/view/modelPage/article'// 文章详情
-import article_details from '@/components/article_details'// 文章详情 demo
-import about_my from '@/view/page/about_my'//关于我
-import add_article from '@/view/page/add_article'//新增文章
+import article_details from '@/components/article-details'// 文章详情 demo
+import about_my from '@/view/page/about-my'//关于我
+import add_article from '@/view/page/add-article'//新增文章
 
 Vue.use(Router)
 const originalPush = Router.prototype.push

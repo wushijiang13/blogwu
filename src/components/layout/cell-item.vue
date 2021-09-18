@@ -44,13 +44,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .item_article {
   padding: 1rem;
 }
 
 .mute-item {
-  color: #909399;
+  color:@theme-disabled-color;
+  background-color: @theme-bubble-bg-color;
   cursor: pointer;
   position: relative;
   font-size: 0px;
@@ -73,13 +74,13 @@ export default {
 }
 
 .mute-noactive:hover {
-  color: #409EFF;
+  color: @primary-color;
 }
 
 .meta-title {
   font-size: 1rem;
   font-weight: 600;
-  color: #000;
+  color: @theme-font-1-color;
   margin-top: 0.5rem;
   padding-right: 0.4rem;
   text-overflow: ellipsis;
@@ -98,10 +99,10 @@ export default {
 
 .icon-style {
   font-size: 0.8rem;
-  color: #DCDFE6;
+  color: @theme-disabled-color;
   font-weight: 600;
   padding: 0.3rem 0.4rem;
-  border: 1px solid #EBEEF5;
+  border: 1px solid @theme-boder-color;
   display: inline-block;
   vertical-align: top;
 }
@@ -112,11 +113,4 @@ export default {
 .icons-text {
   margin-right: .6rem;
 }
-
-@media screen and (max-width: 960px) {
-  .mute-item{
-    width: 100vw;
-  }
-}
-
 </style>

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import CellItem from '../../components/layout/cell_item'
+  import CellItem from '../../components/layout/cell-item'
   import {getArticleList} from '@config/request/requestUrl'
   import {mapState} from 'vuex';
 
@@ -56,7 +56,7 @@
         return new Promise((resolve, reject) => {
           this.$https.post(getArticleList, {
             page: this.$store.state.articlePage,
-            limit: 6,
+            limit: 7,
             search: this.$store.state.articleSearch
           }).then(async ({code, data}) => {
             if (code == 200) {
@@ -110,7 +110,7 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .not-list {
   }
 
@@ -129,18 +129,24 @@
 
   .above_list {
     width: 100%;
-    background-color: #fff;
+    background-color: @body-bg-color;
     display: inline-block;
   }
 
   .list_end {
     text-align: center;
-    background-color: #fff;
+    background-color: @theme-bubble-bg-color;
+    color: @theme-font-1-color;
     padding: 0.6rem;
     margin-top: 0.8rem;
   }
 
   @media screen and (max-width: 960px) {
+    .above_list{
+      width: 95%;
+      margin: 0px auto;
+      display: block;
+    }
     .above_main{
       width: 100vw;
     }

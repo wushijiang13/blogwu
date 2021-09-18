@@ -22,25 +22,26 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .above_secondary {
     width: 16rem;
     display: inline-block;
     vertical-align: top;
     float: right;
-    position: sticky;
+    position: fixed;
     top: 4rem;
+    margin-left: 1rem;
 }
 .user-notice {
-  background-color: #fff;
+  background-color: @theme-bubble-bg-color;
   padding-bottom: 1rem;
 }
 
 .notice-title {
   height: 2.5rem;
-  border-bottom: 1px solid #EBEEF5;
+  border-bottom: 1px solid @theme-boder-color;
   padding: 0rem 0.7rem;
-  color: #000;
+  color: @theme-font-1-color;
   line-height: 2.5rem;
   font-weight: 600;
   font-size: 0.9rem;
@@ -55,7 +56,7 @@ export default {
 
 .notice-mian {
   padding: 0.4rem 0.9rem;
-  color: #000;
+  color: @theme-font-1-color;
   font-size: 0.6rem;
   line-height: 1.2rem;
 }
@@ -65,7 +66,7 @@ export default {
   font-size: 0.8rem;
   padding: 1rem 0rem;
   width: 100%;
-  color: #606266;
+  color: @theme-font-3-color;
 }
 
 @media screen and (max-width: 980px) {

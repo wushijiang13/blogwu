@@ -16,19 +16,9 @@
 </template>
 
 <script>
-  import LayoutHeads from "@/components/layout/layout_head";
+  import LayoutHeads from "@/components/layout/layout-head";
   export default {
     name: "index",
-    data() {
-      return {
-        swiperOptions: {
-          pagination: {
-            el: '.swiper-pagination'
-          },
-          autoplay: true,
-        }
-      }
-    },
     methods: {
       clickgiveup() {
         this.$refs.dianzan.style.color = "#67C23A";

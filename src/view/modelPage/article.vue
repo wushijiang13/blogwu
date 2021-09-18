@@ -12,11 +12,8 @@
           </template>
           <div class="article-title">{{articleInfo.article_title}}</div>
         </a-popover>
-        <div class="article-cover">
-          <img :src="articleInfo.article_cover"/>
-        </div>
-        <div class="article-content" v-html="articleInfo.article_html">
-        </div>
+        <div class="article-cover" v-show="articleInfo.article_cover" :style="{'background-image':'url('+articleInfo.article_cover+')'}" />
+        <div class="article-content" v-html="articleInfo.article_html"/>
       </div>
       <div class="not-data">
         <div  v-show="!articleInfo && isCloseInit">
@@ -73,7 +70,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .article{
     display: flex;
     align-items: center;
@@ -83,7 +80,8 @@ export default {
   .article-details{
     width: 95%;
     padding: 0.8rem;
-    background-color: #fff;
+    min-height: 700px;
+    background-color: @theme-bubble-bg-color;
     word-break: break-all;
     display: inline-block;
   }
@@ -91,36 +89,43 @@ export default {
     font-size: 1.8rem;
     font-weight: 600;
     margin-top: 1rem;
+    color: @theme-font-1-color;
     padding: 0px 0.6rem;
   }
   .article-title:hover{
     text-decoration: underline;
   }
-  .article-content{
+  /deep/.article-content{
     margin: 1rem 0px;
     padding: 0px 0.6rem;
     font-size: 14px;
-    color: #000;
   }
-  .article-content >>> pre{
+  /deep/.article-content > *{
+    color: @theme-font-1-color !important;
+  }
+  /deep/.article-content > pre{
     padding: 16px;
     font-size: 13px;
-    background-color: #f8f8f8;
+    background-color: @theme-pre-bg-color;
     margin-top: 10px;
     user-select: text;
   }
-  .article-content >>> p{
+  /deep/.article-content > p{
     margin: 10px 0px;
   }
-  .article-content >>> hr{
+  /deep/.article-content > hr{
     margin: 10px 0px;
   }
-  .article-content >>> a{
-    color: #00B7FF;
+  /deep/.article-content > a{
+    color: @primary-color;
   }
 
   .article-cover{
     width: 100%;
+    height: 380px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat:no-repeat;
     margin-top: 0.8rem;
   }
 
@@ -129,14 +134,18 @@ export default {
   }
 
   @media screen and (max-width: 960px) {
-    .article-content >>> pre{
+    /deep/.article-content > pre{
       width: 85vw;
     }
     .article-details{
       min-width: 95vw;
+      min-height: 600px;
     }
     .not-data{
       width: 95vw;
+    }
+    .article-cover{
+      height: 200px;
     }
   }
 </style>

@@ -1,2 +1,71 @@
+.white{
+  //--primary-color-theme:#fff; /*ui主题色*/
+  --theme-color:#fff; /*主题色*/
+  --body-bg-color:#f8f9fb;/*全局body背景*/
+  --theme-disabled-color:#909399; /*全局禁止的颜色*/
+  --theme-boder-color:#e8e8e8; /*全局边框的颜色*/
+  --theme-bubble-bg-color:#fff; /*全局气泡背景的颜色*/
+
+  --theme-font-1-color:#303133; /*全局文字颜色一级颜色*/
+  --theme-font-2-color:#909399; /*全局文字颜色二级颜色*/
+  --theme-font-3-color:#606266; /*全局文字颜色三级颜色*/
+
+  --theme-pre-bg-color:#f8f8f8; /*全局代码块背景颜色*/
+
+  --theme-switch-bg-color:#0f1010;/** 主题切换开关背景颜色*/
+}
+.dark{
+  //--primary-color-theme:#fff;/*ui主题色*/
+  --theme-color:#161b22; /*全局主题色*/
+  --body-bg-color:#161b22;  /*全局body背景*/
+  --theme-disabled-color:#909399; /*全局禁止的颜色*/
+  --theme-boder-color:#EBEEF5; /*全局边框的颜色*/
+  --theme-bubble-bg-color:#0f1010; /*全局气泡背景的颜色*/
+
+  --theme-font-1-color:#fff; /*全局文字颜色一级颜色*/
+  --theme-font-2-color:#909399; /*全局文字颜色二级颜色*/
+  --theme-font-3-color:#606266; /*全局文字颜色三级颜色*/
+
+  --theme-pre-bg-color:#2d2828; /*全局代码块背景颜色*/
+
+  --theme-switch-bg-color:#f8f8f8;/** 主题切换开关背景颜色*/
+}
+
+//需要切换的主题颜色
+@theme-color:var(--theme-color); /*全局主题色*/
+@body-bg-color:var(--body-bg-color); /*全局body背景*/
+@theme-disabled-color:var(--theme-disabled-color);/*全局禁止的颜色*/
+@theme-boder-color:var(--theme-boder-color);/*全局边框的颜色*/
+@theme-bubble-bg-color:var(--theme-bubble-bg-color);/*全局气泡背景的颜色*/
+//文字
+@theme-font-1-color:var(--theme-font-1-color);/*全局文字颜色一级颜色*/
+@theme-font-2-color:var(--theme-font-2-color);/*全局文字颜色二级颜色*/
+@theme-font-3-color:var(--theme-font-3-color);/*全局文字颜色三级颜色*/
+//代码
+@theme-pre-bg-color:var(--theme-pre-bg-color); /*全局代码块背景颜色*/
+
+//开关
+@theme-switch-bg-color:var(--theme-switch-bg-color); /** 主题切换开关背景颜色*/
+
+
+//不需要切换的全局变量
+//@primary-color:#1AC19C;
 @primary-color: #1AC19C;
-@margins-08: 0.8rem;
+
+
+//需要覆盖的组件样式
+/deep/.ant-drawer-body{
+  padding: 0px !important;
+}
+
+/deep/.ant-drawer-wrapper-body,/deep/.ant-drawer-body,/deep/.ant-drawer-header{
+  background-color: @theme-bubble-bg-color !important;
+}
+/deep/.ant-drawer-title{
+  color: @theme-font-1-color !important;
+}
+/deep/.ant-menu{
+  background-color: @theme-bubble-bg-color !important;
+  color: @theme-font-1-color !important;
+}
+
