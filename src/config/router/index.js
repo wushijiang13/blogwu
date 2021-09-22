@@ -4,12 +4,12 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import Layout from '@/components/layout/layout-main'//全局布局模板
-import article_list from '@/view/modelPage/article-list' //首页列表
-import notice from '@/view/modelPage/notice'//公告
-import article from '@/view/modelPage/article'// 文章详情
-import article_details from '@/components/article-details'// 文章详情 demo
-import about_my from '@/view/page/about-my'//关于我
-import add_article from '@/view/page/add-article'//新增文章
+import article_list from '@/view/aboveMain/article-list' //首页列表
+import article from '@/view/aboveMain/article-details'// 文章详情
+import about_my from '@/view/aboveMain/about-my'//关于我
+import add_article from '@/view/aboveMain/add-article'//新增文章
+
+import notice from '@/view/aboveSecondary/notice'//公告
 
 Vue.use(Router)
 const originalPush = Router.prototype.push
@@ -34,8 +34,8 @@ const router =new Router({
       }]
     },
     {
-      path:'/article',
-      name: "article",
+      path:'/details',
+      name: "details",
       component: Layout,
       children: [{
         path:'/',
@@ -44,11 +44,6 @@ const router =new Router({
           aboveSecondary:null,
         },
       }]
-    },
-    {
-      path:'/details',
-      name:'details',
-      component: article_details //文章详情demo
     },
     {
       path: '/aboutMy',
@@ -83,6 +78,7 @@ router.beforeEach((to, from, next)=>{
 })
 
 router.afterEach(()=>{
+  document.documentElement.scrollTop=0;
   NProgress.done();
 })
 

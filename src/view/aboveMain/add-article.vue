@@ -49,10 +49,10 @@
           <div  ref="editor" class="editor"></div>
           <input type="text" style="opacity: 0;position: absolute;" v-model="copyInput" ref="copyInput">
           <a-button type="primary" class="copyHtml" style="float: right; margin-top: 20px" @click="copyText(1)">
-            copy-HTML代码
+            copy-TEXT代码
           </a-button>
           <a-button type="primary" class="copyHtml" style="float: right;margin-right: 10px; margin-top: 20px"
-                    @click="copyText(2)">copy-TEXT代码
+                    @click="copyText(2)">copy-HTML代码
           </a-button>
           <a-button class="submit-btn" @click="addArticleBtn" type="primary">提交文章</a-button>
           <p style="padding-bottom: 40px"></p>
@@ -82,6 +82,8 @@ import Editor from "wangeditor"
 import uploads from "../../components/utlis/uploads";
 import {getArticleTypeList,insertArticle} from '../../config/request/requestUrl'
 import {isNullCheck} from "../../utils/utils";
+import 'highlight.js/styles/agate.css'
+import hljs from 'highlight.js'
 
 export default {
   name: "addArticle",
@@ -117,7 +119,10 @@ export default {
   },
   mounted() {
     this.editor = new Editor(".editor")
+    this.editor.highlight = hljs;
+    this.editor.config.uploadImgShowBase64 = true
     this.editor.create();
+    console.log(this.editor.config);
   },
   methods: {
     //-------网络请求---------
@@ -169,8 +174,8 @@ export default {
     },
     addArticleBtn(){
       this.$refs.ruleForm.validate(valid => {
-        if (isNullCheck(this.editor.txt.text())) {
-          this.addArticleInfo.article_html=escape(`${this.editor.txt.html()}`);
+        if (isNullCheck(this.editor.txt.html()) && valid) {
+          this.addArticleInfo.article_html=escape(`${ this.checkCode() }`);
           this.addArticleInfo.article_text=escape(`${this.editor.txt.text()}`);
           this.addArticleInfo.article_cover=this.addArticleInfo.article_cover.toString();
           this.instrtArticleTypeList()
@@ -197,6 +202,18 @@ export default {
     selectArticleTypeChange(){
 
     },
+    /***
+     * 检测代码高亮补全背景
+     */
+    checkCode(){
+      if (this.editor.txt.html().includes('pre') == false) {
+        return
+      }
+      document.querySelectorAll("code").forEach(item=>{
+        item.className+='hljs';
+      })
+      return this.editor.txt.html();
+    }
 
   },
   components:{

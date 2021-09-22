@@ -24,7 +24,7 @@
 </template>
 
 <script>
-  import CellItem from '../../components/layout/cell-item'
+  import CellItem from '../../components/utlis/cell-item'
   import {getArticleList} from '@config/request/requestUrl'
   import {mapState} from 'vuex';
 
@@ -79,7 +79,7 @@
        */
       goArticle(articleInfo) {
         this.$router.push({
-          path: '/article',
+          path: '/details',
           query: {
             article_id: articleInfo.article_id,
           }

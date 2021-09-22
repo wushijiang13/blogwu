@@ -19,15 +19,9 @@
   import LayoutHeads from "@/components/layout/layout-head";
   export default {
     name: "index",
-    methods: {
-      clickgiveup() {
-        this.$refs.dianzan.style.color = "#67C23A";
-      },
+    components: {
+       LayoutHeads
     },
-   components: {
-     LayoutHeads
-   },
-
   }
 </script>
 

@@ -9,5 +9,4 @@ import './ant-design.less'
   Vue.use(item);
 })
 
-
 Vue.prototype.$message=message;

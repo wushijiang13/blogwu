@@ -8,7 +8,6 @@ const ask  = axios.create({
   headers: {'Content-Type': 'application/json;charset=UTF-8'},
 })
 
-console.log(ask.defaults);
 /**
  * 封装get方法
  * @param url

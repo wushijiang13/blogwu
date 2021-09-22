@@ -33,16 +33,18 @@
 <script>
 import {isNullCheck,getConversionTime} from '../../utils/utils'
 import {getArticleById} from '../../config/request/requestUrl'
+import 'highlight.js/styles/agate.css'
+
 export default {
-  name: "articles",
+  name: "articleDetails",
   data(){
       return {
         articleInfo:'',//文章信息
         isCloseInit:false,//是否结束初始化请求了
       }
   },
-  created() {
-   this.init();
+  async mounted() {
+   await this.init();
   },
   methods:{
     goBack(){
@@ -54,9 +56,9 @@ export default {
     init(){
       if (this.$route.query.article_id) {
         this.$https.post(getArticleById,{article_id:this.$route.query.article_id}).then(({code,data})=>{
+          this.isCloseInit=true;
           if (code == 200) {
             if(isNullCheck(data.article_info)){
-              this.isCloseInit=true;
               this.articleInfo=data.article_info;
               this.articleInfo.article_html=unescape(this.articleInfo.article_html);
             }
@@ -78,40 +80,45 @@ export default {
     margin-bottom: 20px;
   }
   .article-details{
-    width: 95%;
+    width: 700px;
     padding: 0.8rem;
     min-height: 700px;
     background-color: @theme-bubble-bg-color;
     word-break: break-all;
     display: inline-block;
   }
+  .data-show{
+    padding: 0.5rem;
+  }
   .article-title{
     font-size: 1.8rem;
     font-weight: 600;
     margin-top: 1rem;
     color: @theme-font-1-color;
-    padding: 0px 0.6rem;
+    display: inline-block;
+    cursor: pointer;
   }
   .article-title:hover{
     text-decoration: underline;
   }
   /deep/.article-content{
     margin: 1rem 0px;
-    padding: 0px 0.6rem;
     font-size: 14px;
   }
   /deep/.article-content > *{
     color: @theme-font-1-color !important;
   }
-  /deep/.article-content > pre{
+  /deep/.article-content > pre > code {
     padding: 16px;
     font-size: 13px;
-    background-color: @theme-pre-bg-color;
     margin-top: 10px;
     user-select: text;
   }
   /deep/.article-content > p{
     margin: 10px 0px;
+  }
+  /deep/.article-content > p > img{
+    width: 100%;
   }
   /deep/.article-content > hr{
     margin: 10px 0px;
@@ -132,14 +139,21 @@ export default {
   .article-cover img{
     width: 100%;
   }
+  .not-data{
+    color: @theme-font-1-color;
+  }
 
   @media screen and (max-width: 960px) {
+    .article{
+      margin: 0.5rem;
+    }
     /deep/.article-content > pre{
-      width: 85vw;
+      width: 91vw;
     }
     .article-details{
-      min-width: 95vw;
+      width: auto;
       min-height: 600px;
+      padding: 0px;
     }
     .not-data{
       width: 95vw;
@@ -147,5 +161,6 @@ export default {
     .article-cover{
       height: 200px;
     }
+
   }
 </style>

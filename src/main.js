@@ -16,11 +16,6 @@ Vue.prototype.$https=https;
 Vue.config.productionTip = false
 Vue.use(infiniteScroll)
 
-router.beforeEach(function(to,form,next){
-  if(to.name === form.name){
-  }
-  next();
-})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
