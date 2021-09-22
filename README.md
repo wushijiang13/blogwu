@@ -2,14 +2,18 @@
  * * *
  其中包含以下知识点
  * javascript
- * css 
+ * css
  * html
-> 项目开发中 
+> 项目开发中
 
-本项目前端使用vue-cli 2.x 开发  
-## 主题换肤  
-![image](https://user-images.githubusercontent.com/38801556/133879665-8872caed-e29e-42c9-a18b-a2ee69b0784c.png)  
-![image](https://user-images.githubusercontent.com/38801556/133879685-61500548-9a23-46fb-8db6-3121ee18c0b3.png)  
+1.layout 布局通过命名路由实现
+2.主题换肤通过var() css变量实现 (less穿透)
+
+
+本项目前端使用vue-cli 2.x 开发
+## 主题换肤
+![image](https://user-images.githubusercontent.com/38801556/133879665-8872caed-e29e-42c9-a18b-a2ee69b0784c.png)
+![image](https://user-images.githubusercontent.com/38801556/133879685-61500548-9a23-46fb-8db6-3121ee18c0b3.png)
 
 ## 响应式适配
 ![image](https://user-images.githubusercontent.com/38801556/133879707-e3372df6-77a3-44dc-aa46-3a11a763b8fc.png)
