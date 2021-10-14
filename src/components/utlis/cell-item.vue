@@ -8,11 +8,23 @@
           <span class="mute-noactive">{{info.nick_name}}</span>-
           <span class="mute-noactive">{{getConversionTime(info.article_time)}}</span>-
           <span class="mute-noactive">{{info.article_types_name}}</span>
-        <p class="meta-title">{{info.article_title}}</p>
+        </p>
+        <p class="meta-title" @click="goArticle(info)">{{info.article_title}}</p>
         <div>
           <p class="mute-giveup">
-            <span class="iconfont icon-style" ref="dianzan" @click="clickgiveup"><a-icon type="like" class="icons-text"/>{{info.article_like}}</span>
-            <span class="iconfont icon-style "><a-icon type="message" class="icons-text"/>{{info.article_comments}}</span>
+            <span class="iconfont icon-style" ref="dianzan" @click="clickgiveup">
+              <wuButton>
+                <template slot="btn-icon">
+                  <wu-icon type="icon-dianzan"  :size="14"/>
+                </template>
+                <template slot="btn-text">
+                  赞
+                </template>
+                <template slot="btn-num">
+                  {{info.article_like}}
+                </template>
+              </wuButton>
+            </span>
           </p>
         </div>
       </div>
@@ -28,6 +40,7 @@
 
 <script>
   import {getConversionTime} from "../../utils/utils";
+  import wuButton from "./wu-button"
 export default {
   name: "cell-item",
   props:[
@@ -39,7 +52,22 @@ export default {
     },
     getConversionTime(article_time){
       return  getConversionTime(article_time)
-    }
+    },
+    /***
+     * 前往文章页面
+     * @param articleId 文章id
+     */
+    goArticle(articleInfo) {
+      this.$router.push({
+        path: '/details',
+        query: {
+          article_id: articleInfo.article_id,
+        }
+      });
+    },
+  },
+  components:{
+    wuButton,
   }
 }
 </script>
@@ -49,14 +77,17 @@ export default {
   padding: 1rem;
 }
 
-.mute-item {
-  color:@theme-disabled-color;
+.mute-item{
+  color:@theme-font-2-color;
   background-color: @theme-bubble-bg-color;
   cursor: pointer;
   position: relative;
   font-size: 0px;
   display: flex;
+  border-radius:@theme-boder-radius-width;
+  margin-bottom: 10px;
 }
+
 .mute-item-div{
   flex: 5;
   display: inline-block;
@@ -68,6 +99,7 @@ export default {
   overflow: hidden;
   align-items: center;
   justify-content: center;
+  border-radius:@theme-boder-radius-width;
 }
 .meta-list {
   font-size: 0.5rem;
@@ -99,18 +131,17 @@ export default {
 
 .icon-style {
   font-size: 0.8rem;
-  color: @theme-disabled-color;
+  color: @theme-font-2-color;
   font-weight: 600;
-  padding: 0.3rem 0.4rem;
-  border: 1px solid @theme-boder-color;
-  display: inline-block;
-  vertical-align: top;
+  margin-right: 10px;
+ /* border: 1px solid @theme-boder-color;
+  border-radius:@theme-boder-radius-width;*/
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mute-img {
-  height: 4rem;
-}
-.icons-text {
-  margin-right: .6rem;
+  height: 5.3rem;
 }
 </style>

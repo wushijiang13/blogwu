@@ -15,6 +15,13 @@
         <div class="article-cover" v-show="articleInfo.article_cover" :style="{'background-image':'url('+articleInfo.article_cover+')'}" />
         <div class="article-content" v-html="articleInfo.article_html"/>
       </div>
+      <div class="article-right">
+        <ul>
+          <li>
+
+          </li>
+        </ul>
+      </div>
       <div class="not-data">
         <div  v-show="!articleInfo && isCloseInit">
           <a-result status="404" title="404" sub-title="抱歉，页面走丢了。。">
@@ -26,6 +33,7 @@
           </a-result>
         </div>
       </div>
+      <div id="gitalk-container"></div>
     </div>
   </div>
 </template>
@@ -33,8 +41,9 @@
 <script>
 import {isNullCheck,getConversionTime} from '../../utils/utils'
 import {getArticleById} from '../../config/request/requestUrl'
-import 'highlight.js/styles/agate.css'
-
+// import 'highlight.js/styles/base16/atelier-forest-light.css'
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
 export default {
   name: "articleDetails",
   data(){
@@ -53,6 +62,22 @@ export default {
     getConversionTime(article_time){
       return  getConversionTime(article_time)
     },
+    /**
+     * 初始化gitalk 评论
+     */
+    initGitAlk(){
+      var gitalk = new Gitalk({
+        clientID: 'c37a93c69f65ed9b31da',
+        clientSecret: '11ebc353cd2598db899c2ccebec19bdb263ca8a0',
+        repo: 'blogwu-gitalk',
+        owner: 'wushijiang13',
+        admin: ['wushijiang13'],
+        title: this.articleInfo.article_title,
+        id: this.articleInfo.article_id+"wu",  // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+      gitalk.render('gitalk-container')
+    },
     init(){
       if (this.$route.query.article_id) {
         this.$https.post(getArticleById,{article_id:this.$route.query.article_id}).then(({code,data})=>{
@@ -61,9 +86,11 @@ export default {
             if(isNullCheck(data.article_info)){
               this.articleInfo=data.article_info;
               this.articleInfo.article_html=unescape(this.articleInfo.article_html);
+              this.initGitAlk();
             }
           }
-        }).catch(e=>{
+        })
+          .catch(e=>{
           this.isCloseInit=true;
         })
       }
@@ -82,10 +109,11 @@ export default {
   .article-details{
     width: 700px;
     padding: 0.8rem;
-    min-height: 700px;
     background-color: @theme-bubble-bg-color;
     word-break: break-all;
     display: inline-block;
+    border-radius: @theme-boder-radius-width;
+    padding-bottom: 20px;
   }
   .data-show{
     padding: 0.5rem;
@@ -141,6 +169,38 @@ export default {
   }
   .not-data{
     color: @theme-font-1-color;
+  }
+
+  .article-right{
+
+  }
+  /deep/.gt-container{
+    color:@theme-font-1-color !important;
+  }
+  /deep/.gt-container a{
+    color:@primary-color !important;
+  }
+  /deep/.gt-container .gt-link{
+    border-bottom: 1px dotted @primary-color !important;
+  }
+  /deep/.gt-container .gt-svg svg{
+    fill:@primary-color !important;
+  }
+  /deep/.gt-container .gt-popup .gt-action.is--active:before{
+    background-color: @primary-color !important;
+  }
+  /deep/.gt-container .gt-btn-public,/deep/.gt-container .gt-btn{
+    border: 1px solid @primary-color;
+    background-color: @primary-color;
+    color:#fff;
+  }
+  /deep/.gt-container .gt-btn-preview{
+    border: 1px solid @primary-color !important;
+    background-color: #fff;
+    color:@primary-color !important;
+  }
+  /deep/.gt-container .gt-header-textarea{
+    color: #000;
   }
 
   @media screen and (max-width: 960px) {

@@ -1,33 +1,51 @@
 .white{
-  //--primary-color-theme:#fff; /*ui主题色*/
   --theme-color:#fff; /*主题色*/
-  --body-bg-color:#f8f9fb;/*全局body背景*/
+  --body-bg-color: #f6f8fa;/*全局body背景*/
   --theme-disabled-color:#909399; /*全局禁止的颜色*/
   --theme-boder-color:#e8e8e8; /*全局边框的颜色*/
-  --theme-bubble-bg-color:#fff; /*全局气泡背景的颜色*/
+  --theme-bubble-bg-color: #fff; /*全局气泡背景的颜色*/
 
-  --theme-font-1-color:#303133; /*全局文字颜色一级颜色*/
-  --theme-font-2-color:#909399; /*全局文字颜色二级颜色*/
-  --theme-font-3-color:#606266; /*全局文字颜色三级颜色*/
+  //btn 按钮
+  --theme-button-default-bg-color:#fff;
+  --theme-button-default-border-color:#d5d8da;
+  --theme-button-default-color:#24292f;
+
+  //文字
+  --theme-font-1-color:#24292f; /*全局文字颜色一级颜色*/
+  --theme-font-2-color: #606266; /*全局文字颜色二级颜色*/
+  --theme-font-3-color: #909399; /*全局文字颜色三级颜色*/
+  --theme-font-4-color: #d9d9db;
+
+  /*全局文字大小*/
+  --theme-emphasize-size:16px;
+  --theme-secondary-size:14px;
+  --theme-unimportant-size:12px;
 
   --theme-pre-bg-color:#f8f8f8; /*全局代码块背景颜色*/
-
   --theme-switch-bg-color:#0f1010;/** 主题切换开关背景颜色*/
 }
 .dark{
-  //--primary-color-theme:#fff;/*ui主题色*/
-  --theme-color:#161b22; /*全局主题色*/
+  --theme-color: #030709; /*全局主题色*/
   --body-bg-color:#161b22;  /*全局body背景*/
   --theme-disabled-color:#909399; /*全局禁止的颜色*/
-  --theme-boder-color:#EBEEF5; /*全局边框的颜色*/
+  --theme-boder-color:#30363d; /*全局边框的颜色*/
   --theme-bubble-bg-color:#0f1010; /*全局气泡背景的颜色*/
+  //btn 按钮
+  --theme-button-default-bg-color:#21262d;
+  --theme-button-default-border-color:#606266;
+  --theme-button-default-color: #92989f;
 
+  //文字
   --theme-font-1-color:#fff; /*全局文字颜色一级颜色*/
   --theme-font-2-color:#909399; /*全局文字颜色二级颜色*/
   --theme-font-3-color:#606266; /*全局文字颜色三级颜色*/
+  --theme-font-4-color: #3c3d40;
+  /*全局文字大小*/
+  --theme-emphasize-size:16px;
+  --theme-secondary-size:14px;
+  --theme-unimportant-size:12px;
 
   --theme-pre-bg-color:#2d2828; /*全局代码块背景颜色*/
-
   --theme-switch-bg-color:#f8f8f8;/** 主题切换开关背景颜色*/
 }
 
@@ -37,20 +55,31 @@
 @theme-disabled-color:var(--theme-disabled-color);/*全局禁止的颜色*/
 @theme-boder-color:var(--theme-boder-color);/*全局边框的颜色*/
 @theme-bubble-bg-color:var(--theme-bubble-bg-color);/*全局气泡背景的颜色*/
+
+//按钮
+@theme-button-default-bg-color:var(--theme-button-default-bg-color);
+@theme-button-default-border-color:var(--theme-button-default-border-color);
+@theme-button-default-color:var(--theme-button-default-color);
+
 //文字
 @theme-font-1-color:var(--theme-font-1-color);/*全局文字颜色一级颜色*/
 @theme-font-2-color:var(--theme-font-2-color);/*全局文字颜色二级颜色*/
 @theme-font-3-color:var(--theme-font-3-color);/*全局文字颜色三级颜色*/
+@theme-font-4-color:var(--theme-font-4-color);
+//全局文字大小
+@theme-emphasize-size:var(--theme-emphasize-size);
+@theme-secondary-size:var(--theme-secondary-size);
+@theme-unimportant-size:var(--theme-unimportant-size);
+
 //代码
 @theme-pre-bg-color:var(--theme-pre-bg-color); /*全局代码块背景颜色*/
-
 //开关
 @theme-switch-bg-color:var(--theme-switch-bg-color); /** 主题切换开关背景颜色*/
-
+//边框
+@theme-boder-radius-width:5px; /** 主题圆角角度*/
 
 //不需要切换的全局变量
-//@primary-color:#1AC19C;
-@primary-color: #1AC19C;
+@primary-color:#1AC19C;
 
 
 //需要覆盖的组件样式
@@ -59,19 +88,74 @@
 }
 /deep/.ant-drawer-wrapper-body,/deep/.ant-drawer-body,/deep/.ant-drawer-header{
   background-color: @theme-bubble-bg-color !important;
+  border:@theme-bubble-bg-color !important;
+  transition: none !important;
+}
+/deep/.ant-menu-vertical{
+  border:@theme-bubble-bg-color !important;
+  transition: none !important;
 }
 /deep/.ant-drawer-title{
   color: @theme-font-1-color !important;
+  transition: none !important;
 }
 /deep/.ant-result-title{
   color: @theme-font-1-color !important;
+  transition: none !important;
 }
 /deep/.ant-result-subtitle{
   color: @theme-font-1-color !important;
+  transition: none !important;
 }
 /deep/.ant-menu{
   background-color: @theme-bubble-bg-color !important;
   color: @theme-font-1-color !important;
+  transition: none !important;
 }
+/deep/.ant-input{
+  border-radius: 30px;
+  outline: none;
+}
+/deep/.ant-input:focus{
+  border-color:#d9d9d9;
+  box-shadow:none;
+}
+/deep/.ant-menu-item:hover{
+  color:@theme-font-1-color !important;
+  transition: none !important;
+}
+/deep/.ant-menu-item-selected{
+  color:@theme-font-1-color !important;
+  transition: none !important;
+}
+/deep/.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+  background-color: @theme-color !important;
+  transition: none !important;
+}
+/deep/.ant-btn{
+  border: none !important;
+  background-color: @theme-color !important;
+  transition: none !important;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #00000000;
+  -webkit-border-radius: 0
+}
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px
+}
+::-webkit-scrollbar-thumb {
+  height: 20px;
+  background-color:  @theme-font-1-color;
+  -webkit-border-radius: 6px;
+  outline-offset: -2px;
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  margin-right: 2px;
+}
+
 
 

@@ -5,9 +5,10 @@
            :infinite-scroll-disabled="$store.state.articleListEnd"
            :infinite-scroll-immediate-check="false"
            :infinite-scroll-distance="100">
-        <CellItem v-for="(item,index) in articleList" :key="index" :info="item" @click.native="goArticle(item)">
-          <a-divider slot="dividers" v-if="(articleList.length-1) != index "/>
-        </CellItem>
+        <CellItem
+          v-for="(item,index) in articleList"
+          :key="index"
+          :info="item"/>
 
         <div class="not-list" v-show="articleList.length == 0 && typeof  articleList != 'string'">
           <p class="not-title">
@@ -46,6 +47,7 @@
     created() {
       this.$store.dispatch("clearArticlePage");
       this.loading = true;
+      this.getArticleList()
     },
     methods: {
       /**
@@ -72,18 +74,6 @@
             }
           })
         })
-      },
-      /***
-       * 前往文章页面
-       * @param articleId 文章id
-       */
-      goArticle(articleInfo) {
-        this.$router.push({
-          path: '/details',
-          query: {
-            article_id: articleInfo.article_id,
-          }
-        });
       },
       /**
        * 下拉刷新
@@ -120,6 +110,9 @@
     align-items: center;
     text-align: center;
     height: 200px;
+    background-color: @theme-bubble-bg-color;
+    border-radius: 5px;
+    color: @theme-font-1-color;
   }
 
   .above_main {
