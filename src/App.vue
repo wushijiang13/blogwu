@@ -1,13 +1,18 @@
 <template>
   <div id="app">
     <router-view />
+    <loading />
   </div>
 </template>
 
 <script>
 
+  import loading from '@/components/utlis/loading.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    loading
+  }
 }
 </script>
 

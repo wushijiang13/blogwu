@@ -33,17 +33,16 @@
           </a-result>
         </div>
       </div>
-      <div id="gitalk-container"></div>
+      <comment :title="articleInfo.article_title" :serial="articleInfo.article_id"/>
     </div>
   </div>
 </template>
 
 <script>
-import {isNullCheck,getConversionTime} from '../../utils/utils'
-import {getArticleById} from '../../config/request/requestUrl'
+import {isNullCheck,getConversionTime} from '@/utils/utils'
+import {getArticleById} from '@/config/request/requestUrl'
+import comment from '@/components/utlis/wu-comment'
 // import 'highlight.js/styles/base16/atelier-forest-light.css'
-import 'gitalk/dist/gitalk.css'
-import Gitalk from 'gitalk'
 export default {
   name: "articleDetails",
   data(){
@@ -62,22 +61,6 @@ export default {
     getConversionTime(article_time){
       return  getConversionTime(article_time)
     },
-    /**
-     * 初始化gitalk 评论
-     */
-    initGitAlk(){
-      var gitalk = new Gitalk({
-        clientID: 'c37a93c69f65ed9b31da',
-        clientSecret: '11ebc353cd2598db899c2ccebec19bdb263ca8a0',
-        repo: 'blogwu-gitalk',
-        owner: 'wushijiang13',
-        admin: ['wushijiang13'],
-        title: this.articleInfo.article_title,
-        id: this.articleInfo.article_id+"wu",  // Ensure uniqueness and length less than 50
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      })
-      gitalk.render('gitalk-container')
-    },
     init(){
       if (this.$route.query.article_id) {
         this.$https.post(getArticleById,{article_id:this.$route.query.article_id}).then(({code,data})=>{
@@ -86,7 +69,6 @@ export default {
             if(isNullCheck(data.article_info)){
               this.articleInfo=data.article_info;
               this.articleInfo.article_html=unescape(this.articleInfo.article_html);
-              this.initGitAlk();
             }
           }
         })
@@ -95,6 +77,9 @@ export default {
         })
       }
     }
+  },
+  components:{
+    comment,
   }
 }
 </script>
@@ -116,7 +101,7 @@ export default {
     padding-bottom: 20px;
   }
   .data-show{
-    padding: 0.5rem;
+    padding: 1rem;
   }
   .article-title{
     font-size: 1.8rem;
@@ -176,6 +161,7 @@ export default {
   }
   /deep/.gt-container{
     color:@theme-font-1-color !important;
+    padding: 1rem;
   }
   /deep/.gt-container a{
     color:@primary-color !important;
@@ -208,7 +194,7 @@ export default {
       margin: 0.5rem;
     }
     /deep/.article-content > pre{
-      width: 91vw;
+      width: 87vw;
     }
     .article-details{
       width: auto;

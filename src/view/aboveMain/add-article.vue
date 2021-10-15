@@ -68,7 +68,7 @@
               继续添加
             </a-button>
             <a-button @click="()=>{$router.push('/')}" key="buy">
-              去首页
+              去博客
             </a-button>
           </template>
         </a-result>

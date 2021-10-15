@@ -18,13 +18,15 @@
         <div class="nav-box">
           <ul class="nav-search">
             <li>
-              <a-input-search
+              <a-input
                 class="nav-search-input"
                 placeholder="搜索一下吧~"
                 :loading="searchLoading"
                 v-model="searchValue"
-                @search="onSearch"
-                @change="searchChange"/>
+                @pressEnter="onSearch"
+                @change="searchChange">
+                <a-icon slot="prefix" type="search" />
+              </a-input>
             </li>
           </ul>
           <div class="nav-function">
@@ -89,9 +91,9 @@
         searchValue: '',
         searchLoading: false,//搜索loading
         navList: [
-          {type:0,label:'首页'},
+          {type:0,label:'博客'},
           {type:1,label:'写文章'},
-          {type:2,label:'归档'},
+          {type:2,label:'文档'},
           {type:4,label:'关于我',icon:"icon-erweima"},
           {type:5,label:'GitHub'},
         ],
@@ -110,6 +112,14 @@
         debounce.call(this, () => {
           this.$router.push('/addArticle');
         }, '人就要被点傻了(＠_＠;)');
+      },
+      /**
+       * 跳转到文档
+       */
+      goDocumentation(){
+        debounce.call(this, () => {
+          this.$router.push('/documentation');
+        }, '看文档不要急哦~');
       },
       goHome() {
         this.searchValue="";
@@ -134,6 +144,7 @@
             break;
           }
           case 2:{
+            this.goDocumentation();
             break;
           }
           case 3:{  break;}

@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import './config/global/config'
 import store from './config/vuex/store'
 import infiniteScroll from 'vue-infinite-scroll'
 import router from './config/router'

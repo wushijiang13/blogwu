@@ -4,6 +4,7 @@
   --theme-disabled-color:#909399; /*全局禁止的颜色*/
   --theme-boder-color:#e8e8e8; /*全局边框的颜色*/
   --theme-bubble-bg-color: #fff; /*全局气泡背景的颜色*/
+  --theme-loading-bg-color: rgba(0,0,0,0.1); /*全局loading背景的颜色*/
 
   //btn 按钮
   --theme-button-default-bg-color:#fff;
@@ -30,6 +31,8 @@
   --theme-disabled-color:#909399; /*全局禁止的颜色*/
   --theme-boder-color:#30363d; /*全局边框的颜色*/
   --theme-bubble-bg-color:#0f1010; /*全局气泡背景的颜色*/
+  --theme-loading-bg-color: rgba(255,255,255,0.1); /*全局loading背景的颜色*/
+
   //btn 按钮
   --theme-button-default-bg-color:#21262d;
   --theme-button-default-border-color:#606266;
@@ -55,6 +58,7 @@
 @theme-disabled-color:var(--theme-disabled-color);/*全局禁止的颜色*/
 @theme-boder-color:var(--theme-boder-color);/*全局边框的颜色*/
 @theme-bubble-bg-color:var(--theme-bubble-bg-color);/*全局气泡背景的颜色*/
+@theme-loading-bg-color:var(--theme-loading-bg-color);/*全局loading的颜色*/
 
 //按钮
 @theme-button-default-bg-color:var(--theme-button-default-bg-color);
@@ -85,6 +89,9 @@
 //需要覆盖的组件样式
 /deep/.ant-drawer-body{
   padding: 0px !important;
+}
+/deep/.ant-drawer-close{
+  color: @theme-font-1-color !important;
 }
 /deep/.ant-drawer-wrapper-body,/deep/.ant-drawer-body,/deep/.ant-drawer-header{
   background-color: @theme-bubble-bg-color !important;
