@@ -39,3 +39,11 @@ p{
 .website-list li{
   display: inline-block;
 }
+.pe-bottom{
+  text-align: center;
+}
+.pe-bottom a{
+  text-decoration: none;
+  color: #000;
+  font-size: 0.3rem;
+}
