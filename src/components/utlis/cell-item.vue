@@ -110,7 +110,7 @@ export default {
 }
 
 .meta-title {
-  font-size: 1rem;
+  font-size: @theme-title-size;
   font-weight: 600;
   color: @theme-font-1-color;
   margin-top: 0.5rem;

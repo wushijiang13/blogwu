@@ -7,7 +7,7 @@
 <script>
     import {Icon} from 'ant-design-vue'
     const WuIcon = Icon.createFromIconfontCN({
-      scriptUrl: '//at.alicdn.com/t/font_2835719_rii6npab6i.js', // 在 iconfont.cn 上生成
+      scriptUrl: '//at.alicdn.com/t/font_2835719_ljo5s9w78i.js', // 在 iconfont.cn 上生成
     });
     export default {
         name: "wu-icon",

@@ -1,5 +1,5 @@
 <template>
-  <div id="gitalk-container">
+  <div :id="queryId">
 
   </div>
 </template>
@@ -10,13 +10,17 @@
     export default {
         name: "wu-comment",
         props:{
+          queryId:{
+            default:"gitalk-container",
+            type:String,
+          },
           title:{
-            default:"",
+            default:"default",
             type:String,
           },
           serial:{
-            default:0,
-            type:Number,
+            default:"",
+            type:String,
           }
         },
         methods:{
@@ -31,10 +35,10 @@
               owner: 'wushijiang13',
               admin: ['wushijiang13'],
               title: this.title,
-              id:this.serial+"wu",  // Ensure uniqueness and length less than 50
+              id:this.serial,  // Ensure uniqueness and length less than 50
               distractionFreeMode: false  // Facebook-like distraction free mode
             })
-            gitalk.render('gitalk-container')
+            gitalk.render(this.queryId)
           },
         },
       watch:{
@@ -42,11 +46,45 @@
             if (this.title) {
               this.initGitAlk();
             }
+          },
+          'queryId'(){
+              this.initGitAlk();
           }
+      },
+      mounted() {
+          this.initGitAlk();
       }
     }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  /deep/.gt-container{
+    color:@theme-font-1-color !important;
+    padding: 1rem;
+  }
+  /deep/.gt-container a{
+    color:@primary-color !important;
+  }
+  /deep/.gt-container .gt-link{
+    border-bottom: 1px dotted @primary-color !important;
+  }
+  /deep/.gt-container .gt-svg svg{
+    fill:@primary-color !important;
+  }
+  /deep/.gt-container .gt-popup .gt-action.is--active:before{
+    background-color: @primary-color !important;
+  }
+  /deep/.gt-container .gt-btn-public,/deep/.gt-container .gt-btn{
+    border: 1px solid @primary-color;
+    background-color: @primary-color;
+    color:#fff;
+  }
+  /deep/.gt-container .gt-btn-preview{
+    border: 1px solid @primary-color !important;
+    background-color: #fff;
+    color:@primary-color !important;
+  }
+  /deep/.gt-container .gt-header-textarea{
+    color: #000;
+  }
 </style>

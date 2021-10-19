@@ -33,7 +33,7 @@
           </a-result>
         </div>
       </div>
-      <comment :title="articleInfo.article_title" :serial="articleInfo.article_id"/>
+      <comment :title="articleInfo.article_title" :serial="articleInfo.article_id+'wu'"/>
     </div>
   </div>
 </template>
@@ -158,35 +158,6 @@ export default {
 
   .article-right{
 
-  }
-  /deep/.gt-container{
-    color:@theme-font-1-color !important;
-    padding: 1rem;
-  }
-  /deep/.gt-container a{
-    color:@primary-color !important;
-  }
-  /deep/.gt-container .gt-link{
-    border-bottom: 1px dotted @primary-color !important;
-  }
-  /deep/.gt-container .gt-svg svg{
-    fill:@primary-color !important;
-  }
-  /deep/.gt-container .gt-popup .gt-action.is--active:before{
-    background-color: @primary-color !important;
-  }
-  /deep/.gt-container .gt-btn-public,/deep/.gt-container .gt-btn{
-    border: 1px solid @primary-color;
-    background-color: @primary-color;
-    color:#fff;
-  }
-  /deep/.gt-container .gt-btn-preview{
-    border: 1px solid @primary-color !important;
-    background-color: #fff;
-    color:@primary-color !important;
-  }
-  /deep/.gt-container .gt-header-textarea{
-    color: #000;
   }
 
   @media screen and (max-width: 960px) {
