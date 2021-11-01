@@ -34,10 +34,7 @@
           return {
             config
           }
-        },
-      created() {
-        console.log(this.config);
-      }
+        }
     }
 </script>
 

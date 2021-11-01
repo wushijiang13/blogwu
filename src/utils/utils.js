@@ -33,7 +33,7 @@ function isNullCheck(value){
  */
 function base64En(value){
   if(isNullCheck(value)){
-    return  btoa(encodeURIComponent(JSON.stringify(value)));
+    return  btoa(escape(JSON.stringify(value)));
   }
 }
 
@@ -43,7 +43,8 @@ function base64En(value){
  */
 function  base64De(value){
   if(isNullCheck(value)){
-    return JSON.parse(decodeURIComponent(atob(value)));
+    return JSON.parse(unescape(atob(value)
+    ));
   }
 }
 

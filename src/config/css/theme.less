@@ -54,7 +54,7 @@
 }
 
 //需要切换的主题颜色
-@theme-color:var(--theme-color); /*全局主题色*/
+@theme-color: var(--theme-color); /*全局主题色*/
 @body-bg-color:var(--body-bg-color); /*全局body背景*/
 @theme-disabled-color:var(--theme-disabled-color);/*全局禁止的颜色*/
 @theme-boder-color:var(--theme-boder-color);/*全局边框的颜色*/
@@ -121,14 +121,6 @@
   color: @theme-font-1-color !important;
   transition: none !important;
 }
-/deep/.ant-input{
-  border-radius: 30px;
-  outline: none;
-}
-/deep/.ant-input:focus{
-  border-color:#d9d9d9;
-  box-shadow:none;
-}
 /deep/.ant-menu-item:hover{
   color:@theme-font-1-color !important;
   transition: none !important;
@@ -145,6 +137,13 @@
   border: none !important;
   background-color: @theme-color !important;
   transition: none !important;
+  color:@theme-font-1-color
+}
+/deep/.ant-divider-horizontal{
+  margin: 0;
+  width: 98%;
+  min-width: 98%;
+  margin: 0px auto;
 }
 
 ::-webkit-scrollbar-track-piece {

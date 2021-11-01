@@ -48,9 +48,13 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx|esm.js)$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
+        exclude: [
+          // \\ for Windows, \/ for Mac OS and Linux
+         '/node_modules/@bytemd/plugin-gfm',
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

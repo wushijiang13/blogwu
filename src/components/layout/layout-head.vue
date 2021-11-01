@@ -1,6 +1,5 @@
 <template>
   <div class="layout-head">
-    <div class="head-placeholder"/>
     <div class="head">
       <div class="nav-bar">
         <div  class="layout-mobile">
@@ -12,7 +11,7 @@
           <span class="xing">Wu</span>
           <span class="pc-blog">的个人博客</span>
           <span class="mobile-blog">
-            blog
+            Blog
           </span>
         </span>
         <div class="nav-box">
@@ -236,20 +235,18 @@
 </script>
 
 <style scoped lang="less">
-  .head-placeholder{
-    height: 60px;
-    margin-bottom: 0.8rem;
-  }
-  .head {
+  .layout-head {
     width: 100%;
     background-color: @theme-color;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     z-index: 999;
-    height: 60px;
   }
-
+  .head{
+    height: 60px;
+    margin-bottom: 0.8rem;
+  }
   .nav-bar {
     margin: 0px auto;
     height: 100%;
@@ -258,7 +255,6 @@
     align-items: center;
     justify-content: space-between;
   }
-
   .layout-pc{
     display: inline-block;
   }
@@ -337,7 +333,19 @@
     margin:0px 0.2rem;
   }
 
+  /deep/.ant-input{
+    border-radius: 30px;
+    outline: none;
+  }
+  /deep/.ant-input:focus{
+    border-color:#d9d9d9;
+    box-shadow:none;
+  }
+
   @media screen and (max-width: 960px) {
+    .head{
+      margin-bottom: 0.8rem;
+    }
     .nav-bar {
       padding: 0.5rem 1rem;
     }

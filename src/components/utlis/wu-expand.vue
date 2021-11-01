@@ -9,7 +9,7 @@
         </div>
         <div class="expand-head-right">
           <slot name="expand-head-right">
-            <a-button shape="circle" ghost @click="comment">
+            <a-button shape="circle" ghost @click="comment('commitRef'+currentId)">
               <wu-icon  :type="iconHeadComment"  :size="18"/>
             </a-button>
             <a-button v-if="isShowUnfold" shape="circle" ghost @click="unfoldPutAway">
@@ -38,9 +38,11 @@
                 <wu-icon style="vertical-align: baseline;" :type="iconUnfold"  :size="10"/>
               </div>
             </div>
-            <div class="expand-bottom-comment-box" v-show="isComment">
-              <comment :queryId="'expand'+currentId" :title="title" :serial="title" />
-            </div>
+            <transition name="unfold">
+              <div class="expand-bottom-comment-box" v-show="isComment">
+                <comment :queryId="'expand'+currentId" :placeholder="'对文档有什么想说的？'" :path="title" :ref="'commitRef'+currentId" />
+              </div>
+            </transition>
           </slot>
         </div>
       </div>
@@ -58,7 +60,7 @@
           },
           title:{
             type:String,
-            default:"标题",
+            default:"",
           },
           height:{
             type:String,
@@ -97,6 +99,10 @@
           comment(){
             this.isComment= !this.isComment;
             this.iconHeadComment=this.isComment ? 'icon-close-pinglun' : 'icon-open-pinglun';
+            let commitRef=this.$refs['commitRef' + this.currentId];
+            if (!commitRef.isInit && this.isComment) {
+              commitRef.initValine();
+            }
           },
           init(){
             this.isShowUnfold =
@@ -153,7 +159,22 @@
     cursor: pointer;
   }
   .expand-bottom-comment-box{
+    margin-top: 10px;
     width: 100%;
+  }
+  .unfold-enter-active,.unfold-enter{
+    max-height: 20px;
+    transition: .4s ease-in-out;
+  }
+  .unfold-enter-to{
+    max-height: 400px;
+  }
+  .unfold-leave-active{
+    max-height: 400px;
+    transition: .4s ease-in-out;
+  }
+  .unfold-leave-to{
+    max-height: 20px;
   }
   .expand-bottom-text:hover{
     text-decoration: underline;

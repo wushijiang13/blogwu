@@ -44,7 +44,7 @@ export function post(url, data = {}, config) {
   console.log(data);
   return new Promise((resolve, reject) => {
     ask.defaults.headers['Content-Type']='application/json;charset=UTF-8'
-    let postData={params:btoa(encodeURIComponent(JSON.stringify(data)))};
+    let postData={params:btoa(escape(JSON.stringify(data)))};
     ask.post(url, postData, config)
       .then(response => {
         resolve(response.data);

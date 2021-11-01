@@ -12,6 +12,8 @@ import documentation from '@/view/aboveMain/documentation'//文档记录
 
 import notice from '@/view/aboveSecondary/notice'//公告
 
+
+
 Vue.use(Router)
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -42,7 +44,6 @@ const router =new Router({
         path:'/',
         components:{
           aboveMain:article,//文章详情页面
-          aboveSecondary:null,
         },
       }]
     },
@@ -53,8 +54,7 @@ const router =new Router({
       children: [{
         path:'/',
         components:{
-          aboveMain:documentation,//文档收集
-          aboveSecondary:null,
+          aboveMain:documentation,
         },
       }]
     },
@@ -65,8 +65,7 @@ const router =new Router({
       children: [{
         path:'/',
         components:{
-          aboveMain:about_my,//关于我
-          aboveSecondary:null,
+          aboveMain:about_my,
         },
       }]
     },
@@ -77,11 +76,10 @@ const router =new Router({
       children: [{
         path:'/',
         components:{
-          aboveMain:add_article,//新增文章
-          aboveSecondary:null,
+          freeMain:add_article,//新增文章
         },
       }]
-    },
+    }
   ]
 })
 

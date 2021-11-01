@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="layout">
     <LayoutHeads/>
-    <div class="layout-main">
+    <div class="layout-main" ref="layoutMain">
       <a-back-top/>
       <div class="above">
+        <router-view  name="freeMain"/>
         <div class="above-main">
           <!--主要的-->
           <router-view  name="aboveMain"/>
@@ -21,20 +22,30 @@
     name: "index",
     components: {
        LayoutHeads
-    },
+    }
   }
 </script>
 
 <style scoped>
-  .layout-main {
-    width: 980px;
+  .layout{
+    position: relative;
   }
-  last-child {
-    margin-bottom: 0;
+  .layout-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
+  .above{
+    width: 100%;
+  }
+  .above-main {
+    width: 980px;
+    margin: 0px auto;
   }
 
   @media screen and (max-width: 980px) {
-     .layout-main{
+     .above-main{
        width: 100%;
      }
   }

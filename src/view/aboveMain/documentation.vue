@@ -5,8 +5,8 @@
       v-for="typeInfo in dataList"
       :key="typeInfo.type_id"
       :currentId="typeInfo.type_id"
+      :title="typeInfo.type_name"
     >
-      {{typeInfo}}
       <template slot="expand-head-left">
         <span class="documentation-title">{{typeInfo.type_name}}</span>
         <span>({{typeInfo.data.length}})</span>

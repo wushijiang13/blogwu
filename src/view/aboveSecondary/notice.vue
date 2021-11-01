@@ -9,7 +9,7 @@
       </p>
     </div>
     <div class="statement">
-      京ICP备2020046294号-1 | Mr.Wu
+      <span @click="jumpStatement">京ICP备2020046294号</span> | Mr.Wu
     </div>
   </div>
 </template>
@@ -17,6 +17,11 @@
 <script>
 export default {
   name: "notice",
+  methods:{
+    jumpStatement(){
+      window.open('https://beian.miit.gov.cn/')
+    }
+  }
 }
 </script>
 
@@ -65,6 +70,9 @@ export default {
   padding: 1rem 0rem;
   width: 100%;
   color: @theme-font-3-color;
+  span{
+    cursor: pointer;
+  }
 }
 
 @media screen and (max-width: 980px) {
