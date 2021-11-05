@@ -96,7 +96,7 @@
             if (currentDom.level > currentMaxDom.children[0].level) {
               //如果当前值 大于 当前子集内容
               let childFinally=newCurrentMaxDom.children[newCurrentMaxDom.children.length-1];
-              newCurrentMaxDom.children[currentMaxDom.children.length-1] = insertTree(currentDom,childFinally);
+              newCurrentMaxDom.children[currentMaxDom.children.length-1] = this.insertTree(currentDom,childFinally);
             }else{
               //如果不大于内部等级 那就是 当前值 == 当前层级 直接push 到当前子集中
               newCurrentMaxDom.children.push(currentDom);

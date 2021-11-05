@@ -20,7 +20,9 @@
         name: "wu-side-children-component",
         props:{
           'childrenList':{
-            default:[],
+            default:function () {
+              return [];
+            },
             type:Array
           }
         }

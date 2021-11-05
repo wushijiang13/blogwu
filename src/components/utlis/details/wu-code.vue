@@ -8,8 +8,8 @@
   /**
    * 根据br 去截取判断是一行，然后加入 li 标签 并自动计算行号
    */
-  // import 'highlight.js/styles/agate.css'
-    import 'highlight.js/styles/androidstudio.css'
+  import 'highlight.js/styles/agate.css'
+    // import 'highlight.js/styles/androidstudio.css'
     export default {
       name: "wu-code",
       props:{
@@ -65,7 +65,8 @@
           cycleForArrayGenerateTemplate(children){
             let generateTemplate=``;
             //用于遍历 标签嵌套的子项 ,递归循环遍历
-            if (children.length) {
+              console.log(children);
+              if (children.length) {
               children.forEach(item=>{
                 generateTemplate+=this.getItemDomTree(item);
               })
@@ -75,7 +76,6 @@
       },
       mounted() {
         this.$nextTick(()=>{
-          console.log(document.querySelectorAll('div.code'));
           // this.generateHTML = hljs.highlight(this.generateHTML, {language: 'JavaScript'}).value;
           // document.querySelectorAll('code.xmp').forEach(el => {
           //   // then highlight each
@@ -100,6 +100,7 @@
 <style lang="less" scoped>
   .wu-code{
     width: 100%;
+    /*padding: 10px;*/
   }
   @media screen and (max-width: 960px) {
     .wu-code{

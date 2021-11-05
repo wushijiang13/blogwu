@@ -139,9 +139,10 @@ export default {
     this.editor.highlight = hljs;
     this.editor.config.height = 600;
     this.editor.config.uploadImgShowBase64 = true;
-    this.editor.config.onchange = () =>{
+  /*  this.editor.config.onchange = () =>{
+      this.articleInfo.article_html =  this.checkCode()
       this.articleInfo.article_json=this.editor.txt.getJSON();
-    };
+    };*/
     this.editor.create();
   },
   methods: {
@@ -197,8 +198,8 @@ export default {
               this.articleInfo = data.article_info;
               this.articleInfo.article_html = this.escapeReplace(unescape(this.articleInfo.article_html));
               this.articleInfo.article_json = JSON.parse(unescape(this.articleInfo.article_json));
-              console.log(this.articleInfo.article_json);
-              this.editor.txt.setJSON(this.articleInfo.article_json);
+              console.log(this.articleInfo.article_html);
+              this.editor.txt.html(this.articleInfo.article_html);
             }
           }
         })
@@ -264,10 +265,10 @@ export default {
      * 转义替换
      * \n 变成 br
      * 空格变成 &nbsp;
+     *
      */
     escapeReplace(text){
-      // return text.replace(/\n/g,'<br/>&nbsp;').replace(/'<br >'/g,'<br/>');
-      return text;
+      return text.replace(/\n/g,'<br/>&nbsp;').replace(/'<br >'/g,'');
     }
   },
   components:{
@@ -282,14 +283,16 @@ export default {
   width: 100%;
   background: #fff;
   word-break: break-all;
-  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 /deep/p > img{
   width: 100% !important;
 }
 /deep/p > pre{
-  white-space: pre-wrap;
   width: 700px !important;
+}
+/deep/.w-e-text code{
+  background-color: #333;
 }
 .content-write{
   width: 100%;

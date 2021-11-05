@@ -30,12 +30,16 @@
     export default {
         name: "details-content",
         props:{
-          'articleInfo':{
-            default:{},
+          articleInfo:{
+            default:function () {
+              return {};
+            },
             type:Object
           },
-          'type':{
-            default:"look",
+          type:{
+            default:function () {
+              return "look";
+            },
             type:String,
           }
         },

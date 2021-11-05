@@ -7,7 +7,8 @@ import Layout from '@/components/layout/layout-main'//全局布局模板
 import article_list from '@/view/aboveMain/article-list' //博客列表
 import article from '@/view/aboveMain/article-details'// 文章详情
 import about_my from '@/view/aboveMain/about-my'//关于我
-import add_article from '@/view/aboveMain/add-article'//新增文章
+import article_add from '@/view/aboveMain/article-add'//新增文章
+import add_bytemd from '@/view/aboveMain/add-bytemd'//新增md
 import documentation from '@/view/aboveMain/documentation'//文档记录
 
 import notice from '@/view/aboveSecondary/notice'//公告
@@ -76,10 +77,21 @@ const router =new Router({
       children: [{
         path:'/',
         components:{
-          freeMain:add_article,//新增文章
+          freeMain:article_add,//新增文章
         },
       }]
-    }
+    },
+    {
+      path: '/addBytemd',
+      name: "addBytemd",
+      component: Layout,
+      children: [{
+        path:'/',
+        components:{
+          freeMain:add_bytemd,//新增md
+        },
+      }]
+    },
   ]
 })
 

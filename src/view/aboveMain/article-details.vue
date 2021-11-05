@@ -66,8 +66,7 @@ export default {
               })
             }
           }
-        })
-          .catch(e=>{
+        }).catch(()=>{
           this.isCloseInit=true;
         })
       }
