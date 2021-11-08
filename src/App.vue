@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <!--    <loading />-->
+    <loading />
     <router-view />
   </div>
 </template>
 
 <script>
-  // import loading from '@/components/utlis/loading.vue'
+  import loading from '@/components/utlis/loading.vue'
   export default {
     name: 'App',
     components:{
-      // loading
+      loading
     }
   }
 </script>

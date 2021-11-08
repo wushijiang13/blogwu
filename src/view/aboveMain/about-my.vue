@@ -3,7 +3,10 @@
   <div class="aboutmy">
     <p class="title">我是谁：</p>
     <p>
-      <vue-typed-js :strings="introduction">
+      <vue-typed-js
+          :strings="introduction"
+          :typeSpeed="100"
+      >
         <span class="typing"></span>
       </vue-typed-js>
     </p>

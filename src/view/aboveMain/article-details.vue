@@ -1,11 +1,11 @@
 <!--文章页面-->
 <template>
   <div class="article">
-    <sideNavigation class="article-navigation" ref="sideNavigationRef" />
+    <wuSideNavigation class="article-navigation" ref="sideNavigationRef" />
     <div class="article-details">
-      <detailsContent :articleInfo="articleInfo"/>
+      <wuDetailsContent :articleInfo="articleInfo"/>
       <div class="article-comment">
-        <comment :path="articleInfo.article_title"  :placeholder="'看完文章了，有什么想说的？'" />
+        <wuComment :path="articleInfo.article_title"  :placeholder="'看完文章了，有什么想说的？'" />
       </div>
       <div class="not-data">
         <div  v-show="!articleInfo && isCloseInit">
@@ -33,9 +33,8 @@
    */
 import {isNullCheck} from '@/utils/utils'
 import {getArticleById} from '@/config/request/requestUrl'
-import comment from '@/components/utlis/wu-comment'
-import sideNavigation from '@/components/utlis/side/wu-side-navigation'
-import detailsContent from '@/components/details/details-content'
+
+import {wuComment,wuSideNavigation,wuDetailsContent} from '@/components/utlis'
 // import 'highlight.js/styles/base16/atelier-forest-light.css'
 export default {
   name: "articleDetails",
@@ -73,9 +72,9 @@ export default {
     }
   },
   components:{
-    comment,
-    sideNavigation,
-    detailsContent
+    wuComment,
+    wuSideNavigation,
+    wuDetailsContent
   }
 }
 </script>
@@ -88,13 +87,19 @@ export default {
     position: relative;
   }
   .article-details{
-    width: 700px;
+    flex:3;
     padding: 1rem;
     padding-bottom: 20px;
     background-color: @theme-bubble-bg-color;
     word-break: break-all;
     display: inline-block;
     border-radius: @theme-boder-radius-width;
+  }
+  .article-navigation{
+    flex:2;
+  }
+  .article-right{
+    flex:2;
   }
   .data-show{
     padding: 1rem;

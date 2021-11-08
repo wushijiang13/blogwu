@@ -183,7 +183,6 @@
        */
       themeChange(){
         this.theme = !this.theme;
-        console.log(this.theme);
       },
       onSearch() {
         debounce.call(this,()=>{
@@ -241,7 +240,10 @@
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 998;
+  }
+  ul{
+    padding: 0px;
   }
   .head{
     height: 60px;
@@ -268,7 +270,7 @@
   }
 
   .xing {
-    width: 2rem;
+    width: 2.2rem;
     transition: 1s;
     font-size: 22px;
   }

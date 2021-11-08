@@ -12,19 +12,6 @@
         <p class="meta-title" @click="goArticle(info)">{{info.article_title}}</p>
         <div>
           <p class="mute-giveup">
-            <span class="iconfont icon-style" ref="dianzan" @click="clickgiveup">
-              <wuButton>
-                <template slot="btn-icon">
-                  <wu-icon type="icon-dianzan"  :size="14"/>
-                </template>
-                <template slot="btn-text">
-                  赞
-                </template>
-                <template slot="btn-num">
-                  {{info.article_like}}
-                </template>
-              </wuButton>
-            </span>
           </p>
         </div>
       </div>
@@ -40,16 +27,12 @@
 
 <script>
   import {getConversionTime} from "../../utils/utils";
-  import wuButton from "./wu-button"
 export default {
   name: "cell-item",
   props:[
     'info'
   ],
   methods:{
-    clickgiveup() {
-      this.$refs.dianzan.style.color = "#67C23A";
-    },
     getConversionTime(article_time){
       return  getConversionTime(article_time)
     },
@@ -66,9 +49,6 @@ export default {
       });
     },
   },
-  components:{
-    wuButton,
-  }
 }
 </script>
 

@@ -16,17 +16,15 @@
     <div v-show="articleInfo.article_cover" class="article-cover" >
       <img :src="articleInfo.article_cover">
     </div>
-    <div class="render-content" >
-      <renderContent :articleInfo="articleInfo"></renderContent>
+    <div class="render-content"  v-html="articleInfo.article_html">
     </div>
-<!--    <div class="render-content"  v-html="articleInfo.article_html">-->
-<!--    </div>-->
   </div>
 </template>
 
 <script>
     import {getConversionTime} from '@/utils/utils'
-    import renderContent from './render-content.vue'
+    import Prism from 'prismjs';
+
     export default {
         name: "details-content",
         props:{
@@ -43,14 +41,26 @@
             type:String,
           }
         },
-        components:{
-          renderContent,
-        },
         methods:{
           getConversionTime(article_time){
             return getConversionTime(article_time)
           },
+          initLineNumber(){
+            document.querySelectorAll("pre").forEach(item=>{
+              item.className+='line-numbers';
+            })
+          }
        },
+      watch:{
+        'articleInfo.article_html'(){
+          if (this.articleInfo.article_html) {
+            this.$nextTick(()=>{
+              this.initLineNumber();
+              Prism.highlightAll();
+            })
+          }
+        }
+      }
     }
 </script>
 
@@ -90,9 +100,37 @@
   .not-data{
     color: @theme-font-1-color;
   }
+  .details-content pre{
+    border-radius: @theme-boder-radius-width;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .details-content pre > code {
+    padding: 16px;
+    font-size: 13px;
+    user-select: text;
+  }
+  p{
+    margin: 10px 0px;
+  }
+  hr{
+    margin: 10px 0px;
+  }
+  a{
+    color: @primary-color;
+  }
+  /deep/h1, /deep/h2, /deep/h3, /deep/h4, /deep/h5, /deep/h6{
+    color: @theme-font-1-color;
+  }
   @media screen and (max-width: 960px) {
     .article-cover{
       height: 174px;
+    }
+    /deep/pre{
+      width: 87vw;
+    }
+    /deep/img{
+      width: 100%;
     }
   }
 </style>

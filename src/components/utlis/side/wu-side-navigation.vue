@@ -131,7 +131,8 @@
 <style lang="less" scoped>
   .wu-side-navigation {
     position: sticky;
-    top: 80px;
+    top: 60px;
+    margin: 0px auto;
     padding: 0.8rem;
     width: 200px;
     color: @theme-font-1-color;

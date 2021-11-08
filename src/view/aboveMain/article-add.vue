@@ -1,9 +1,9 @@
 <template>
-  <div class="add-article">
-    <div class="add-article-mian">
-      <div class="add-mian-div" v-show="pageStatus">
-        <p class="head-title-p">添加文章</p>
+  <div class="article-add">
+    <div class="article-add-mian">
+      <div class="mian-add-div" v-show="pageStatus">
         <div class="content-write">
+
           <div class="content-editor">
             <a-form-model  :rules="rules" :model="articleInfo" ref="ruleForm" >
               <a-form-model-item  ref="article_title" prop="article_id">
@@ -11,6 +11,9 @@
               </a-form-model-item>
               <a-form-model-item   ref="article_title" prop="article_title">
                 <a-input placeholder="请输入文章标题"  v-model="articleInfo.article_title"/>
+              </a-form-model-item>
+              <a-form-model-item>
+                <wuEditor :defaultJson="articleInfo.article_json" @change="editorChange" class="editor"/>
               </a-form-model-item>
               <a-form-model-item >
                 <uploads v-model="articleInfo.article_cover"/>
@@ -49,26 +52,12 @@
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
-              <input type="text" style="opacity: 0;position: absolute;" v-model="copyInput" ref="copyInput">
-              <p style="padding-bottom: 40px"></p>
             </a-form-model>
-            <div ref="editor" class="editor"></div>
           </div>
-          <detailsContent :articleInfo="articleInfo" class="content-render"/>
+          <wuDetailsContent :articleInfo="articleInfo" class="content-render"/>
         </div>
-
-        <a-button type="primary" class="copyHtml" style="float: right; margin-top: 20px" @click="copyText(2)">
-          copy-TEXT代码
-        </a-button>
-        <a-button type="primary" class="copyHtml" style="float: right;margin-right: 10px; margin-top: 20px"
-                  @click="copyText(1)">copy-HTML代码
-        </a-button>
-        <a-button type="primary" class="copyHtml" style="float: right;margin-right: 10px; margin-top: 20px"
-                  @click="copyText(3)">copy-JSON代码
-        </a-button>
-        <a-button class="submit-btn" @click="submitArticleBtn" type="primary">提交文章</a-button>
+        <button class="submit-btn" @click="submitArticleBtn" type="primary">提交文章</button>
       </div>
-
       <div class="result" v-show="!pageStatus">
         <a-result
           status="success"
@@ -89,26 +78,14 @@
 </template>
 
 <script>
-  /**
-   * 这个页面的规划
-   * 1.如果加入一个抽离好的文章详情页展示效果
-   * 2.需要整体调整一下ui效果
-   * 3.确认下是否在这里初始化行号 因为代码高亮 是使用编辑器内置加入的class 所以需要确认下。
-   * highlightjs-line-numbers.js
-   */
-import Editor from "wangeditor"
-import uploads from "../../components/utlis/uploads";
-import detailsContent from '@/components/details/details-content.vue'
+import {wuEditor,uploads,wuDetailsContent} from '@/components/utlis';
 import {getArticleTypeList,insertArticle,getArticleById,updateArticle} from '../../config/request/requestUrl'
 import {isNullCheck} from "../../utils/utils";
-import hljs from 'highlight.js'
 
 export default {
   name: "addArticle",
   data() {
     return {
-      editor: "",
-      copyInput: "",
       articleTypeList:[],//文章技术分类
       rules: {
         article_title: [
@@ -126,7 +103,7 @@ export default {
         article_title:'',
         article_type:undefined,//技术分类
         article_technology_type:undefined,//文章系列分类
-        article_json:'',
+        article_json:{},
         article_html:'',
         article_cover:"",//封面
       },//添加参数对象
@@ -135,15 +112,6 @@ export default {
   },
   mounted() {
     this.$https.asyncFunQueue.call(this,[this.getArticleTypeList])
-    this.editor = new Editor(".editor")
-    this.editor.highlight = hljs;
-    this.editor.config.height = 600;
-    this.editor.config.uploadImgShowBase64 = true;
-  /*  this.editor.config.onchange = () =>{
-      this.articleInfo.article_html =  this.checkCode()
-      this.articleInfo.article_json=this.editor.txt.getJSON();
-    };*/
-    this.editor.create();
   },
   methods: {
     //-------网络请求---------
@@ -163,7 +131,7 @@ export default {
     /***
      * 添加文章
      */
-    instrtArticleTypeList(){
+    instrtArticle(){
       return new Promise(resolve => {
         this.$https.post(insertArticle,this.articleInfo).then((res)=>{
           if(res.code == 200){
@@ -196,10 +164,8 @@ export default {
           if (code == 200) {
             if (isNullCheck(data.article_info)) {
               this.articleInfo = data.article_info;
-              this.articleInfo.article_html = this.escapeReplace(unescape(this.articleInfo.article_html));
+              this.articleInfo.article_html = unescape(this.articleInfo.article_html);
               this.articleInfo.article_json = JSON.parse(unescape(this.articleInfo.article_json));
-              console.log(this.articleInfo.article_html);
-              this.editor.txt.html(this.articleInfo.article_html);
             }
           }
         })
@@ -207,37 +173,18 @@ export default {
     },
     //---------点击按钮-----------
     /**
-     * copy代码
-     * @param status 1 == html 2 text
+     * 提交submit
      */
-    copyText(status) {
-      this.copyInput = '';
-      let messageText;
-      if (status == 1) {
-        messageText='HTML'
-        this.copyInput = this.editor.txt.html();
-      } else if (status == 2) {
-        messageText='TEXT'
-        this.copyInput = this.editor.txt.text();
-      }else {
-        this.copyInput = this.editor.txt.getJSON()
-      }
-      let copyValue = this.$refs.copyInput;
-      copyValue.select(); // 选择对象
-      document.execCommand("copy"); // 执行浏览器复制命令用户定义的代码区域用户定义的代码区域
-      this.$message.success("copy-"+messageText+"成功")
-    },
     submitArticleBtn(){
       this.$refs.ruleForm.validate(valid => {
-        if (isNullCheck(this.editor.txt.html()) && valid) {
-          console.log(`${this.editor.txt.html()}`);
-          this.articleInfo.article_html=escape(`${  this.checkCode() }`);
-          this.articleInfo.article_json=escape(JSON.stringify(this.editor.txt.getJSON()));
+        if (isNullCheck(this.articleInfo.article_json) && valid) {
+          this.articleInfo.article_html=escape(this.articleInfo.article_html);
+          this.articleInfo.article_json=escape(JSON.stringify(this.articleInfo.article_json));
           this.articleInfo.article_cover=this.articleInfo.article_cover.toString();
           if(this.articleInfo.article_id){
             this.updateArticle();
           }else{
-            this.instrtArticleTypeList();
+            this.instrtArticle();
           }
         }
       })
@@ -250,36 +197,21 @@ export default {
       this.$refs.ruleForm.resetFields();
     },
     //--------------逻辑js-----------------
-    /***
-     * 检测代码高亮补全背景
-     */
-    checkCode(){
-      if (this.editor.txt.html().includes('pre')) {
-        document.querySelectorAll("code").forEach(item=>{
-          item.className='hljs';
-        })
-      }
-      return this.editor.txt.html();
-    },
-    /**
-     * 转义替换
-     * \n 变成 br
-     * 空格变成 &nbsp;
-     *
-     */
-    escapeReplace(text){
-      return text.replace(/\n/g,'<br/>&nbsp;').replace(/'<br >'/g,'');
+    editorChange(json,html){
+      this.articleInfo.article_json=json;
+      this.articleInfo.article_html=html;
     }
   },
   components:{
     uploads,
-    detailsContent
+    wuDetailsContent,
+    wuEditor
   }
 }
 </script>
 
 <style lang="less" scoped>
-.add-article {
+.article-add {
   width: 100%;
   background: #fff;
   word-break: break-all;
@@ -298,16 +230,14 @@ export default {
   width: 100%;
   display: flex;
   .content-editor{
-    flex: 1;
-    max-width: 600px;
+    width: 50%;
     display: inline-block;
     .editor{
       flex: 1;
     }
   }
   .content-render{
-    flex: 1;
-    max-width: 600px;
+    width: 50%;
     display: inline-block;
     border: 1px solid @theme-boder-color;
     padding: 1rem;
@@ -318,9 +248,37 @@ export default {
 .submit-btn{
   display: block;
   margin: 0px auto;
-  padding: 10px;
+  margin-top: 20px;
+  padding: 4px 20px;
+  background-color: #fff;
+  border: @primary-color solid 1px;
+  color: @primary-color;
+  border-radius: @theme-boder-radius-width;
+  cursor: pointer;
+}
+/deep/.ant-input , /deep/.ant-select-selection{
+  border:none;
+  border-radius: inherit;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #d9d9d9;
+}
+/deep/.ant-input:hover{
+  border-bottom: 1px solid #d9d9d9;
+}
+/deep/.ant-input:focus{
+  box-shadow:none;
+  border-bottom: 1px solid #d9d9d9;
+}
+.has-error .ant-input:focus{
+  box-shadow:none;
+  border-bottom: 1px solid #d9d9d9;
+}
+.ant-form-item{
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 960px) {
+
 }
 </style>

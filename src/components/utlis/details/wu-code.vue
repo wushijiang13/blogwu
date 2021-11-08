@@ -21,6 +21,7 @@
       data(){
         return {
           generateHTML:``,
+          singleList:['br'],
         }
       },
       methods:{
@@ -30,8 +31,8 @@
           initTemplate(json){
             this.generateHTML=``;//生成的html模板
             if (json) {
-              this.generateHTML=this.getItemDomTree(json);
-              console.log(this.generateHTML);
+                console.log(json);
+                this.generateHTML=this.getItemDomTree(json);
             }
           },
           /***
@@ -40,7 +41,13 @@
           getItemDomTree(item_info) {
             //如果不是标签的话，else是文本
             if (typeof item_info == 'object' && Object.keys(item_info).length) {
-              return `<${item_info.tag} ${this.forAttrs(item_info.attrs)}>${this.cycleForArrayGenerateTemplate(item_info.children)}</${item_info.tag}>`;
+                if(this.singleList.includes(item_info.tag)){
+                // <${item_info.tag} ${this.forAttrs(item_info.attrs)} />
+                    return `<${item_info.tag} ${this.forAttrs(item_info.attrs)} />`;
+                }else{
+                    return `<${item_info.tag} ${this.forAttrs(item_info.attrs)}>${this.cycleForArrayGenerateTemplate(item_info.children)}</${item_info.tag}>`;
+                }
+
             } else {
               return `${item_info}`
             }
@@ -65,7 +72,6 @@
           cycleForArrayGenerateTemplate(children){
             let generateTemplate=``;
             //用于遍历 标签嵌套的子项 ,递归循环遍历
-              console.log(children);
               if (children.length) {
               children.forEach(item=>{
                 generateTemplate+=this.getItemDomTree(item);
