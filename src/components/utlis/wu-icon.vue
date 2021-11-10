@@ -1,13 +1,19 @@
 <template>
-      <WuIcon :type="type"
-              :style="{fontSize:size+'px',color}"
-              :class="themeDis ? 'icon icon-theme' : 'icon' "/>
+      <div class="wu-icon">
+            <WuIcon v-if="!type.includes('http')"
+                    :type="type"
+                    :style="{fontSize:size+'px',color}"
+                    :class="themeDis ? 'icon icon-theme' : 'icon' "/>
+            <img  v-else
+                  :style="{width:'80px'}"
+                  :src="type"/>
+      </div>
 </template>
 
 <script>
     import {Icon} from 'ant-design-vue'
     const WuIcon = Icon.createFromIconfontCN({
-      scriptUrl: '//at.alicdn.com/t/font_2835719_ljo5s9w78i.js', // 在 iconfont.cn 上生成
+      scriptUrl: '//at.alicdn.com/t/font_2835719_97cgxr3zum4.js', // 在 iconfont.cn 上生成
     });
     export default {
         name: "wu-icon",
@@ -36,6 +42,9 @@
 </script>
 
 <style scoped lang="less">
+  .wu-icon{
+    display: inline-block;
+  }
   .icon{
     vertical-align: text-top;
   }

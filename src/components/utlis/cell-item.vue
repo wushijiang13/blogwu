@@ -10,10 +10,14 @@
           <span class="mute-noactive">{{info.article_types_name}}</span>
         </p>
         <p class="meta-title" @click="goArticle(info)">{{info.article_title}}</p>
-        <div>
-          <p class="mute-giveup">
+        <a-tooltip placement="bottomLeft">
+          <template slot="title">
+            <span> {{info.article_desc}}</span>
+          </template>
+          <p class="meta-desc">
+              {{info.article_desc}}
           </p>
-        </div>
+        </a-tooltip>
       </div>
       <div class="mute-item-img"  v-if="info.article_cover">
         <img
@@ -88,12 +92,15 @@ export default {
 .mute-noactive:hover {
   color: @primary-color;
 }
-
+p{
+  margin: 0px;
+  padding: 0px !important;
+}
 .meta-title {
   font-size: @theme-title-size;
   font-weight: 600;
   color: @theme-font-1-color;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0px;
   padding-right: 0.4rem;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -102,6 +109,18 @@ export default {
 
 .meta-title:hover {
   text-decoration: underline;
+}
+.meta-desc{
+  height: 34px;
+  font-size: @theme-unimportant-size;
+  color: @theme-font-3-color;
+  padding-right: 0.4rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; //这里是在第二行有省略号
+  /*text-overflow: ellipsis;*/
+  /*white-space: nowrap;*/
+  /*overflow: hidden;*/
 }
 
 .mute-giveup {

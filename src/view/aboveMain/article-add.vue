@@ -18,7 +18,10 @@
               <a-form-model-item >
                 <uploads v-model="articleInfo.article_cover"/>
               </a-form-model-item>
-              <a-form-model-item  ref="article_type" prop="article_type">
+              <a-form-model-item   prop="article_desc">
+                <a-input placeholder="请输入文章简介" :max-length="150"  v-model="articleInfo.article_desc"/>
+              </a-form-model-item>
+              <a-form-model-item prop="article_type">
                 <a-select
                   placeholder="请选择文章分类"
                   show-search
@@ -35,7 +38,7 @@
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
-              <a-form-model-item  ref="article_technology_type" prop="article_technology_type">
+              <a-form-model-item prop="article_technology_type">
                 <a-select
                   placeholder="请选择文章系列分类"
                   show-search
@@ -106,6 +109,7 @@ export default {
         article_json:{},
         article_html:'',
         article_cover:"",//封面
+        article_desc:"",//简介
       },//添加参数对象
       pageStatus:true//是否操作成功
     }
@@ -213,7 +217,6 @@ export default {
 <style lang="less" scoped>
 .article-add {
   width: 100%;
-  background: #fff;
   word-break: break-all;
   white-space: pre-wrap;
 }

@@ -15,19 +15,28 @@
           </span>
         </span>
         <div class="nav-box">
-          <ul class="nav-search">
-            <li>
-              <a-input
-                class="nav-search-input"
-                placeholder="搜索一下吧~"
-                :loading="searchLoading"
-                v-model="searchValue"
-                @pressEnter="onSearch"
-                @change="searchChange">
-                <a-icon slot="prefix" type="search" />
-              </a-input>
-            </li>
-          </ul>
+          <div class="nav-search">
+            <div class="layout-pc">
+              <ul class="nav-pc-search">
+                <li>
+                  <a-input
+                          class="nav-search-input"
+                          placeholder="搜索一下吧~"
+                          :loading="searchLoading"
+                          v-model="searchValue"
+                          @pressEnter="onSearch"
+                          @change="searchChange">
+                    <a-icon slot="prefix" type="search" />
+                  </a-input>
+                </li>
+              </ul>
+            </div>
+            <div  class="layout-mobile">
+              <a-button @click="()=>{this.isMobileSearch=!this.isMobileSearch}" shape="circle" ghost>
+                <wu-icon :type="isMobileSearch ? 'icon-guanbi' : 'icon-sousuo'"  :size="20" />
+              </a-button>
+            </div>
+          </div>
           <div class="nav-function">
             <!-- pc  -->
             <div class="layout-pc">
@@ -69,6 +78,10 @@
                   </a-menu-item>
                   <a-menu-item v-for="item in navList" :key="item.label" @click="clickNavIcon(item.type)">
                     <span>{{item.label}}</span>
+                    <div v-if="item.type != 5" >
+                      {{item.label}}
+                      <wu-icon v-if="item.icon" :type="item.icon" :size="14"  />
+                    </div>
                   </a-menu-item>
                 </a-menu>
               </a-drawer>
@@ -76,6 +89,18 @@
           </div>
         </div>
       </div>
+      <transition name="unfold">
+        <div class="nav-search-mobile" v-show="isMobileSearch">
+        <a-input
+                placeholder="搜索一下吧~"
+                :loading="searchLoading"
+                v-model="searchValue"
+                @pressEnter="onSearch"
+                @change="searchChange">
+          <a-icon slot="prefix" type="search" />
+        </a-input>
+      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -95,9 +120,11 @@
           {type:2,label:'文档'},
           {type:4,label:'关于我',icon:"icon-erweima"},
           {type:5,label:'GitHub'},
+          {type:6,label:'',icon:'https://img.shields.io/github/stars/wushijiang13/blogwu?style=social'},
         ],
         theme:false,
-        isDrawer:false
+        isDrawer:false,
+        isMobileSearch:false,//移动端搜索
       }
     },
     methods: {
@@ -153,6 +180,10 @@
           }
           case 5:{
             this.gogitHub();
+            break;
+          }
+          case 6:{
+            window.open("https://github.com/wushijiang13/blogwu")
             break;
           }
         }
@@ -298,12 +329,19 @@
     cursor: pointer;
     padding: 0rem 0.8rem;
   }
-
+  .nav-search-mobile{
+    background-color: @theme-color;
+    width: 100%;
+    height: 46px;
+    overflow: hidden;
+    display: none;
+    padding: 0rem 0.8rem;
+  }
   .nav-function{
     margin: 0px 0.2rem;
     display: inline-block;
   }
-  .nav-search,.nav-list{
+  .nav-search,.nav-pc-search,.nav-list{
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -314,18 +352,27 @@
     color:@theme-font-1-color;
   }
   .nav-search-input{
+    width: 150px;
     vertical-align: middle;
   }
   .nav-search-input  /deep/.ant-input  {
-    width: 0px;
-  }
-  .nav-search-input  /deep/.ant-input:focus{
     width: 150px;
+  }
+  /deep/.ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled){
+    border-color:#d9d9d9;
+  }
+  /deep/.ant-input{
+    border-radius: 30px;
+    outline: none;
+    border-color:#d9d9d9;
+  }
+  /deep/.ant-input:focus{
+    border-color:#d9d9d9;
+    box-shadow:none;
   }
   .mouseIcon {
     cursor: pointer;
   }
-
   .mobile-blog{
     display: none;
   }
@@ -334,17 +381,25 @@
     display: inline-block;
     margin:0px 0.2rem;
   }
-
-  /deep/.ant-input{
-    border-radius: 30px;
-    outline: none;
+  .unfold-enter-active,.unfold-enter{
+    height: 0px;
+    transition: .2s ease-in-out;
   }
-  /deep/.ant-input:focus{
-    border-color:#d9d9d9;
-    box-shadow:none;
+  .unfold-enter-to{
+    height: 46px;
+  }
+  .unfold-leave-active{
+    height: 46px;
+    transition: .2s ease-in-out;
+  }
+  .unfold-leave-to{
+    height: 0px;
   }
 
   @media screen and (max-width: 960px) {
+    .nav-search-mobile{
+      display: block;
+    }
     .head{
       margin-bottom: 0.8rem;
     }
@@ -352,9 +407,6 @@
       padding: 0.5rem 1rem;
     }
     .nav-search-input  /deep/.ant-input  {
-      width: 0px;
-    }
-    .nav-search-input  /deep/.ant-input:focus{
       width: 120px;
     }
     .nav-box li{
@@ -381,6 +433,9 @@
     }
   }
   @media screen and (max-width: 350px) {
+    .nav-search-mobile{
+      display: block;
+    }
     .nav-search-input{
       width: 80px;
     }

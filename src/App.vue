@@ -16,7 +16,9 @@
 </script>
 
 <style lang="less">
-  #app {
+  *{
+    margin: 0px;
+    padding: 0px;
   }
   body{
     background-color: @body-bg-color !important;

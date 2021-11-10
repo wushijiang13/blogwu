@@ -14,7 +14,7 @@ module.exports = {
         "ts",
         'go',
         "php"],
-      "plugins": ["line-numbers",'toolbar','normalize-whitespace','match-braces'],
+      "plugins": ["line-numbers",'toolbar','normalize-whitespace','match-braces','show-language','copy-to-clipboard'],
       "theme": "okaidia",
       "css": true
     }]

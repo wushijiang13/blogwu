@@ -158,7 +158,7 @@
     text-decoration: underline;
   }
   .side-title::before{
-    content: "*";
+    content: "·";
     display: inline-block;
     font-size: 12px;
     margin-right: 5px;

@@ -35,7 +35,6 @@ import {isNullCheck} from '@/utils/utils'
 import {getArticleById} from '@/config/request/requestUrl'
 
 import {wuComment,wuSideNavigation,wuDetailsContent} from '@/components/utlis'
-// import 'highlight.js/styles/base16/atelier-forest-light.css'
 export default {
   name: "articleDetails",
   data(){
@@ -88,8 +87,8 @@ export default {
   }
   .article-details{
     flex:3;
-    padding: 1rem;
-    padding-bottom: 20px;
+    width: 700px;
+    padding: 1rem 1rem 20px 1rem;
     background-color: @theme-bubble-bg-color;
     word-break: break-all;
     display: inline-block;
@@ -106,6 +105,50 @@ export default {
   }
   .article-comment{
     padding: 1rem;
+  }
+  /deep/div.code-toolbar > .toolbar{
+    opacity:1;
+  }
+  /deep/div.code-toolbar > .toolbar > .toolbar-item{
+    margin: 0px 0.4rem;
+    cursor: pointer;
+    span{
+      cursor: pointer;
+    }
+  }
+  /deep/div.code-toolbar > .toolbar > .toolbar-item > span:hover{
+    color: #bbb;
+  }
+  /deep/div.code-toolbar > .toolbar > .toolbar-item > button:hover{
+    color: #bbb;
+  }
+  /deep/table,/deep/table tr th, /deep/table tr td { border:1px solid @theme-boder-color; }
+  /deep/table{
+    border:1px solid @theme-boder-color;
+    border-radius: @theme-boder-radius-width;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 10px 0px;
+  }
+  /deep/table tr th{
+    background-color: @theme-disabled-color;
+  }
+  /deep/table td{
+    font-size: @theme-unimportant-size;
+  }
+  /deep/table tr th,/deep/table td{
+    padding: 10px 0px;
+    font-weight: 600;
+  }
+
+  /deep/.post-meta-item-text,/deep/.leancloud-visitors-count{
+    color: @theme-font-2-color;
+  }
+  /deep/.ant-popover-inner-content{
+    padding: 2px 16px !important;
+  }
+  /deep/img{
+    border-radius: @theme-boder-radius-width;
   }
 
   @media screen and (max-width: 960px) {

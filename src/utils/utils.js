@@ -25,29 +25,6 @@ function isNullCheck(value){
   return false;
 }
 
-
-/**
- * 依赖浏览器的base64加密
- * @param value 需要加密的对象
- * @returns {string} 返回加密结果
- */
-function base64En(value){
-  if(isNullCheck(value)){
-    return  btoa(escape(JSON.stringify(value)));
-  }
-}
-
-/***
- * 依赖浏览器的base64解密
- * @param value 传入需要解密的字符
- */
-function  base64De(value){
-  if(isNullCheck(value)){
-    return JSON.parse(unescape(atob(value)
-    ));
-  }
-}
-
 /***
  * 防抖
  * @param fn 需要执行的函数
@@ -70,7 +47,5 @@ function debounce(fn,message){
 export {
   getConversionTime,
   isNullCheck,
-  base64En,
-  base64De,
   debounce,
 }

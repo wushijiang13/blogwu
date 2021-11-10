@@ -7,7 +7,7 @@ import infiniteScroll from 'vue-infinite-scroll'
 import router from './config/router'
 import https from './config/request/request'
 import VueTypedJs from 'vue-typed-js'
-import './config/css/ant-import'
+import './config/less/ant-import'
 
 Vue.prototype.$https=https;
 
