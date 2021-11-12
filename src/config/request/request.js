@@ -3,7 +3,7 @@ import {isNullCheck} from "../../utils/utils";
 //然后再修改原型链
 // process.env.BASE_URL ? process.env.BASE_URL :
 const ask  = axios.create({
-  baseURL:"http://localhost:3000",
+  baseURL:"http://192.168.12.211:3000",
   timeout:5000,
   headers: {'Content-Type': 'application/json;charset=UTF-8'},
 })

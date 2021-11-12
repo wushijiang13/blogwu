@@ -44,7 +44,7 @@
 <script>
   import {getDocumentationList} from '@/config/request/requestUrl'
   import {isNullCheck} from '@/utils/utils'
-  import wuExpand from '@/components/utlis/wu-expand.vue'
+  import {wuExpand} from '@/components/utils'
     export default {
       name: "documentation",
       data() {
@@ -129,7 +129,6 @@
     background-color: @primary-color;
   }
   .documentation-item{
-    /*flex: 1;*/
     width: 12.5%;
     height: 80px;
     overflow: hidden;

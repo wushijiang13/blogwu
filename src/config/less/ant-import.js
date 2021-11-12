@@ -2,7 +2,7 @@ import {BackTop,Button,Input,Icon,Divider,InputNumber
   ,Skeleton,Result,Popover,message,FormModel,Select,Upload,Layout,Dropdown,Menu,Switch,Drawer,
   Tooltip
 } from 'ant-design-vue';
-import WuIcon from '@/components/utlis/wu-icon'
+import WuIcon from '@/components/utils/wu-icon'
 import  Vue from 'vue';
 import './ant-design.less'
 

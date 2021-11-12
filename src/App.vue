@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import loading from '@/components/utlis/loading.vue'
+  import loading from '@/components/utils/loading.vue'
   export default {
     name: 'App',
     components:{
@@ -22,6 +22,10 @@
   }
   body{
     background-color: @body-bg-color !important;
+    scroll-behavior: smooth;
+  }
+  html{
+    scroll-behavior: smooth;
   }
   p{
     margin: 0px;

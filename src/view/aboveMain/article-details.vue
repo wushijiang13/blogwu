@@ -34,7 +34,7 @@
 import {isNullCheck} from '@/utils/utils'
 import {getArticleById} from '@/config/request/requestUrl'
 
-import {wuComment,wuSideNavigation,wuDetailsContent} from '@/components/utlis'
+import {wuComment,wuSideNavigation,wuDetailsContent} from '@/components/utils'
 export default {
   name: "articleDetails",
   data(){
@@ -132,9 +132,6 @@ export default {
   }
   /deep/table tr th{
     background-color: @theme-disabled-color;
-  }
-  /deep/table td{
-    font-size: @theme-unimportant-size;
   }
   /deep/table tr th,/deep/table td{
     padding: 10px 0px;

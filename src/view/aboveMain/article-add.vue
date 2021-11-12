@@ -55,6 +55,9 @@
                   </a-select-option>
                 </a-select>
               </a-form-model-item>
+              <a-form-model-item   ref="article_pass" prop="article_pass">
+                <a-input placeholder="请输入密码"  v-model="articleInfo.article_pass"/>
+              </a-form-model-item>
             </a-form-model>
           </div>
           <wuDetailsContent :articleInfo="articleInfo" class="content-render"/>
@@ -81,7 +84,7 @@
 </template>
 
 <script>
-import {wuEditor,uploads,wuDetailsContent} from '@/components/utlis';
+import {wuEditor,uploads,wuDetailsContent} from '@/components/utils';
 import {getArticleTypeList,insertArticle,getArticleById,updateArticle} from '../../config/request/requestUrl'
 import {isNullCheck} from "../../utils/utils";
 
@@ -100,6 +103,9 @@ export default {
         article_technology_type: [
           { required: true, message: '文章系列分类不能为空', trigger: 'change' }
         ],
+        article_pass: [
+          { required: true, message: '密码不能为空', trigger: 'change' }
+        ],
       },
       articleInfo:{
         article_id:'',
@@ -110,6 +116,7 @@ export default {
         article_html:'',
         article_cover:"",//封面
         article_desc:"",//简介
+        article_pass:"",//密码
       },//添加参数对象
       pageStatus:true//是否操作成功
     }
@@ -141,6 +148,8 @@ export default {
           if(res.code == 200){
             this.pageStatus=false;
             resolve(res);
+          }else{
+            this.$message.error("添加失败");
           }
         })
       })
@@ -154,6 +163,8 @@ export default {
           if(res.code == 200){
             this.pageStatus=false;
             resolve(res);
+          }else{
+            this.$message.error("修改失败");
           }
         })
       })

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import CellItem from '../../components/utlis/cell-item'
+  import CellItem from '../../components/utils/cell-item'
   import {getArticleList} from '@config/request/requestUrl'
   import {mapState} from 'vuex';
 

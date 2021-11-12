@@ -86,7 +86,7 @@ export default {
   border-radius:@theme-boder-radius-width;
 }
 .meta-list {
-  font-size: 0.5rem;
+  font-size: @theme-secondary-size;
 }
 
 .mute-noactive:hover {
@@ -112,15 +112,12 @@ p{
 }
 .meta-desc{
   height: 34px;
-  font-size: @theme-unimportant-size;
+  font-size: @theme-secondary-size;
   color: @theme-font-3-color;
   padding-right: 0.4rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2; //这里是在第二行有省略号
-  /*text-overflow: ellipsis;*/
-  /*white-space: nowrap;*/
-  /*overflow: hidden;*/
 }
 
 .mute-giveup {
@@ -133,8 +130,6 @@ p{
   color: @theme-font-2-color;
   font-weight: 600;
   margin-right: 10px;
- /* border: 1px solid @theme-boder-color;
-  border-radius:@theme-boder-radius-width;*/
   display: inline-flex;
   align-items: center;
   justify-content: center;

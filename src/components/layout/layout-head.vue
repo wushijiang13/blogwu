@@ -216,6 +216,7 @@
         this.theme = !this.theme;
       },
       onSearch() {
+        this.isMobileSearch=false;
         debounce.call(this,()=>{
           this.searchLoading = true;
           this.getData();

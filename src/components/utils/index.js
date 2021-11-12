@@ -9,6 +9,7 @@ import wuComment from './wu-comment';
 import wuEditor from './wu-editor';
 import wuExpand from './wu-expand';
 import wuIcon from './wu-icon';
+import wuCard from './wu-card'
 
 export * from './side/index';
 export * from './details/index';
@@ -21,5 +22,6 @@ export {
     wuComment,
     wuEditor,
     wuExpand,
-    wuIcon
+    wuIcon,
+    wuCard
 }

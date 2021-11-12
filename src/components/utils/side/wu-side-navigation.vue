@@ -113,10 +113,7 @@
          * @param dom
          */
         jumpTitle(dom){
-          document.querySelector(`#${dom.id}`).scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-            inline: "nearest"});
+          scrollTo(0, document.querySelector(`#${dom.id}`).offsetTop);
         },
         /**
          * 生成key
