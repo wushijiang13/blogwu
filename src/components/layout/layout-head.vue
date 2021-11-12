@@ -49,7 +49,7 @@
                   v-for="item in navList"
                   :key="item.label"
                   @click="clickNavIcon(item.type)">
-                  <div v-if="item.type != 5" >
+                  <div v-if="item.type != 7" >
                     {{item.label}}
                     <wu-icon v-if="item.icon" :type="item.icon" :size="14"  />
                   </div>
@@ -78,7 +78,7 @@
                   </a-menu-item>
                   <a-menu-item v-for="item in navList" :key="item.label" @click="clickNavIcon(item.type)">
                     <span>{{item.label}}</span>
-                    <div v-if="item.type != 5" >
+                    <div v-if="item.type != 7" >
                       {{item.label}}
                       <wu-icon v-if="item.icon" :type="item.icon" :size="14"  />
                     </div>
