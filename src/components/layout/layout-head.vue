@@ -116,11 +116,13 @@
         searchLoading: false,//搜索loading
         navList: [
           {type:0,label:'博客'},
-          {type:1,label:'写文章'},
+          // {type:1,label:'写文章'},
           {type:2,label:'文档'},
           {type:4,label:'关于我',icon:"icon-erweima"},
-          {type:5,label:'GitHub'},
-          {type:6,label:'',icon:'https://img.shields.io/github/stars/wushijiang13/blogwu?style=social'},
+          {type:5,label:'脚手架'},
+          {type:6,label:'聊天室'},
+          {type:7,label:'GitHub'},
+          {type:8,label:'',icon:'https://img.shields.io/github/stars/wushijiang13/blogwu?style=social'},
         ],
         theme:false,
         isDrawer:false,
@@ -179,10 +181,18 @@
             break;
           }
           case 5:{
-            this.gogitHub();
+            window.open("https://wushijiang.cn/vue3-vite-cli/")
             break;
           }
           case 6:{
+            window.open("https://github.com/wushijiang13/livechats")
+            break;
+          }
+          case 7:{
+            this.gogitHub();
+            break;
+          }
+          case 8:{
             window.open("https://github.com/wushijiang13/blogwu")
             break;
           }
