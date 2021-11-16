@@ -4,12 +4,12 @@
  * javascript
  * css
  * html
-> 项目开发中
+> 项目开发完成
 
 ## 已完成的点
 
 1.layout 布局通过命名路由实现  
-2.响应式适配rem  
+2.响应式适配rem，支持移动端  
 3.主题换肤通过var() css变量实现 (less穿透  
 4.代码高亮，支持多种语言代码  
 5.文章上传支持图片粘贴，文本转义  
@@ -17,22 +17,14 @@
 7.加入仿github按钮样式组件  
 8.文档手风琴组件，支持评论和自定义  
 9.文档iframe内部加载文档  
-10.重置整体UI样式,采用胶囊样式
+10.重置整体UI样式,采用胶囊样式  
+11.更换评论组件为valine组件  
+12.升级wangeditor为V5版本，重构编辑文章，和回显文章问题  
+13.加入文章详情页侧边导航    
+14.加入关于我页面`打字稿组件`  
+15.优化webpack 打包过大问题，开启gzip加载，ant Icon按需引入。分离moment  
+16.分离新增文章模块，优化wangeditor等无用依赖项的引入。  
+17.项目整体从Vue-Cli 2.x 升级Vue-Cli 4.x 
 
 
-本项目前端使用vue-cli 2.x 开发
-## 主题换肤
-![image](https://user-images.githubusercontent.com/38801556/133879665-8872caed-e29e-42c9-a18b-a2ee69b0784c.png)
-![image](https://user-images.githubusercontent.com/38801556/133879685-61500548-9a23-46fb-8db6-3121ee18c0b3.png)
-
-## 响应式适配
-![image](https://user-images.githubusercontent.com/38801556/133879707-e3372df6-77a3-44dc-aa46-3a11a763b8fc.png)
-![image](https://user-images.githubusercontent.com/38801556/133879714-0bd5d590-24f4-4f80-95e5-9c2658151b0e.png)
-
-![image](https://user-images.githubusercontent.com/38801556/133879722-eefda1ff-9182-4ffa-9664-962042c65fa1.png)
-![image](https://user-images.githubusercontent.com/38801556/133879729-cc4ca22a-40c1-46bc-9079-7294bc42a115.png)
-
-![image](https://user-images.githubusercontent.com/38801556/134318087-22823aba-f487-4c63-b20d-e32dde256f96.png)
-![image](https://user-images.githubusercontent.com/38801556/134318146-b142a142-8131-452a-8977-e0d16df5ab81.png)
-
-
+本项目前端使用vue-cli 4.x 开发 组件库使用：ant design vue  
