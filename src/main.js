@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import 'bytemd/dist/index.min.css'
 import './config/global/config'
 import store from './config/vuex/store'
 import infiniteScroll from 'vue-infinite-scroll'
 import router from './config/router'
 import https from './config/request/request'
 import VueTypedJs from 'vue-typed-js'
-import './config/less/ant-import'
+import './config/ant/ant-import'
 
 Vue.prototype.$https=https;
 

@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "blog:serve": "cross-env PACK_NAME=blog npm run serve",
+    "blog:build": "cross-env PACK_NAME=blog npm run build",
+    "editArticle:serve": "cross-env PACK_NAME=articleAdmin npm run serve",
+    "editArticle:build": "cross-env PACK_NAME=articleAdmin npm run build",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -36,11 +40,14 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "compression-webpack-plugin": "^6.1.1",
+    "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "style-resources-loader": "^1.4.1",
     "vue-cli-plugin-style-resources-loader": "^0.1.5",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^4.5.0"
   },
   "eslintConfig": {
     "root": true,

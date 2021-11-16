@@ -1,0 +1,26 @@
+export { default as LoadingOutline } from '@ant-design/icons/lib/outline/LoadingOutline'
+export { default as SearchOutline } from '@ant-design/icons/lib/outline/SearchOutline'
+export { default as CloseOutline } from '@ant-design/icons/lib/outline/CloseOutline'
+export { default as CheckOutline } from '@ant-design/icons/lib/outline/CheckOutline'
+
+export { default as ExclamationCircleOutline } from '@ant-design/icons/lib/outline/ExclamationCircleOutline'
+export { default as InfoCircleOutline } from '@ant-design/icons/lib/outline/InfoCircleOutline'
+export { default as CheckCircleOutline } from '@ant-design/icons/lib/outline/CheckCircleOutline'
+export { default as CloseCircleOutline } from '@ant-design/icons/lib/outline/CloseCircleOutline'
+export { default as QuestionCircleOutline } from '@ant-design/icons/lib/outline/QuestionCircleOutline'
+export { default as WarningOutline } from '@ant-design/icons/lib/outline/WarningOutline'
+
+export { default as ExclamationCircleFill } from '@ant-design/icons/lib/fill/ExclamationCircleFill'
+export { default as InfoCircleFill } from '@ant-design/icons/lib/fill/InfoCircleFill'
+export { default as CheckCircleFill } from '@ant-design/icons/lib/fill/CheckCircleFill'
+export { default as CloseCircleFill } from '@ant-design/icons/lib/fill/CloseCircleFill'
+export { default as QuestionCircleFill } from '@ant-design/icons/lib/fill/QuestionCircleFill'
+export { default as WarningFill } from '@ant-design/icons/lib/fill/WarningFill'
+
+
+export { default as ExclamationCircleTwotone } from '@ant-design/icons/lib/twotone/ExclamationCircleTwoTone'
+export { default as InfoCircleTwoTone } from '@ant-design/icons/lib/twotone/InfoCircleTwoTone'
+export { default as CheckCircleTwotone } from '@ant-design/icons/lib/twotone/CheckCircleTwoTone'
+export { default as CloseCircleTwoTone } from '@ant-design/icons/lib/twotone/CloseCircleTwoTone'
+export { default as QuestionCircleTwotone } from '@ant-design/icons/lib/twotone/QuestionCircleTwoTone'
+export { default as WarningTwotone } from '@ant-design/icons/lib/twotone/WarningTwoTone'

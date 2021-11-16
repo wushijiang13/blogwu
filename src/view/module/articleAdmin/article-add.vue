@@ -84,9 +84,9 @@
 </template>
 
 <script>
-import {wuEditor,uploads,wuDetailsContent} from '@/components/utils';
-import {getArticleTypeList,insertArticle,getArticleById,updateArticle} from '../../config/request/requestUrl'
-import {isNullCheck} from "../../utils/utils";
+import {wuEditor,uploads,wuDetailsContent} from './components';
+import {getArticleTypeList,insertArticle,getArticleById,updateArticle} from '@/config/request/requestUrl'
+import {isNullCheck} from "@/utils/utils";
 
 export default {
   name: "addArticle",

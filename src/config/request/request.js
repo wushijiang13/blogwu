@@ -1,9 +1,8 @@
 import axios from 'axios';
 import {isNullCheck} from "../../utils/utils";
 //然后再修改原型链
-// process.env.BASE_URL ? process.env.BASE_URL :
 const ask  = axios.create({
-  baseURL:"http://192.168.12.211:3000",
+  baseURL:process.env.VUE_APP_API_URL, //端口被占用
   timeout:5000,
   headers: {'Content-Type': 'application/json;charset=UTF-8'},
 })
@@ -15,8 +14,6 @@ const ask  = axios.create({
  * @returns {Promise}
  */
 export function get(url, params = {}) {
-  console.log("POST参数");
-  console.log(params);
   return new Promise((resolve, reject) => {
     ask.defaults.headers['Content-Type']='application/json;charset=UTF-8'
     ask.get(url, {
@@ -40,8 +37,6 @@ export function get(url, params = {}) {
  */
 
 export function post(url, data = {}, config) {
-  console.log("POST参数");
-  console.log(data);
   return new Promise((resolve, reject) => {
     ask.defaults.headers['Content-Type']='application/json;charset=UTF-8'
     let postData={params:btoa(escape(JSON.stringify(data)))};
