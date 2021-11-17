@@ -137,6 +137,7 @@
     background-color: @theme-bubble-bg-color;
     border-radius: @theme-boder-radius-width;
     margin-top: 20px;
+    padding: 0px 20px;
   }
   @media screen and (max-width: 960px) {
     .about-my{

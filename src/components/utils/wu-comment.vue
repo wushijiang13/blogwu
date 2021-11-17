@@ -60,7 +60,7 @@
 </script>
 
 <style lang="less" scoped>
-  /deep/.vcount {
+  /deep/.vcount,/deep/.vnick{
     color:@theme-font-1-color !important;
   }
   /deep/.vbtn:hover{

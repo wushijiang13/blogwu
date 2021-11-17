@@ -7,7 +7,7 @@
         <li v-for="(item,index) in treeList"
             :key="generateKey(item,index)"
             @click="jumpTitle(item)">
-          <span class="side-title">{{item.title}}</span>
+          <span class="side-title"> <wu-icon type="icon-dian"  :size="20" />{{item.title}}</span>
           <template v-if="item.children">
             <wuSideChildrenComponent  :childrenList="item.children"/>
           </template>
@@ -153,12 +153,6 @@
   }
   .side-title:hover{
     text-decoration: underline;
-  }
-  .side-title::before{
-    content: "·";
-    display: inline-block;
-    font-size: 12px;
-    margin-right: 5px;
   }
   .side-ul{
     list-style: none;

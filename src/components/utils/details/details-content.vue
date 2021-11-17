@@ -105,6 +105,9 @@
     margin-top: 10px;
     width: 100%;
   }
+  /deep/pre{
+    padding-top: 20px;
+  }
   .details-content pre > code {
     padding: 16px;
     font-size: 13px;
