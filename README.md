@@ -1,10 +1,6 @@
 ## wublog  创建一个博客项目用于学习记录自己遇到的知识点
 
- 其中包含以下知识点
- * javascript
- * css
- * html
-> 项目开发完成
+使用Vue-Cli 4.x Vue2 开发 组件库使用：ant design vue    
 
 ## 已完成的点
 
@@ -26,5 +22,6 @@
 16.分离新增文章模块，优化wangeditor等无用依赖项的引入。  
 17.项目整体从Vue-Cli 2.x 升级Vue-Cli 4.x 
 
+项目截图
+![image](https://user-images.githubusercontent.com/38801556/142148441-92c9f209-44ce-4192-b16a-4cfbd231b7b3.png)
 
-本项目前端使用vue-cli 4.x 开发 组件库使用：ant design vue  
