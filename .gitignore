@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
 /dist
-
+/blog
+/articleAdmin
 
 # local env files
 .env.local
