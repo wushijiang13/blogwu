@@ -42,8 +42,8 @@
 </template>
 
 <script>
-  import {getDocumentationList} from '@/config/request/requestUrl'
-  import {isNullCheck} from '@/utils/utils'
+  import {getDocumentationList} from '@config/request/requestUrl'
+  import {isNullCheck} from '@utils/utils'
   import {wuExpand} from '@/components/utils'
     export default {
       name: "documentation",

@@ -33,6 +33,7 @@ module.exports = {
         config.resolve.alias
             .set('@',path.join(__dirname, './src'))
             .set('@config',resolve('src/config'))
+            .set('@utils',resolve('src/utils'))
         config.plugin('html').tap(args => {
             args[0].title = '阿江的个人博客';
             return args;

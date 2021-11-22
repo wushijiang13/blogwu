@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import {config} from '@/config/global/config'
+    import {config} from '@config/global/config'
     export default {
         name: "loading",
         data(){

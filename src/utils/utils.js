@@ -43,9 +43,28 @@ function debounce(fn,message){
     },300)
 }
 
+/***
+ * 判断数组完全相等
+ * @param arr1 第一个数组
+ * @param arr2 第二个数组
+ * @returns 返回boolean 是否相等
+ */
+function arrayEqual(arr1,arr2){
+    if(arr1 == arr2)return true;
+    if(arr1.length != arr2.length) return false;
+    let isEqual = true ; //是否相等的变量
+    arr1.forEach((item,index)=>{
+        if (item != arr2[index]) {
+            isEqual= false;
+        }
+    })
+    return isEqual;
+}
+
 
 export {
   getConversionTime,
   isNullCheck,
   debounce,
+  arrayEqual
 }

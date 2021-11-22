@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import {getConversionTime} from '@/utils/utils'
+    import {getConversionTime} from '@utils/utils'
     import Prism from 'prismjs';
 
     export default {
@@ -105,8 +105,13 @@
     margin-top: 10px;
     width: 100%;
   }
+  /deep/img{
+    border-radius: @theme-boder-radius-width;
+    margin-top: 10px;
+    width: 100%;
+  }
   /deep/pre{
-    padding-top: 20px;
+    padding-top: 30px;
   }
   .details-content pre > code {
     padding: 16px;
@@ -131,9 +136,6 @@
     }
     /deep/pre{
       width: 87vw;
-    }
-    /deep/img{
-      width: 100%;
     }
   }
 </style>

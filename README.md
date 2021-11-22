@@ -20,7 +20,8 @@
 14.加入关于我页面`打字稿组件`  
 15.优化webpack 打包过大问题，开启gzip加载，ant Icon按需引入。分离moment  
 16.分离新增文章模块，优化wangeditor等无用依赖项的引入。  
-17.项目整体从Vue-Cli 2.x 升级Vue-Cli 4.x 
+17.项目整体从Vue-Cli 2.x 升级Vue-Cli 4.x  
+18.新增文章图片上传从base64改为上传服务器，修改删除图片后会在删除服务器图片  
 
 项目截图
 ![image](https://user-images.githubusercontent.com/38801556/142148441-92c9f209-44ce-4192-b16a-4cfbd231b7b3.png)

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {isNullCheck} from "../../utils/utils";
+import {isNullCheck} from "@utils/utils";
 //然后再修改原型链
 const ask  = axios.create({
   baseURL:process.env.VUE_APP_API_URL, //端口被占用
@@ -37,6 +37,7 @@ export function get(url, params = {}) {
  */
 
 export function post(url, data = {}, config) {
+  console.log(data);
   return new Promise((resolve, reject) => {
     ask.defaults.headers['Content-Type']='application/json;charset=UTF-8'
     let postData={params:btoa(escape(JSON.stringify(data)))};

@@ -3,17 +3,19 @@
     <div class="article-add-mian">
       <div class="mian-add-div" v-show="pageStatus">
         <div class="content-write">
-
+          <div class="content-operating">
+            <button class="btn" @click="editFormShow" type="primary">{{isFormText}}</button>
+          </div>
           <div class="content-editor">
+            <wuEditor ref="wuEditor" :defaultJson="articleInfo.article_json" @change="editorChange" class="editor"/>
+          </div>
+          <div v-show="isFormShow" class="content-form">
             <a-form-model  :rules="rules" :model="articleInfo" ref="ruleForm" >
-              <a-form-model-item  ref="article_title" prop="article_id">
+              <a-form-model-item   prop="article_id">
                 <a-input placeholder="请输入文章id"  v-model="articleInfo.article_id" @keydown.enter="getArticleById(articleInfo.article_id)"/>
               </a-form-model-item>
               <a-form-model-item   ref="article_title" prop="article_title">
                 <a-input placeholder="请输入文章标题"  v-model="articleInfo.article_title"/>
-              </a-form-model-item>
-              <a-form-model-item>
-                <wuEditor :defaultJson="articleInfo.article_json" @change="editorChange" class="editor"/>
               </a-form-model-item>
               <a-form-model-item >
                 <uploads v-model="articleInfo.article_cover"/>
@@ -60,9 +62,8 @@
               </a-form-model-item>
             </a-form-model>
           </div>
-          <wuDetailsContent :articleInfo="articleInfo" class="content-render"/>
         </div>
-        <button class="submit-btn" @click="submitArticleBtn" type="primary">提交文章</button>
+        <button v-show="isFormShow" class="btn submit-btn" @click="submitArticleBtn" type="primary">提交文章</button>
       </div>
       <div class="result" v-show="!pageStatus">
         <a-result
@@ -84,9 +85,9 @@
 </template>
 
 <script>
-import {wuEditor,uploads,wuDetailsContent} from './components';
-import {getArticleTypeList,insertArticle,getArticleById,updateArticle} from '@/config/request/requestUrl'
-import {isNullCheck} from "@/utils/utils";
+import {wuEditor,uploads} from './components';
+import {getArticleTypeList,insertArticle,getArticleById,updateArticle} from '@config/request/requestUrl'
+import {isNullCheck} from "@utils/utils";
 
 export default {
   name: "addArticle",
@@ -118,7 +119,10 @@ export default {
         article_desc:"",//简介
         article_pass:"",//密码
       },//添加参数对象
-      pageStatus:true//是否操作成功
+      pageStatus:true,//是否操作成功
+      isFormShow:false,
+      isFormText:"展示表单",
+      endImageList:[],//最后的图片list
     }
   },
   mounted() {
@@ -176,6 +180,7 @@ export default {
       if(id){
         this.$https.post(getArticleById,{article_id:id}).then(({code,data})=> {
           this.isCloseInit = true;
+          this.$refs.wuEditor.isInit=false;
           if (code == 200) {
             if (isNullCheck(data.article_info)) {
               this.articleInfo = data.article_info;
@@ -196,6 +201,8 @@ export default {
           this.articleInfo.article_html=escape(this.articleInfo.article_html);
           this.articleInfo.article_json=escape(JSON.stringify(this.articleInfo.article_json));
           this.articleInfo.article_cover=this.articleInfo.article_cover.toString();
+          //确认差异的图片并删除服务器图片
+          this.$refs.wuEditor.deleDiffImageList();
           if(this.articleInfo.article_id){
             this.updateArticle();
           }else{
@@ -204,6 +211,7 @@ export default {
         }
       })
     },
+
     /***
      * 继续添加
      */
@@ -215,11 +223,17 @@ export default {
     editorChange(json,html){
       this.articleInfo.article_json=json;
       this.articleInfo.article_html=html;
+    },
+    /**
+     * 隐藏表单
+     */
+    editFormShow(){
+      this.isFormShow=!this.isFormShow;
+      this.isFormText= this.isFormShow ? '隐藏表单' : '展示表单';
     }
   },
   components:{
     uploads,
-    wuDetailsContent,
     wuEditor
   }
 }
@@ -242,33 +256,41 @@ export default {
 }
 .content-write{
   width: 100%;
-  display: flex;
   .content-editor{
-    width: 50%;
-    display: inline-block;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     .editor{
+      width: 50%;
       flex: 1;
+      display: inline-block;
+    }
+    .content-render{
+      width: 50%;
+      height: 100vh;
+      display: inline-block;
+      border: 1px solid @theme-boder-color;
+      padding: 1rem;
     }
   }
-  .content-render{
-    width: 50%;
-    display: inline-block;
-    border: 1px solid @theme-boder-color;
-    padding: 1rem;
+  .content-form{
+    display: block;
   }
 }
 
-
-.submit-btn{
-  display: block;
-  margin: 0px auto;
-  margin-top: 20px;
+.btn{
   padding: 4px 20px;
   background-color: #fff;
   border: @primary-color solid 1px;
   color: @primary-color;
   border-radius: @theme-boder-radius-width;
   cursor: pointer;
+}
+
+.submit-btn{
+  display: block;
+  margin: 0px auto;
+  margin-top: 20px;
 }
 /deep/.ant-input , /deep/.ant-select-selection{
   border:none;
@@ -291,7 +313,10 @@ export default {
 .ant-form-item{
   margin-bottom: 10px;
 }
-
+.content-operating{
+  padding: 10px 20px;
+  background: #fff;
+}
 @media screen and (max-width: 960px) {
 
 }

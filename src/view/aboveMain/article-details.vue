@@ -31,8 +31,8 @@
    * 侧边导航 需要整理成对应的数据格式
    *
    */
-import {isNullCheck} from '@/utils/utils'
-import {getArticleById} from '@/config/request/requestUrl'
+import {isNullCheck} from '@utils/utils'
+import {getArticleById} from '@config/request/requestUrl'
 
 import {wuComment,wuSideNavigation,wuDetailsContent} from '@/components/utils'
 export default {

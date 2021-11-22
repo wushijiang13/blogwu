@@ -106,8 +106,8 @@
 </template>
 
 <script>
-  import {getArticleList} from '../../config/request/requestUrl'
-  import {debounce} from "../../utils/utils";
+  import {getArticleList} from '@config/request/requestUrl'
+  import {debounce} from "@utils/utils";
   export default {
     name: "Head",
     data() {

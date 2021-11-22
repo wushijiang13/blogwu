@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <loading />
+<!--    <loading />-->
     <router-view />
   </div>
 </template>
 
 <script>
-  import loading from '@/components/utils/loading.vue'
+  // import loading from '@/components/utils/loading.vue'
   export default {
     name: 'App',
-    components:{
-      loading
-    }
+    // components:{
+    //   loading
+    // }
   }
 </script>
 

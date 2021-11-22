@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import {getConversionTime} from "../../utils/utils";
+  import {getConversionTime} from "@utils/utils";
 export default {
   name: "cell-item",
   props:[

@@ -53,7 +53,7 @@
           this.$https.uploads(option.file).then(({code, data}) => {
             if (code == 200) {
               this.imgList=[];
-              this.imgList.push(data.file_url);
+              this.imgList.push(data[0].file_url);
               resolve(data);
             }
           })
