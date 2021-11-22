@@ -19,7 +19,6 @@
                             :defaultConfig="editorConfig"
                             :mode="mode"
                             @onChange="editorChange"
-                            @keydown.enter="updateToBottom"
                     />
                 </div>
                 <p class="editor-tips">当前字数：{{currentNum}}个</p>
@@ -123,12 +122,6 @@
                })
                this.diffImageList=[];
            },
-            /**
-             * 更新到底部
-             */
-           updateToBottom(){
-               this.$refs.editor.scrollTop=this.$refs.editor.scrollHeight;
-           }
         },
         created() {
             let this_=this;
