@@ -35,7 +35,7 @@
                  <span class="expand-bottom-text">
                   {{tipsUnfold}}
                  </span>
-                <wu-icon style="vertical-align: baseline;" :type="iconUnfold"  :size="10"/>
+                <wu-icon style="vertical-align: sub;" :type="iconUnfold"  :size="10"/>
               </div>
             </div>
             <transition name="unfold">

@@ -112,6 +112,7 @@
   }
   /deep/pre{
     padding-top: 30px;
+    padding-bottom: 20px;
   }
   .details-content pre > code {
     padding: 16px;

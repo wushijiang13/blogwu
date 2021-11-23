@@ -5,7 +5,7 @@
         <li v-for="item in childrenList"
           :key="item.title"
         >
-          <span class="side-title">{{item.title}}</span>
+          <span class="side-title"  @click.stop="jumpTitle(item)"> <wu-icon type="icon-dian"  :size="20" />{{item.title}}</span>
           <template v-if="item.childrenList">
             <wu-side-children-component  :data-list="item.children"></wu-side-children-component>
           </template>
@@ -25,6 +25,15 @@
             },
             type:Array
           }
+        },
+        methods:{
+          /**
+           * 跳转标题
+           * @param dom
+           */
+          jumpTitle(dom){
+            scrollTo(0, document.querySelector(`#${dom.id}`).offsetTop);
+          },
         }
     }
 </script>
@@ -46,13 +55,6 @@
   }
   .side-title:hover{
     text-decoration: underline;
-  }
-  ul li span::before{
-    content: "➜";
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    margin-right: 5px;
   }
   .sub-ul{
     list-style: none;

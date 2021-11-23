@@ -5,9 +5,8 @@
       <p class="side-label">目录</p>
       <ul class="side-ul" v-show="treeList.length">
         <li v-for="(item,index) in treeList"
-            :key="generateKey(item,index)"
-            @click="jumpTitle(item)">
-          <span class="side-title"> <wu-icon type="icon-dian"  :size="20" />{{item.title}}</span>
+            :key="generateKey(item,index)">
+          <span class="side-title" @click.stop="jumpTitle(item)" > <wu-icon type="icon-dian"  :size="20" />{{item.title}}</span>
           <template v-if="item.children">
             <wuSideChildrenComponent  :childrenList="item.children"/>
           </template>
@@ -105,7 +104,6 @@
             //如果找到子集没有的话 ，就证明找到层级了
             newCurrentMaxDom.children.push(currentDom);
           }
-
           return newCurrentMaxDom;
         },
         /**
